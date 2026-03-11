@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public static Player instance;
     InputAction moveInput;
     [HideInInspector]public Controls inputs;
-    Rigidbody2D rb;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,13 +19,14 @@ public class Player : MonoBehaviour
         inputs = new Controls();
         moveInput = inputs.Player.Move;
         moveInput.Enable();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
     }
     void OnDisable()=>moveInput.Disable();
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveDir = inputs.Player.Move.ReadValue<Vector2>();
-        rb.AddForce(moveDir * speed * Time.deltaTime * acceleration,ForceMode2D.Force);
+        Vector2 input = inputs.Player.Move.ReadValue<Vector2>();
+        Vector3 moveDir = new Vector3(input.x,0,input.y);
+        rb.AddForce(moveDir * speed,ForceMode.Acceleration);
     }
 }

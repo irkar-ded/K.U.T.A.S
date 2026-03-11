@@ -5,22 +5,18 @@ using UnityEngine.InputSystem;
 
 public class TestRotation : MonoBehaviour
 {
-    InputAction mouseInput;
-    // Start is called before the first frame update
-    void Start()
-    {
-        mouseInput = Player.instance.inputs.Player.Look;
-        mouseInput.Enable();
-    }
-    void OnDisable()=>mouseInput.Disable();
+    [SerializeField] LayerMask surfaceToLook;
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        mousePos = mousePos - transform.position;
-        mousePos = mousePos.normalized;
-        float rot = Mathf.Atan2(mousePos.y, mousePos.x) * (180/Mathf.PI);
-        transform.rotation = Quaternion.Euler(0, 0, rot);
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray, out hit,Mathf.Infinity, surfaceToLook))
+        {
+            Quaternion rotToLook = Quaternion.LookRotation((hit.point - transform.position).normalized);
+            rotToLook.z = 0;
+            rotToLook.x = 0;
+            transform.rotation = rotToLook;
+        }
     }
 }
