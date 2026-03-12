@@ -11,25 +11,15 @@ public class DamageFlash : MonoBehaviour
         model = GetComponentInChildren<MeshRenderer>();
         healtSystem = GetComponent<HealtSystem>();
         healtSystem.onTakeDamage.AddListener((Vector3) => OnTakeDamage());
+        healtSystem.onDie.AddListener(() => Destroy(healtSystem));
     }
-    public void OnTakeDamage()
-    {
-        if(healtSystem.healt == 0)
-            return;
-        StartCoroutine(AnimatedDamage());
-    }
+    public void OnTakeDamage()=>StartCoroutine(AnimatedDamage());
     IEnumerator AnimatedDamage()
     {
         for(int i = 0; i < 5; i++)
         {
-            model.material.SetFloat("_FlashAmount", i % 2 == 1 ? 1 : 0);
+            model.material.SetFloat("_FlashAmount", i % 2);
             yield return new WaitForSeconds(0.1f);
-        }
-        if(healtSystem.healt == 0)
-        {
-            Color deathColor = model.material.color;
-            deathColor.a = 0.5f;
-            model.material.color = deathColor;
         }
     }
 }

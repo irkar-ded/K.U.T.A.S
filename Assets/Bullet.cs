@@ -28,4 +28,9 @@ public class Bullet : MonoBehaviour
         damage.damage = bullet.damage;
         damage.enabled = true;
     }
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Wall")
+           gameObject.SetActive(false); 
+    }
 }

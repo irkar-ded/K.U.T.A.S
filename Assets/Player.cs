@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     [Header("Values")]
     [SerializeField] float speed = 10;
-    [SerializeField] float acceleration = 100;
     public static Player instance;
     InputAction moveInput;
     [HideInInspector]public Controls inputs;
