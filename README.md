@@ -29,6 +29,8 @@ The music in the game is made in the genre [Jungle](https://en.wikipedia.org/wik
 - [FMOD](https://www.fmod.com/unity)
 
 ## License:
-Game by <b>IRKAR</b>
+<b>MIT</b>. Have fun :)
+
+Game by <b>IRKAR</b> ❤️
 
 <b>K</b>ill.<b>U</b>ltra.<b>T</b>itan.<b>A</b>gressive.<b>S</b>quad
