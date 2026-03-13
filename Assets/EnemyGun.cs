@@ -9,8 +9,11 @@ public class EnemyGun : MonoBehaviour
     Gun gun;
     [Header("Values:")]
     [SerializeField] float reactionTime = 0.1f;
-    float timerReaction;
+    [SerializeField] float distanceToBack = 2;
+    [SerializeField] float distanceToStay = 6;
+    bool backMove;
     float timerToLeavePlayer;
+    float timerReaction;
     bool IsSeePlayer;
     bool readyToAtack;
     // Start is called before the first frame update
@@ -31,15 +34,28 @@ public class EnemyGun : MonoBehaviour
             return;
         }
         IsSeePlayer = isSeePlayer();
-        enemyMain.Move(IsSeePlayer ? EnemyMain.TypeMovement.MoveDodge : EnemyMain.TypeMovement.Move);
+        if(backMove == false)
+        {
+            enemyMain.typeMovement = IsSeePlayer ? EnemyMain.TypeMovement.MoveDodge : EnemyMain.TypeMovement.Move;
+            enemyMain.Move();
+        }
+        else
+        {
+            enemyMain.typeMovement = EnemyMain.TypeMovement.Move;
+            enemyMain.Move(transform.position + (transform.position - player.position).normalized);
+        }
+        if(Vector3.Distance(transform.position,player.position) <= distanceToBack && backMove == false)
+            backMove = true;
+        if(Vector3.Distance(transform.position,player.position) >= distanceToStay && backMove)
+            backMove = false;
         if(CanAtackPlayer())
             gun.Shoot();
     }
     public bool isSeePlayer()
     {
-        if(Physics.Raycast(transform.position,(player.position - transform.position).normalized, Mathf.Infinity, gun.surfaceToLook))
+        if(Physics.Raycast(transform.position,(player.position - transform.position).normalized,out RaycastHit hit, Mathf.Infinity, gun.surfaceToLook) && hit.transform.tag != "Player")
         {
-            if(IsSeePlayer && timerToLeavePlayer < 1f)
+            if(IsSeePlayer && timerToLeavePlayer < 0.5f)
             {
                 timerToLeavePlayer += Time.deltaTime;
                 return true;

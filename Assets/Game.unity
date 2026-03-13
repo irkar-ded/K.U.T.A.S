@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 20744181}
   - component: {fileID: 20744184}
   - component: {fileID: 20744183}
-  - component: {fileID: 20744185}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -274,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fbe972e402f7f1c5b9fc1511c0082fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 15
 --- !u!114 &20744183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,22 +311,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isInvincible: 0
---- !u!208 &20744185
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20744176}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 3, y: 0.5, z: 3}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &102385440
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,13 +328,14 @@ GameObject:
   - component: {fileID: 102385443}
   - component: {fileID: 102385442}
   - component: {fileID: 102385441}
+  - component: {fileID: 102385450}
   m_Layer: 0
   m_Name: EnemyFly
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &102385441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +425,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 15
+  typeMovement: 3
+  speed: 20
+  randomOffsetDistance: 10
+  kdToRandomPath: 0.5
 --- !u!135 &102385446
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -528,6 +515,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &102385450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102385440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acc6672047af943281e8d9c2f030cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTag: 1
+  owner: {fileID: 102385440}
+  damage: 1
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &246219235
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +550,7 @@ GameObject:
   - component: {fileID: 246219238}
   - component: {fileID: 246219237}
   - component: {fileID: 246219236}
+  - component: {fileID: 246219245}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -565,7 +571,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  typeMovement: 0
   speed: 7
+  randomOffsetDistance: 10
+  kdToRandomPath: 0.5
 --- !u!114 &246219237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,6 +588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionTime: 0.1
+  distanceToBack: 2
+  distanceToStay: 6
 --- !u!195 &246219238
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -727,6 +738,24 @@ Transform:
   - {fileID: 1471521433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &246219245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246219235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acc6672047af943281e8d9c2f030cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTag: 1
+  owner: {fileID: 246219235}
+  damage: 1
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &278506194
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1018,231 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &493394345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493394355}
+  - component: {fileID: 493394354}
+  - component: {fileID: 493394353}
+  - component: {fileID: 493394352}
+  - component: {fileID: 493394351}
+  - component: {fileID: 493394350}
+  - component: {fileID: 493394349}
+  - component: {fileID: 493394348}
+  - component: {fileID: 493394346}
+  - component: {fileID: 493394356}
+  m_Layer: 0
+  m_Name: EnemyFlyKamikaze
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &493394346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acc6672047af943281e8d9c2f030cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTag: 1
+  owner: {fileID: 493394345}
+  damage: 1
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &493394348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79790e0af5589a9dbb02f3de30fa85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &493394349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4033a693c372d77c6805090850edcbfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healt: 1
+  maxHealt: 1
+  minHealt: 0
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []
+  addHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isInvincible: 0
+--- !u!54 &493394350
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 10
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
+--- !u!114 &493394351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536b522e5e7154453abb6ec5bd869a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  typeMovement: 3
+  speed: 50
+  randomOffsetDistance: 10
+  kdToRandomPath: 0.5
+--- !u!135 &493394352
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &493394353
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a48554b71b8e5ab7499de9a3c45f915f, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &493394354
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &493394355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: 0.35, z: 21}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493394356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493394345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51922c473883ce0869422af9d97b3199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 5059559244069807908, guid: 1c6797024b86af3e3a4bceb9c4af31c5, type: 3}
+  distanceToExplosion: 5
+  timeToExplosion: 0.5
 --- !u!1 &537787657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1297,7 @@ MonoBehaviour:
     owner: {fileID: 20744176}
     force: 70
     damage: 1
+  recoil: 0
   kdBeetwenShoots: 0.25
 --- !u!1 &756815485
 GameObject:
@@ -1061,6 +1316,7 @@ GameObject:
   - component: {fileID: 756815494}
   - component: {fileID: 756815496}
   - component: {fileID: 756815495}
+  - component: {fileID: 756815497}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -1229,6 +1485,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactionTime: 0.1
+  distanceToBack: 5
+  distanceToStay: 10
 --- !u!114 &756815496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1500,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  typeMovement: 2
   speed: 7
+  randomOffsetDistance: 10
+  kdToRandomPath: 1
+--- !u!114 &756815497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756815485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acc6672047af943281e8d9c2f030cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTag: 1
+  owner: {fileID: 756815485}
+  damage: 1
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &763103871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1908,7 @@ MonoBehaviour:
     owner: {fileID: 246219235}
     force: 50
     damage: 1
+  recoil: 1
   kdBeetwenShoots: 0.5
 --- !u!1 &1698513302
 GameObject:
@@ -1772,7 +2052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  typeMovement: 1
   speed: 15
+  randomOffsetDistance: 10
+  kdToRandomPath: 0.5
 --- !u!195 &1932891388
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1932,6 +2215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51922c473883ce0869422af9d97b3199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 5059559244069807908, guid: 1c6797024b86af3e3a4bceb9c4af31c5, type: 3}
+  distanceToExplosion: 5
+  timeToExplosion: 0.5
 --- !u!1 &2089092693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,12 +2266,13 @@ MonoBehaviour:
   ownerGun: 1
   surfaceToLook:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   bullet: {fileID: 7704451624214823731, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
   parametersBullet:
     owner: {fileID: 756815485}
     force: 50
     damage: 1
+  recoil: 1
   kdBeetwenShoots: 0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -2001,3 +2288,4 @@ SceneRoots:
   - {fileID: 319954930}
   - {fileID: 388417566}
   - {fileID: 102385449}
+  - {fileID: 493394355}

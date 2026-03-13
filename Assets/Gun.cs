@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
     public GameObject bullet;
     public Bullet.ParametersBullet parametersBullet;
     [Header("Gun:")]
+    public float recoil = 0;
     public float kdBeetwenShoots = 0.1f;
     float timerKd;
     Transform player;
@@ -52,7 +53,7 @@ public class Gun : MonoBehaviour
         SpawnBullet();
         timerKd = kdBeetwenShoots;
     }
-    public void SpawnBullet()=>Instantiate(bullet, transform.position, transform.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
+    public void SpawnBullet()=>Instantiate(bullet, transform.position + transform.right * Random.Range(-recoil,recoil), transform.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
     public Quaternion LookRotate()
     {
         Quaternion rotToLook = Quaternion.LookRotation(((ownerGun == OwnerGun.Player ? MouseHit() : player.position) - transform.position).normalized);

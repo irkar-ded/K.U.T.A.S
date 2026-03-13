@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class EnemyKamikaze : MonoBehaviour
 {
-    EnemyMain enemyMain;
+    [SerializeField] GameObject explosion;
+    [SerializeField] float distanceToExplosion = 5;
+    [SerializeField] float timeToExplosion = 0.5f;
+    HealtSystem healtSystem;
+    bool isExplosionState;
     Transform player;
+    EnemyMain enemyMain;
     // Start is called before the first frame update
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
+        healtSystem = GetComponent<HealtSystem>();
+        healtSystem.onDie.AddListener(Explosion);
         player = enemyMain.target;
     }
 
@@ -21,6 +28,20 @@ public class EnemyKamikaze : MonoBehaviour
             Destroy(this);
             return;
         }
-        enemyMain.Move(EnemyMain.TypeMovement.Move);
+        if(isExplosionState)
+            return;
+        if(Vector3.Distance(transform.position,player.position) <= distanceToExplosion)
+        {
+            isExplosionState = true;
+            Invoke("TakeDamageAfterTime",timeToExplosion);
+            return;
+        }
+        enemyMain.Move();
+    }
+    void TakeDamageAfterTime()=>healtSystem.TakeDamage(1488);
+    void Explosion()
+    {
+        Instantiate(explosion,transform.position,transform.rotation);
+        Destroy(gameObject);
     }
 }

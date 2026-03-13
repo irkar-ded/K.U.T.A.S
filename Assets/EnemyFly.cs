@@ -21,6 +21,6 @@ public class EnemyFly : MonoBehaviour
             Destroy(this);
             return;
         }
-        enemyMain.Move(EnemyMain.TypeMovement.Fly);
+        enemyMain.Move();
     }
 }

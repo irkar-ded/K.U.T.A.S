@@ -26,6 +26,6 @@ public class Player : MonoBehaviour
     {
         Vector2 input = inputs.Player.Move.ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(input.x,0,input.y);
-        rb.AddForce(moveDir * speed,ForceMode.Acceleration);
+        rb.AddForce(moveDir * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
     }
 }
