@@ -21,6 +21,7 @@ public class EnemyMain : MonoBehaviour
     Vector3 offsetMove;
     public TypeMovement typeMovement;
     public float speed;
+    public LayerMask layerAvoidObjects;
     public float randomOffsetDistance = 10;
     public float kdToRandomPath = 0.5f;
     void Awake()
@@ -56,7 +57,7 @@ public class EnemyMain : MonoBehaviour
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
-                rb.AddForce((target.position - transform.position).normalized * speed,ForceMode.Acceleration);
+                FlyMovement();
             break;
             case TypeMovement.None:
                 if(refreshPathCoroutine != null)
@@ -86,6 +87,31 @@ public class EnemyMain : MonoBehaviour
             refreshPathCoroutine = null;
         }
     }
+    public void FlyMovement()
+    {
+        Collider[] avoidObjects = Physics.OverlapSphere(transform.position,3,layerAvoidObjects);
+        Vector3 avoidDirection = Vector3.zero;
+        if(avoidObjects.Length > 0)
+        {
+            float currentDistacne = 3;
+            for(int i = 0; i < avoidObjects.Length; i++)
+            {
+                if(avoidObjects[i].transform == transform)
+                    continue;
+                if(Vector3.Distance(transform.position,avoidObjects[i].transform.position) < currentDistacne)
+                {
+                    avoidDirection = (transform.position - avoidObjects[i].transform.position).normalized;
+                    if(avoidDirection == Vector3.zero)
+                    {
+                        avoidObjects[i].transform.position += Vector3.right;
+                        transform.position -= Vector3.left;
+                    }
+                    currentDistacne = Vector3.Distance(transform.position,avoidObjects[i].transform.position);
+                }
+            }
+        }
+        rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
+    }
     IEnumerator PathOffset()
     {
         while (true)
@@ -106,8 +132,10 @@ public class EnemyMainEditor : Editor
     SerializedProperty m_speed;
     SerializedProperty m_randomOffsetDistance;
     SerializedProperty m_kdToRandomPath;
+    SerializedProperty m_layerAvoidObjects;
     void OnEnable()
     {
+        m_layerAvoidObjects = serializedObject.FindProperty("layerAvoidObjects");
         m_typeMovement = serializedObject.FindProperty("typeMovement");
         m_speed = serializedObject.FindProperty("speed");
         m_randomOffsetDistance = serializedObject.FindProperty("randomOffsetDistance");
@@ -120,10 +148,16 @@ public class EnemyMainEditor : Editor
         GUILayout.Label("Values:");
         EditorGUILayout.PropertyField(m_typeMovement,new GUIContent("Type Movement"));
         EditorGUILayout.PropertyField(m_speed, new GUIContent("Speed"));
-        if(enemyMain.typeMovement == EnemyMain.TypeMovement.MoveDodge)
+        switch (enemyMain.typeMovement)
         {
-            EditorGUILayout.PropertyField(m_randomOffsetDistance, new GUIContent("Random Offset Distance"));
-            EditorGUILayout.PropertyField(m_kdToRandomPath, new GUIContent("Kd To Random Path"));
+            case EnemyMain.TypeMovement.MoveDodge:
+                EditorGUILayout.PropertyField(m_randomOffsetDistance, new GUIContent("Random Offset Distance"));
+                EditorGUILayout.PropertyField(m_kdToRandomPath, new GUIContent("Kd To Random Path"));
+            break;
+            case EnemyMain.TypeMovement.Fly:
+                EditorGUILayout.PropertyField(m_layerAvoidObjects, new GUIContent("Layer Avoid Objects"));
+            break;
+
         }
         serializedObject.ApplyModifiedProperties();
     }
