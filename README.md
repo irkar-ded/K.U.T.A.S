@@ -25,7 +25,7 @@ The music in the game is made in the genre [Jungle](https://en.wikipedia.org/wik
 - Music: [FL Studio](https://en.wikipedia.org/wiki/FL_Studio)
 
 ## Libraries Used:
-- [Lean Pool (Unity Asset)](https://assetstore.unity.com/packages/tools/utilities/lean-pool-35666)
+- [EZ Pooling (Unity Asset)](https://assetstore.unity.com/packages/tools/ez-pooling-19941)
 - [FMOD](https://www.fmod.com/unity)
 
 ## License:
