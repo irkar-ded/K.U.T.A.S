@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EZ_Pooling;
 using UnityEngine;
 
 public class EnemyKamikaze : MonoBehaviour
@@ -41,7 +42,7 @@ public class EnemyKamikaze : MonoBehaviour
     void TakeDamageAfterTime()=>healtSystem.TakeDamage(1488);
     void Explosion()
     {
-        Instantiate(explosion,transform.position,transform.rotation);
+        EZ_PoolManager.Spawn(explosion.transform,transform.position,transform.rotation);
         Destroy(gameObject);
     }
 }

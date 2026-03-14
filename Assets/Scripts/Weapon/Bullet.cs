@@ -11,13 +11,19 @@ public class Bullet : MonoBehaviour
         public float force;
         public float damage;
     }
+    [SerializeField] LayerMask layerWall;
     Rigidbody rb;
     DamageOnCollision damage;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        damage = GetComponent<DamageOnCollision>();
+        damage = GetComponentInChildren<DamageOnCollision>();
         damage.OnTakeDamage.AddListener(() => gameObject.SetActive(false));
+    }
+    void FixedUpdate()
+    {
+        if(Physics.CheckSphere(transform.position,0.01f,layerWall))
+            gameObject.SetActive(false);
     }
     void OnEnable()=>damage.enabled = false;
     public void SetBullet(ParametersBullet bullet)
@@ -27,10 +33,5 @@ public class Bullet : MonoBehaviour
         damage.owner = bullet.owner;
         damage.damage = bullet.damage;
         damage.enabled = true;
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Wall")
-           gameObject.SetActive(false); 
     }
 }

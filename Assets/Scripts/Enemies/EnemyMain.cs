@@ -46,18 +46,39 @@ public class EnemyMain : MonoBehaviour
     {
         if(agent != null)
             agent.speed = speed;
+        Collider[] avoidObjects = Physics.OverlapSphere(transform.position,3,layerAvoidObjects);
+        Vector3 avoidDirection = Vector3.zero;
+        if(avoidObjects.Length > 0)
+        {
+            float currentDistacne = 3;
+            for(int i = 0; i < avoidObjects.Length; i++)
+            {
+                if(avoidObjects[i].transform == transform)
+                    continue;
+                if(Vector3.Distance(transform.position,avoidObjects[i].transform.position) < currentDistacne)
+                {
+                    avoidDirection = (transform.position - avoidObjects[i].transform.position).normalized;
+                    if(avoidDirection == Vector3.zero)
+                    {
+                        avoidObjects[i].transform.position += Vector3.right;
+                        transform.position -= Vector3.left;
+                    }
+                    currentDistacne = Vector3.Distance(transform.position,avoidObjects[i].transform.position);
+                }
+            }
+        }
         switch (typeMovement)
         {
             case TypeMovement.MoveDodge:
                 if(refreshPathCoroutine == null)
                     refreshPathCoroutine = StartCoroutine(PathOffset());
-                agent.destination = target.position + offsetMove;
+                agent.destination = (avoidDirection != Vector3.zero ? avoidDirection  :  target.position) + offsetMove;
             break;
             case TypeMovement.Move:
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
-                FlyMovement();
+                rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
             break;
             case TypeMovement.None:
                 if(refreshPathCoroutine != null)
@@ -86,31 +107,6 @@ public class EnemyMain : MonoBehaviour
             StopCoroutine(refreshPathCoroutine);
             refreshPathCoroutine = null;
         }
-    }
-    public void FlyMovement()
-    {
-        Collider[] avoidObjects = Physics.OverlapSphere(transform.position,3,layerAvoidObjects);
-        Vector3 avoidDirection = Vector3.zero;
-        if(avoidObjects.Length > 0)
-        {
-            float currentDistacne = 3;
-            for(int i = 0; i < avoidObjects.Length; i++)
-            {
-                if(avoidObjects[i].transform == transform)
-                    continue;
-                if(Vector3.Distance(transform.position,avoidObjects[i].transform.position) < currentDistacne)
-                {
-                    avoidDirection = (transform.position - avoidObjects[i].transform.position).normalized;
-                    if(avoidDirection == Vector3.zero)
-                    {
-                        avoidObjects[i].transform.position += Vector3.right;
-                        transform.position -= Vector3.left;
-                    }
-                    currentDistacne = Vector3.Distance(transform.position,avoidObjects[i].transform.position);
-                }
-            }
-        }
-        rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
     }
     IEnumerator PathOffset()
     {
@@ -147,15 +143,13 @@ public class EnemyMainEditor : Editor
         serializedObject.Update();
         GUILayout.Label("Values:");
         EditorGUILayout.PropertyField(m_typeMovement,new GUIContent("Type Movement"));
+        EditorGUILayout.PropertyField(m_layerAvoidObjects, new GUIContent("Layer Avoid Objects"));
         EditorGUILayout.PropertyField(m_speed, new GUIContent("Speed"));
         switch (enemyMain.typeMovement)
         {
             case EnemyMain.TypeMovement.MoveDodge:
                 EditorGUILayout.PropertyField(m_randomOffsetDistance, new GUIContent("Random Offset Distance"));
                 EditorGUILayout.PropertyField(m_kdToRandomPath, new GUIContent("Kd To Random Path"));
-            break;
-            case EnemyMain.TypeMovement.Fly:
-                EditorGUILayout.PropertyField(m_layerAvoidObjects, new GUIContent("Layer Avoid Objects"));
             break;
 
         }

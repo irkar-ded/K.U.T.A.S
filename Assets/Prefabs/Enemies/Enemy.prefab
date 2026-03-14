@@ -189,7 +189,7 @@ MonoBehaviour:
   speed: 10
   layerAvoidObjects:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   randomOffsetDistance: 10
   kdToRandomPath: 0.5
 --- !u!114 &180186027890546885

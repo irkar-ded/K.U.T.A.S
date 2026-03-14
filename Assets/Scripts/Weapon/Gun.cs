@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EZ_Pooling;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,7 @@ public class Gun : MonoBehaviour
     public LayerMask surfaceToLook;
     [Header("Bullet:")]
     public GameObject bullet;
+    public Transform bulletSpawnPosition;
     public Bullet.ParametersBullet parametersBullet;
     [Header("Gun:")]
     public float recoil = 0;
@@ -53,7 +55,7 @@ public class Gun : MonoBehaviour
         SpawnBullet();
         timerKd = kdBeetwenShoots;
     }
-    public void SpawnBullet()=>Instantiate(bullet, transform.position + transform.right * Random.Range(-recoil,recoil), transform.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
+    public void SpawnBullet()=>EZ_PoolManager.Spawn(bullet.transform, bulletSpawnPosition.position + bulletSpawnPosition.right * Random.Range(-recoil,recoil), bulletSpawnPosition.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
     public Quaternion LookRotate()
     {
         Quaternion rotToLook = Quaternion.LookRotation(((ownerGun == OwnerGun.Player ? MouseHit() : player.position) - transform.position).normalized);
