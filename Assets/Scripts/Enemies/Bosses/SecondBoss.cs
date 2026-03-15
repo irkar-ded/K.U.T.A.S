@@ -42,7 +42,7 @@ public class SecondBoss : MonoBehaviour
     }
     public void CheckToTeleport()
     {
-        if(healtSystem.healt + 10 <= currentHealthToTeleport)
+        if(healtSystem.healt + 20 <= currentHealthToTeleport)
         {
             currentHealthToTeleport = healtSystem.healt;
             bossState = SecondBossStates.Teleport;

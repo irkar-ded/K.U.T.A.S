@@ -33,6 +33,6 @@ Material:
     - _Glossiness: 0
     - _Metallic: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.804821, a: 1}
+    - _Color: {r: 0.02520132, g: 0, b: 1, a: 1}
     - _ColorFlash: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

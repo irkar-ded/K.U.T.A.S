@@ -15,7 +15,7 @@ public class EnemyMain : MonoBehaviour
     }
     HealtSystem healtSystem;
     Rigidbody rb;
-    NavMeshAgent agent;
+    [HideInInspector]public NavMeshAgent agent;
     [HideInInspector]public Transform target;
     Coroutine refreshPathCoroutine;
     Vector3 offsetMove;
