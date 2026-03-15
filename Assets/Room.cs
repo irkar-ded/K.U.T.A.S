@@ -17,12 +17,14 @@ public class Room : MonoBehaviour
         {
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
             if(enemy != null)
-            {
-                GameManager.instance.AddEnemy(enemy.gameObject);
-                enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
-                coutAliveEnemies++;
-            }
+                AddEnemy(enemy);
         }
+    }
+    public void AddEnemy(EnemyMain enemy)
+    {
+        GameManager.instance.AddEnemy(enemy.gameObject);
+        enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
+        coutAliveEnemies++;
     }
     public void OnDieEnemy()
     {

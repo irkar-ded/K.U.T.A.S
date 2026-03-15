@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
         public float damage;
     }
     [SerializeField] LayerMask layerWall;
+    [SerializeField] float radiusWallCollision = 0.01f;
     Rigidbody rb;
     DamageOnCollision damage;
     void Awake()
@@ -22,8 +23,15 @@ public class Bullet : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(Physics.CheckSphere(transform.position,0.01f,layerWall))
+        if(Physics.CheckSphere(transform.position,radiusWallCollision,layerWall))
             gameObject.SetActive(false);
+    }
+    void OnDrawGizmosSelected()
+    {
+        Color colorCollision = Color.green;;
+        colorCollision.a = 0.5f;
+        Gizmos.color = colorCollision;
+        Gizmos.DrawSphere(transform.position,radiusWallCollision);
     }
     void OnEnable()=>damage.enabled = false;
     public void SetBullet(ParametersBullet bullet)

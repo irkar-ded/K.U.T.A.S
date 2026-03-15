@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Game:")]
     [SerializeField] GameObject player;
     [SerializeField] RoomSettings[] rooms;
+    [SerializeField] RoomSettings debugRoom;
     public int stage;
     public static GameManager instance;
     List<GameObject> enemies = new List<GameObject>();
@@ -37,14 +38,21 @@ public class GameManager : MonoBehaviour
     }
     public void DestroyAllRooms()
     {
+        if(debugRoom != null && debugRoom.room != null)
+            debugRoom.room.gameObject.SetActive(false);
         for(int i = 0;i < rooms.Length;i++)
             rooms[i].room.gameObject.SetActive(false);
     }
     public void SetupRoom()
     {
-        List<RoomSettings> roomsInPool = rooms.ToList();
-        roomsInPool.RemoveAll(x => x.stageOn > stage);
-        currentRoom = roomsInPool[Random.Range(0,roomsInPool.Count)].room;
+        if(debugRoom != null && debugRoom.room != null)
+            currentRoom = debugRoom.room;
+        else
+        {
+            List<RoomSettings> roomsInPool = rooms.ToList();
+            roomsInPool.RemoveAll(x => x.stageOn > stage);
+            currentRoom = roomsInPool[Random.Range(0,roomsInPool.Count)].room;
+        }
         currentRoom.gameObject.SetActive(true);
         currentRoom.PrepareRoom();
     }

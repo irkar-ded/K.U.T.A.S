@@ -150,6 +150,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 5013025287305365675, guid: 1a96a607fad4bbd4fb5d6ffea4a09032, type: 3}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
       propertyPath: recoil
       value: 1
       objectReference: {fileID: 0}

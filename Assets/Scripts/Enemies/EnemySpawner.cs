@@ -16,10 +16,14 @@ public class EnemySpawner : MonoBehaviour
     public EnemyMain SpawnEnemy()
     {
         System.Array.Sort(enemyContents,(a,b) => a.startInStage.CompareTo(b.startInStage));
-        for(int i = 0;i < enemyContents.Length; i++)
+        List<EnemyContent> enemiesContentTemp = new List<EnemyContent>(enemyContents);
+        enemiesContentTemp.RemoveAll(x => x.startInStage > GameManager.instance.stage);
+        while(enemiesContentTemp.Count > 0)
         {
-            if(enemyContents[i].startInStage <= GameManager.instance.stage && Random.Range(0,101) <= enemyContents[i].chance)
-                return Instantiate(enemyContents[i].enemy,transform.position,transform.rotation);
+            EnemyContent enemyContentTemp = enemiesContentTemp[Random.Range(0,enemiesContentTemp.Count)];
+            if(Random.Range(0,101) <= enemyContentTemp.chance)
+                return Instantiate(enemyContentTemp.enemy,transform.position,transform.rotation);
+            enemiesContentTemp.Remove(enemyContentTemp);
         }
         return null;
     }
