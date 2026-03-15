@@ -8,16 +8,6 @@ using UnityEngine.UI;
 
 public class TicTacToeManager : MonoBehaviour
 {
-    public class MinimaxMove
-    {
-        public int idMove;
-        public int costMove;
-        public MinimaxMove(int idMove,int costMove)
-        {
-            this.idMove = idMove;
-            this.costMove = costMove;
-        }
-    }
     public enum Winner
     {
         Player,
