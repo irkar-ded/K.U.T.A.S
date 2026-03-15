@@ -10190,7 +10190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabPoolOptions:
   - prefabTransform: {fileID: 9067211960851488566, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
-    instancesToPreload: 100
+    instancesToPreload: 500
     isPoolExpanded: 1
     showDebugLog: 0
     poolCanGrow: 0
@@ -10202,7 +10202,7 @@ MonoBehaviour:
     hardLimit: 10
     recycle: 1
   - prefabTransform: {fileID: 5958076636059096238, guid: 1a96a607fad4bbd4fb5d6ffea4a09032, type: 3}
-    instancesToPreload: 100
+    instancesToPreload: 500
     isPoolExpanded: 1
     showDebugLog: 0
     poolCanGrow: 0
@@ -10214,7 +10214,7 @@ MonoBehaviour:
     hardLimit: 10
     recycle: 1
   - prefabTransform: {fileID: 7334830213016421230, guid: 1c6797024b86af3e3a4bceb9c4af31c5, type: 3}
-    instancesToPreload: 100
+    instancesToPreload: 500
     isPoolExpanded: 1
     showDebugLog: 0
     poolCanGrow: 0
@@ -10226,7 +10226,7 @@ MonoBehaviour:
     hardLimit: 10
     recycle: 1
   - prefabTransform: {fileID: 6861924912170062807, guid: 2b58a67ed391a41869b8ba7151eff809, type: 3}
-    instancesToPreload: 100
+    instancesToPreload: 500
     isPoolExpanded: 1
     showDebugLog: 0
     poolCanGrow: 0
@@ -19275,8 +19275,15 @@ MonoBehaviour:
     stageOn: 5
   - room: {fileID: 1070825237}
     stageOn: 0
+  bossRooms:
+  - room: {fileID: 1753660347}
+    stageOn: 0
+  - room: {fileID: 418092137}
+    stageOn: 0
+  - room: {fileID: 514855625}
+    stageOn: 0
   debugRoom:
-    room: {fileID: 1753660347}
+    room: {fileID: 0}
     stageOn: 0
   stage: 0
   gameIsStarted: 0

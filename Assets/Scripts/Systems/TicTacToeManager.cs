@@ -118,7 +118,8 @@ public class TicTacToeManager : MonoBehaviour
     {
         if(gameIsEnd)
             return;
-        onChooseCell.Invoke(id);
+        if(currentGrid.cells[id] == 0)
+            onChooseCell.Invoke(id);
     }
     public void PlayCell(int idCell)
     {
@@ -167,6 +168,13 @@ public class TicTacToeManager : MonoBehaviour
     {
         for(int i = 0; i < currentGrid.cells.Count; i++)
             textButtons[i].text = GetSymbolCell(currentGrid.cells[i]);
+    }
+    public Winner TryMove(int id)
+    {
+        currentGrid.cells[id] = 1;
+        Winner winner = CheckWin();
+        currentGrid.cells[id] = 0;
+        return winner;
     }
     public string GetSymbolCell(int value)
     {

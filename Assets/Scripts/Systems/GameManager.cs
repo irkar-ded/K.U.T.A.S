@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
     [Header("Game:")]
     [SerializeField] GameObject player;
     [SerializeField] RoomSettings[] rooms;
+    [SerializeField] RoomSettings[] bossRooms;
     [SerializeField] RoomSettings debugRoom;
     public int stage;
     public static GameManager instance;
     List<GameObject> enemies = new List<GameObject>();
     public bool gameIsStarted;
+    bool isBossFight;
     int currentChoosenCell;
     Room currentRoom;
     GameObject currentPlayer;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     {
         currentChoosenCell = idCell;
         gameIsStarted = true;
+        isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
         TicTacToeManager.instance.SetTicTacToe(false);
         DestroyAllRooms();
         SetupRoom();
@@ -39,14 +42,21 @@ public class GameManager : MonoBehaviour
     public void DestroyAllRooms()
     {
         if(debugRoom != null && debugRoom.room != null)
+        {
             debugRoom.room.gameObject.SetActive(false);
+            return;
+        }
         for(int i = 0;i < rooms.Length;i++)
             rooms[i].room.gameObject.SetActive(false);
+        for(int i = 0;i < bossRooms.Length;i++)
+            bossRooms[i].room.gameObject.SetActive(false);
     }
     public void SetupRoom()
     {
         if(debugRoom != null && debugRoom.room != null)
             currentRoom = debugRoom.room;
+        else if(isBossFight)
+            currentRoom = bossRooms[Random.Range(0,bossRooms.Length)].room;
         else
         {
             List<RoomSettings> roomsInPool = rooms.ToList();

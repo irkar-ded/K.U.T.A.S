@@ -120,11 +120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842946729119622290, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: healt
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6842946729119622290, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: maxHealt
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8336325526326271816, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: m_LocalPosition.x
