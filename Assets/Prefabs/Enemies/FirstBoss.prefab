@@ -448,6 +448,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 644a6c2dc0debac9db2a8e8a1ed30a32, type: 2}
+    - target: {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: typeMovement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: layerAvoidObjects.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6842946729119622290, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: healt
       value: 100
@@ -502,7 +514,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 753370544640439609, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
-    - {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
     - {fileID: 180186027890546885, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -519,9 +530,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9166579554697699405, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2447292149454222595}
-    - targetCorrespondingSourceObject: {fileID: 9166579554697699405, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2238459354883749995}
   m_SourcePrefab: {fileID: 100100000, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
 --- !u!4 &2574831360652870462 stripped
 Transform:
@@ -565,26 +573,6 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 5169110307303227632}
   - {fileID: 2706957998860493409}
---- !u!114 &2238459354883749995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3403889077444918331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536b522e5e7154453abb6ec5bd869a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  typeMovement: 0
-  speed: 0
-  layerAvoidObjects:
-    serializedVersion: 2
-    m_Bits: 0
-  randomOffsetDistance: 10
-  kdToRandomPath: 0.5
 --- !u!1001 &5896646566955523476
 PrefabInstance:
   m_ObjectHideFlags: 0
