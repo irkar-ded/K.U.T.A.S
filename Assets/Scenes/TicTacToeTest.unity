@@ -240,6 +240,7 @@ MonoBehaviour:
   whatsTurn: 0
   currentGrid:
     cells: 000000000000000000000000000000000000000000000000000000000000000000000000
+  isDebug: 1
   mainPanelTicTacToe: {fileID: 805198638}
   prefabCell: {fileID: 2372160954077403147, guid: bd1adcae4800b4c44a3af66d4e230b01, type: 3}
   panelGrid: {fileID: 1210271148}

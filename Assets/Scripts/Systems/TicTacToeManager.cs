@@ -8,6 +8,16 @@ using UnityEngine.UI;
 
 public class TicTacToeManager : MonoBehaviour
 {
+    public class MinimaxMove
+    {
+        public int idMove;
+        public int costMove;
+        public MinimaxMove(int idMove,int costMove)
+        {
+            this.idMove = idMove;
+            this.costMove = costMove;
+        }
+    }
     public enum Winner
     {
         Player,
@@ -82,6 +92,7 @@ public class TicTacToeManager : MonoBehaviour
         }),
     };
     [Header("UI")]
+    [SerializeField] bool isDebug;
     [SerializeField] GameObject mainPanelTicTacToe;
     [SerializeField] GameObject prefabCell;
     [SerializeField] Transform panelGrid;
@@ -93,6 +104,11 @@ public class TicTacToeManager : MonoBehaviour
         instance = this;
         CreateGrid();
     }
+    void Update()
+    {
+        if(whatsTurn == Winner.Enemy && isDebug)
+            MoveEnemy();
+    }
     public void SetTicTacToe(bool isPlay)=>mainPanelTicTacToe.SetActive(isPlay);
     public void CreateGrid()
     {
@@ -100,7 +116,10 @@ public class TicTacToeManager : MonoBehaviour
         {
             int idCell = i;
             Button tmpCell = Instantiate(prefabCell,panelGrid).GetComponent<Button>();
-            tmpCell.onClick.AddListener(() => SelectCell(idCell));
+            if(isDebug)
+                tmpCell.onClick.AddListener(() => PlayCell(idCell));
+            else
+                tmpCell.onClick.AddListener(() => SelectCell(idCell));
             textButtons.Add(tmpCell.GetComponentInChildren<TextMeshProUGUI>());
         }
         RefreshCells();
@@ -121,45 +140,63 @@ public class TicTacToeManager : MonoBehaviour
             {
                 case Winner.Player:
                     currentGrid.cells[idCell] = 1;
+                    if(isDebug)
+                        whatsTurn = Winner.Enemy;
                 break;
                 case Winner.Enemy:
                     currentGrid.cells[idCell] = -1;
+                    if(isDebug)
+                        whatsTurn = Winner.Player;
                 break;
             }
         }
         RefreshCells();
-        if(CheckWin(currentGrid) != Winner.None)
+        if(CheckWin() != Winner.None)
             gameIsEnd = true;
-        print(CheckWin(currentGrid).ToString());
+        print(CheckWin().ToString());
     }
     public void MoveEnemy()
     {
-        PlayCell(idCellToMoveAI(currentGrid));
+        List<int> currentEmptyCells = FreeCells();
+            int maxValue = int.MinValue;
+            int idMove = 0;
+            for(int i = 0;i < currentEmptyCells.Count; i++)
+            {
+                currentGrid.cells[currentEmptyCells[i]] = -1;
+                int value = Minimax(0,false);
+                currentGrid.cells[currentEmptyCells[i]] = 0;
+                if(value > maxValue)
+                {
+                    maxValue = value;
+                    idMove = currentEmptyCells[i];
+                }
+            }
+            PlayCell(idMove);
     }
     public void RefreshCells()
     {
         for(int i = 0; i < currentGrid.cells.Count; i++)
-        {
-            switch (currentGrid.cells[i])
-            {
-                case 0:
-                    textButtons[i].text = "-";
-                break;
-                case 1:
-                    textButtons[i].text = "X";
-                break;
-                case -1:
-                    textButtons[i].text = "O";
-                break;
-            }
-        }
+            textButtons[i].text = GetSymbolCell(currentGrid.cells[i]);
     }
-    public Winner CheckWin(Grid grid)
+    public string GetSymbolCell(int value)
+    {
+        switch (value)
+        {
+            case 0:
+                return "-";
+            case 1:
+                return "X";
+            case -1:
+                return "O";
+        }
+        return "-";
+    }
+    public Winner CheckWin()
     {
         Winner currentWinner = Winner.Tie;
-        for(int i = 0;i < grid.cells.Count; i++)
+        for(int i = 0;i < currentGrid.cells.Count; i++)
         {
-            if(grid.cells[i] == 0)
+            if(currentGrid.cells[i] == 0)
             {
                 currentWinner = Winner.None;
                 break;
@@ -177,12 +214,12 @@ public class TicTacToeManager : MonoBehaviour
                 {
                     if(patternsWin[i].cells[j] == 0)
                         continue;
-                    if(grid.cells[j] == (currentWinner == Winner.Player ? -1 : 1))
+                    if(currentGrid.cells[j] == (currentWinner == Winner.Player ? -1 : 1))
                     {
                         currentWinner = Winner.None;
                         break;
                     }
-                    if(grid.cells[j] == (currentWinner == Winner.Player ? 1 : -1))
+                    if(currentGrid.cells[j] == (currentWinner == Winner.Player ? 1 : -1))
                         countToWin++;
                 }
                 if(currentWinner != Winner.None && countToWin >= 3)
@@ -191,63 +228,55 @@ public class TicTacToeManager : MonoBehaviour
         }
         return Winner.None;
     }
-    public int idCellToMoveAI(Grid grid)
+    int Minimax(int depth,bool maximizingPlayer)
     {
-        List<int> idsCellsCanGo = new List<int>();
-        for(int i = 0;i < grid.cells.Count; i++)
-        {
-            if(grid.cells[i] == 0)
-                idsCellsCanGo.Add(i);
-        }
-        int isBetterMove = int.MinValue;
-        int idBestMove = 0;
-        for(int i = 0;i < idsCellsCanGo.Count; i++)
-        {
-            Grid gridTemp = new Grid(null);
-            gridTemp.cells = new List<int>();
-            gridTemp.cells.AddRange(grid.cells);
-            gridTemp.cells[idsCellsCanGo[i]] = -1;
-            int moveCost = Minimax(gridTemp);
-            if (moveCost > isBetterMove)
-            {
-                isBetterMove = moveCost;
-                idBestMove = idsCellsCanGo[i];
-            }
-        }
-        return idBestMove;
-    }
-    int Minimax(Grid grid) 
-    {
-        Winner winner = CheckWin(grid);
-        if (winner != Winner.None)
+        Winner winner = CheckWin();
+        if(winner != Winner.None)
         {
             switch (winner)
             {
-                case Winner.Player:
-                    return -1;
                 case Winner.Enemy:
                     return 1;
+                case Winner.Player:
+                    return -1;
                 case Winner.Tie:
                     return 0;
             }
         }
-        List<int> idsCellsCanGo = new List<int>();
-        for(int i = 0;i < grid.cells.Count; i++)
+        int maxValue;
+        List<int> canMove = FreeCells();
+        if (maximizingPlayer)
         {
-            if(grid.cells[i] == 0)
+            maxValue = int.MinValue;
+            for(int i = 0; i < canMove.Count; i++)
+            {
+                currentGrid.cells[canMove[i]] = -1;
+                int value = Minimax(depth + 1,false);
+                currentGrid.cells[canMove[i]] = 0;
+                maxValue = Mathf.Max(value,maxValue);
+            }
+        }
+        else
+        {
+            maxValue = int.MaxValue;
+            for(int i = 0; i < canMove.Count; i++)
+            {
+                currentGrid.cells[canMove[i]] = 1;
+                int value = Minimax(depth + 1,true);
+                currentGrid.cells[canMove[i]] = 0;
+                maxValue = Mathf.Min(value,maxValue);
+            }
+        }
+        return maxValue;
+    }
+    public List<int> FreeCells()
+    {
+        List<int> idsCellsCanGo = new List<int>();
+        for(int i = 0;i < currentGrid.cells.Count; i++)
+        {
+            if(currentGrid.cells[i] == 0)
                 idsCellsCanGo.Add(i);
         }
-        int isBetterMove = int.MinValue;
-        for(int i = 0;i < idsCellsCanGo.Count; i++)
-        {
-            Grid gridTemp = new Grid(null);
-            gridTemp.cells = new List<int>();
-            gridTemp.cells.AddRange(grid.cells);
-            gridTemp.cells[idsCellsCanGo[i]] = -1;
-            int moveCost = Minimax(gridTemp);
-            if (moveCost > isBetterMove)
-                isBetterMove = moveCost;
-        }
-        return isBetterMove;
+        return idsCellsCanGo;
     }
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int stage;
     public static GameManager instance;
     List<GameObject> enemies = new List<GameObject>();
+    public bool gameIsStarted;
     int currentChoosenCell;
     Room currentRoom;
     GameObject currentPlayer;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel(int idCell)
     {
         currentChoosenCell = idCell;
+        gameIsStarted = true;
         TicTacToeManager.instance.SetTicTacToe(false);
         DestroyAllRooms();
         SetupRoom();
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour
     public void AddEnemy(GameObject enemy) => enemies.Add(enemy);
     public void EndLevel(TicTacToeManager.Winner winner)
     {
+        if(gameIsStarted == false)
+            return;
+        gameIsStarted = false;
         for(int i = 0;i < enemies.Count;i++)
             Destroy(enemies[i].gameObject);
         enemies.Clear();
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
                 TicTacToeManager.instance.PlayCell(currentChoosenCell);
             break;
             case TicTacToeManager.Winner.Enemy:
-            TicTacToeManager.instance.whatsTurn = TicTacToeManager.Winner.Enemy;
+                TicTacToeManager.instance.whatsTurn = TicTacToeManager.Winner.Enemy;
                 TicTacToeManager.instance.MoveEnemy();
             break;
         }
