@@ -12,9 +12,14 @@ public class BuffManager : MonoBehaviour
     {
         public float fireRate;
         public float maxHealth;
+        public float bonusSpeed;
+        public float bonusForceBullet;
         public float damage;
         public int bonusCoin;
         public float lessTimeFade;
+        public int toxicBullet;
+        public int xRayBullet;
+        public int bounceBullet;
     }
     [SerializeField] GameObject textYourBuffs;
     [SerializeField] Transform endBuffsContent;
@@ -42,6 +47,11 @@ public class BuffManager : MonoBehaviour
                 tempBuff.damage += item.passiveBuff.damage;
                 tempBuff.bonusCoin += item.passiveBuff.bonusCoin;
                 tempBuff.lessTimeFade += item.passiveBuff.lessTimeFade;
+                tempBuff.bonusSpeed += item.passiveBuff.bonusSpeed;
+                tempBuff.toxicBullet += item.passiveBuff.toxicBullet;
+                tempBuff.xRayBullet += item.passiveBuff.xRayBullet;
+                tempBuff.bounceBullet += item.passiveBuff.bounceBullet;
+                tempBuff.bonusForceBullet += item.passiveBuff.bonusForceBullet;
             }
         }
         passiveBuff = tempBuff;

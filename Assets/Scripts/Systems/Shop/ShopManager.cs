@@ -19,18 +19,36 @@ public class ShopManager : MonoBehaviour
         }
     }
     //[SerializeField] EventReference soundExit;
-    [SerializeField] GameObject itemRefresh;
-    [SerializeField] Transform[] itemsHolder;
-    [SerializeField] Transform refreshItemHolder;
+    [SerializeField] RefreshItem itemRefresh;
+    [SerializeField] ShopItemHolder itemShopHolder;
+    [SerializeField] Transform contentItems;
     [SerializeField] ShopItem[] itemsShop;
     [SerializeField] ShopItem[] customItems;
     List<ShopItemTemp> itemsShopNames = new List<ShopItemTemp>();
-    List<ShopItem> currentItems = new List<ShopItem>();
+    List<ShopItemHolder> currentItems = new List<ShopItemHolder>();
     public static ShopManager instance;
     [SerializeField] public UnityEvent onBuy;
     RefreshItem refreshItem;
     // Start is called before the first frame update
-    void Awake()=>instance = this;
+    void Awake()
+    {
+        instance = this;
+        for (int i = 0; i < itemsShop.Length; i++)itemsShopNames.Add(new ShopItemTemp(itemsShop[i].nameItem));
+        onBuy.AddListener(() =>
+        {
+            if(ScoreManager.instance != null)
+                ScoreManager.instance.addScore(10); 
+        });
+    }
+    void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            gameObject.SetActive(false);
+            GameManager.instance.NextStage();
+        }
+    }
+    void OnEnable()=>createItems();
     public void createItems()
     {
         //bool isOutStock = false;
@@ -40,9 +58,10 @@ public class ShopManager : MonoBehaviour
                 isOutStock = true;
             else
             {*/
-                for(int j = 0;j < itemsHolder.Length; j++)
+                for(int j = 0;j < customItems.Length; j++)
                 {
-                    ShopItem randomItem = Instantiate(canSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, canSpawnItemsCustom(customItems.ToList()).Count - 1)], itemsHolder[j]);
+                    ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
+                    randomItem.SetItemHolder(canSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, canSpawnItemsCustom(customItems.ToList()).Count - 1)]);
                     currentItems.Add(randomItem);
                 }
             //}
@@ -53,10 +72,11 @@ public class ShopManager : MonoBehaviour
                 isOutStock = true;
             else
             {*/
-                for(int j = 0;j < itemsHolder.Length; j++)
+                for(int i = 0; i < 3; i++)
                 {
                     List<ShopItem> tempItems = canSpawnItems();
-                    ShopItem randomItem = Instantiate(tempItems[Random.Range(0, tempItems.Count)], itemsHolder[j]);
+                    ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
+                    randomItem.SetItemHolder(tempItems[Random.Range(0, tempItems.Count)]);
                     currentItems.Add(randomItem);
                 }
             //}
@@ -67,7 +87,7 @@ public class ShopManager : MonoBehaviour
             print("dadwaefgwafesaf");
             return;
         }*/
-        refreshItem = Instantiate(itemRefresh, refreshItemHolder).GetComponent<RefreshItem>();
+        refreshItem = Instantiate(itemRefresh, contentItems);
         refreshItem.SetItem();
     }
     public void Refresh()
@@ -78,7 +98,7 @@ public class ShopManager : MonoBehaviour
     private void OnDisable() => destroyItems();
     public void destroyItems()
     {
-        foreach (ShopItem shopButton in currentItems)
+        foreach (ShopItemHolder shopButton in currentItems)
         {
             if(shopButton != null)
                 Destroy(shopButton.gameObject);
@@ -90,11 +110,12 @@ public class ShopManager : MonoBehaviour
     public List<ShopItem> canSpawnItems()
     {
         HashSet<string> usedNames = new HashSet<string>();
-        foreach (ShopItem itemCurrent in currentItems)
-            usedNames.Add(itemCurrent.name);
+        foreach (ShopItemHolder itemCurrent in currentItems)
+            usedNames.Add(itemCurrent.item.nameItem);
         foreach (ShopItemTemp itemCurrent in itemsShopNames)
         {
-            if (itemCurrent.countBuyedItem >= itemsShop.First(x=> x.nameItem == itemCurrent.nameItem).maxCountItemsBuyed && itemsShop.First(x=> x.nameItem == itemCurrent.nameItem).maxCountItemsBuyed != -1)
+            ShopItem shopItem = itemsShop.First(x=> x.nameItem == itemCurrent.nameItem);
+            if (itemCurrent.countBuyedItem >= shopItem.maxCountItemsBuyed && shopItem.maxCountItemsBuyed != -1)
                 usedNames.Add(itemCurrent.nameItem);
         }
         List<ShopItem> result = new List<ShopItem>();
@@ -103,7 +124,6 @@ public class ShopManager : MonoBehaviour
             if (!usedNames.Contains(item.nameItem))
                 result.Add(item);
         }
-
         return result;
     }
     public List<ShopItem> canSpawnItemsCustom(List<ShopItem> customItems)
@@ -111,7 +131,8 @@ public class ShopManager : MonoBehaviour
         HashSet<string> usedNames = new HashSet<string>();
         foreach (ShopItemTemp itemCurrent in itemsShopNames)
         {
-            if (itemCurrent.countBuyedItem >= itemsShop.First(x=> x.nameItem == itemCurrent.nameItem).maxCountItemsBuyed && itemsShop.First(x=> x.nameItem == itemCurrent.nameItem).maxCountItemsBuyed != -1)
+            ShopItem shopItem = itemsShop.First(x => x.nameItem == itemCurrent.nameItem);
+            if (itemCurrent.countBuyedItem >= shopItem.maxCountItemsBuyed && shopItem.maxCountItemsBuyed != -1)
                 usedNames.Add(itemCurrent.nameItem);
         }
         List<ShopItem> result = new List<ShopItem>();
@@ -120,7 +141,6 @@ public class ShopManager : MonoBehaviour
             if (!usedNames.Contains(item.nameItem))
                 result.Add(item);
         }
-
         return result;
     }
     public void DropCountItem(string nameItem)

@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
         public int startInStage = 0;
     }
     [SerializeField] EnemyContent[] enemyContents;
+    public bool useHealthbar;
     public EnemyMain SpawnEnemy()
     {
         System.Array.Sort(enemyContents,(a,b) => a.startInStage.CompareTo(b.startInStage));

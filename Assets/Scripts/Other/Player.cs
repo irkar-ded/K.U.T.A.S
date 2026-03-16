@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [Header("Values")]
-    [SerializeField] float speed = 10;
+    public float speed = 10;
     public static Player instance;
     InputAction moveInput;
     [HideInInspector]public Controls inputs;

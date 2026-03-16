@@ -22,7 +22,6 @@ public class TicTacToeManager : MonoBehaviour
         public Grid(List<int> cellsNew)=>cells = cellsNew;
     }
     [Header("System")]
-    bool gameIsEnd = false;
     public Winner whatsTurn = Winner.Player;
     [SerializeField] Grid currentGrid = new Grid(new List<int>
         {
@@ -87,17 +86,27 @@ public class TicTacToeManager : MonoBehaviour
     [SerializeField] GameObject prefabCell;
     [SerializeField] Transform panelGrid;
     public UnityEvent<int> onChooseCell;
+    [HideInInspector]public Winner currentWinner = Winner.None;
     List<TextMeshProUGUI> textButtons = new List<TextMeshProUGUI>();
     public static TicTacToeManager instance;
     void Awake()
     {
         instance = this;
         CreateGrid();
+        SetupTicTacToe();
     }
     void Update()
     {
         if(whatsTurn == Winner.Enemy && isDebug)
             MoveEnemy();
+    }
+    public void SetupTicTacToe()
+    {
+        whatsTurn = Winner.Player;
+        currentWinner = Winner.None;
+        for(int i = 0; i < currentGrid.cells.Count;i++)
+            currentGrid.cells[i] = 0;
+        RefreshCells();
     }
     public void SetTicTacToe(bool isPlay)=>mainPanelTicTacToe.SetActive(isPlay);
     public void CreateGrid()
@@ -116,14 +125,14 @@ public class TicTacToeManager : MonoBehaviour
     }
     public void SelectCell(int id)
     {
-        if(gameIsEnd)
+        if(currentWinner != Winner.None)
             return;
         if(currentGrid.cells[id] == 0)
             onChooseCell.Invoke(id);
     }
     public void PlayCell(int idCell)
     {
-        if(gameIsEnd)
+        if(currentWinner != Winner.None)
             return;
         if(currentGrid.cells[idCell] == 0)
         {
@@ -143,7 +152,7 @@ public class TicTacToeManager : MonoBehaviour
         }
         RefreshCells();
         if(CheckWin() != Winner.None)
-            gameIsEnd = true;
+            currentWinner = CheckWin();
         print(CheckWin().ToString());
     }
     public void MoveEnemy()

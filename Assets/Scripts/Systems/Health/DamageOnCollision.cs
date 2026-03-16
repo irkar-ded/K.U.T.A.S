@@ -9,22 +9,25 @@ public class DamageOnCollision : MonoBehaviour
     public GameObject owner;
     public float damage;
     public UnityEvent OnTakeDamage;
+    [HideInInspector] public HealtSystem lastDamagedTarget;
     void Start(){}
     private void OnTriggerEnter(Collider other)
     {
         if (useTag)
         {
-            if (other.gameObject.TryGetComponent<HealtSystem>(out HealtSystem hit) && owner.tag != hit.transform.tag)
+            if (other.gameObject.TryGetComponent(out HealtSystem hit) && (owner == null  || owner != null && owner.tag != hit.transform.tag))
             {
-                hit.TakeDamage(damage, transform.position);
+                hit.TakeDamage(damage, transform.position,"LOL");
+                lastDamagedTarget = hit;
                 OnTakeDamage.Invoke();
             }
         }
         else
         {
-            if (owner != other.gameObject && other.gameObject.TryGetComponent<HealtSystem>(out HealtSystem hit))
+            if ((owner == null  || owner != null && owner != other.gameObject) && other.gameObject.TryGetComponent(out HealtSystem hit))
             {
-                hit.TakeDamage(damage, transform.position);
+                hit.TakeDamage(damage, transform.position,"LOL");
+                lastDamagedTarget = hit;
                 OnTakeDamage.Invoke();
             }
         }

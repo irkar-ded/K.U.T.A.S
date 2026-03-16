@@ -13,12 +13,13 @@ public class EnemyMain : MonoBehaviour
         MoveDodge,
         Fly
     }
-    HealtSystem healtSystem;
+    [HideInInspector]public HealtSystem healtSystem;
     Rigidbody rb;
     [HideInInspector]public NavMeshAgent agent;
     [HideInInspector]public Transform target;
     Coroutine refreshPathCoroutine;
     Vector3 offsetMove;
+    public string nameEnemy;
     public TypeMovement typeMovement;
     public float speed;
     public LayerMask layerAvoidObjects;
@@ -36,6 +37,8 @@ public class EnemyMain : MonoBehaviour
         {
             healtSystem.onDie.AddListener(() =>
             {
+                ScoreManager.instance.addKill();
+                ComboManager.instance.addCombo(1);
                 Destroy(this);
                 if(agent != null)
                     Destroy(agent);
@@ -78,7 +81,7 @@ public class EnemyMain : MonoBehaviour
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
-                rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
+                rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection.normalized :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
             break;
             case TypeMovement.None:
                 if(refreshPathCoroutine != null)
@@ -124,6 +127,7 @@ public class EnemyMain : MonoBehaviour
 [CustomEditor(typeof(EnemyMain))]
 public class EnemyMainEditor : Editor
 {
+    SerializedProperty m_nameEnemy;
     SerializedProperty m_typeMovement;
     SerializedProperty m_speed;
     SerializedProperty m_randomOffsetDistance;
@@ -136,12 +140,14 @@ public class EnemyMainEditor : Editor
         m_speed = serializedObject.FindProperty("speed");
         m_randomOffsetDistance = serializedObject.FindProperty("randomOffsetDistance");
         m_kdToRandomPath = serializedObject.FindProperty("kdToRandomPath");
+        m_nameEnemy = serializedObject.FindProperty("nameEnemy");
     }
     public override void OnInspectorGUI()
     {
         EnemyMain enemyMain = (EnemyMain)target;
         serializedObject.Update();
         GUILayout.Label("Values:");
+        EditorGUILayout.PropertyField(m_nameEnemy,new GUIContent("Name Enemy"));
         EditorGUILayout.PropertyField(m_typeMovement,new GUIContent("Type Movement"));
         EditorGUILayout.PropertyField(m_layerAvoidObjects, new GUIContent("Layer Avoid Objects"));
         EditorGUILayout.PropertyField(m_speed, new GUIContent("Speed"));

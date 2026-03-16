@@ -26,10 +26,17 @@ public class ThirdBoss : MonoBehaviour
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
+        gun = GetComponentInChildren<Gun>();
+        enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
+        enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.1f;
+        enemyMain.kdToRandomPath = enemyMain.kdToRandomPath - GameManager.instance.stage * 0.015f;
+        gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.01f;
+        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.1f;
         startSpeed = enemyMain.speed;
         player = enemyMain.target;
         rbPlayer = player.GetComponent<Rigidbody>();
-        gun = GetComponentInChildren<Gun>();
         SetStateBoss(ThirdBossStates.Idle);
     }
 
@@ -66,7 +73,7 @@ public class ThirdBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.015f);
         bossState = ThirdBossStates.Shoot;
     }
     IEnumerator shootStateBoss()
@@ -97,7 +104,7 @@ public class ThirdBoss : MonoBehaviour
         rotToPlayer.x = 0;
         transform.rotation = rotToPlayer;
         Vector3 target = player.position + rbPlayer.velocity.normalized;
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f - GameManager.instance.stage * 0.015f);
         enemyMain.agent.enabled = true;
         enemyMain.agent.isStopped = false;
         enemyMain.speed = 50;
@@ -108,7 +115,7 @@ public class ThirdBoss : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f - GameManager.instance.stage * 0.015f);
         bossState = ThirdBossStates.Shoot;
     }
 }

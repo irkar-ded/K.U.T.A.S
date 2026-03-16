@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
         textName.text = name;
         healthSystem.onTakeDamage.AddListener((Vector3) => reloadTimer());
     }
-    public void reloadTimer() => timerToBackHardDamage = 0.5f;
+    public void reloadTimer() => timerToBackHardDamage = 0.25f;
     void Update()
     {
         if(healthSystem == null)

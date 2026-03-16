@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79790e0af5589a9dbb02f3de30fa85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageStandart: {r: 1, g: 0, b: 0, a: 1}
+  toxicDamage: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &6842946729119622290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +152,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isInvincible: 0
+  currentTypeDamage: 
 --- !u!195 &753370544640439609
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -171,7 +174,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &3974067801348483038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536b522e5e7154453abb6ec5bd869a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healtSystem: {fileID: 0}
+  agent: {fileID: 0}
   target: {fileID: 0}
   typeMovement: 1
   speed: 10
@@ -222,3 +227,4 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  lastDamagedTarget: {fileID: 0}

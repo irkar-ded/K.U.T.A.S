@@ -16,25 +16,28 @@ public class HealtSystem : MonoBehaviour
     public UnityEvent<Vector3> onTakeDamage;
     public static HealtSystem instance;
     [HideInInspector]public bool isInvincible;
+    [HideInInspector]public string currentTypeDamage;
     private void Awake()
     {
         if(transform.tag == "Player")
             instance = this;
     }
-    public void TakeDamage(float damage,Vector3 posBlood)
+    public void TakeDamage(float damage,Vector3 posBlood,string typeDamage)
     {
         if (isInvincible || enabled == false)
             return;
+        currentTypeDamage = typeDamage;
         healt -= damage;
         healt = Mathf.Clamp(healt, minHealt, maxHealt);
         onTakeDamage.Invoke(posBlood);
         if (healt <= 0)
             Die();
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage,string typeDamage)
     {
         if (isInvincible)
             return;
+        currentTypeDamage = typeDamage;
         healt -= damage;
         healt = Mathf.Clamp(healt, minHealt, maxHealt);
         if (healt <= 0)
@@ -46,5 +49,14 @@ public class HealtSystem : MonoBehaviour
         healt += hp;
         healt = Mathf.Clamp(healt, minHealt, maxHealt);
         addHealth.Invoke();
+    }
+    public void DamagePoison(int countDamage,float damage) => StartCoroutine(damagePoisonCoroutine(countDamage,damage));
+    IEnumerator damagePoisonCoroutine(int countDamage,float damage)
+    {
+        for(int i = 0; i < countDamage; i++)
+        {
+            yield return new WaitForSeconds(0.2f);
+            TakeDamage(damage,transform.position,"Toxic");
+        }
     }
 }

@@ -21,6 +21,7 @@ public class FirstBoss : MonoBehaviour
     [SerializeField] Transform[] spawnPointsToBullet;
     [Header("Spawn Enemey State:")]
     [SerializeField] EnemySpawner[] enemySpawners;
+    EnemyMain enemyMain;
     Transform player;
     int aliveEnemies;
     Coroutine currentWorkState;
@@ -30,6 +31,10 @@ public class FirstBoss : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         room = FindObjectOfType<Room>();
+        enemyMain = GetComponent<EnemyMain>();
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
+        enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
+        enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         SetStateBoss(FirstBossStates.Idle);
     }
 
@@ -63,12 +68,12 @@ public class FirstBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.015f);
         bossState = FirstBossStates.BulletHell;
     }
     IEnumerator bulletHellStateBoss()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
         float timer = 0;
         float timerToSpawnBullet = 0;
         float currentRot = 0;
@@ -77,7 +82,7 @@ public class FirstBoss : MonoBehaviour
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
             currentRot += Time.deltaTime * 30;
-            if(timerToSpawnBullet >= 0.2f)
+            if(timerToSpawnBullet >= 0.2f-GameManager.instance.stage * 0.01f)
             {
                 spawnPointToBulletParent.rotation = Quaternion.Euler(0,currentRot,0);
                 for(int i = 0;i < spawnPointsToBullet.Length; i++)
@@ -91,13 +96,13 @@ public class FirstBoss : MonoBehaviour
     }
     IEnumerator enemyAtackStateBoss()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
             print(enemy.gameObject.name);
             enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
-            room.AddEnemy(enemy);
+            room.AddEnemy(enemy,false);
             aliveEnemies++;
             print(aliveEnemies);
         }

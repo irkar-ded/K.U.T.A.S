@@ -17,12 +17,12 @@ public class Room : MonoBehaviour
         {
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
             if(enemy != null)
-                AddEnemy(enemy);
+                AddEnemy(enemy,enemySpawners[i].useHealthbar);
         }
     }
-    public void AddEnemy(EnemyMain enemy)
+    public void AddEnemy(EnemyMain enemy,bool useHealthbar)
     {
-        GameManager.instance.AddEnemy(enemy.gameObject);
+        GameManager.instance.AddEnemy(enemy.gameObject,useHealthbar ? UIManagerGame.instance.CreateHealthBar(enemy.healtSystem,enemy.nameEnemy) : null);
         enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
         coutAliveEnemies++;
     }

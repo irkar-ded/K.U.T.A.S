@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54c3f362cb500cf0a9ee4f03c195b4b, type: 3}
+  m_Name: Clock
+  m_EditorClassIdentifier: 
+  iconItem: {fileID: 21300000, guid: 257988d0edc9a2f6fbe6b65454ad5a34, type: 3}
+  nameItem: Clock
+  description: 
+  costItem: 200
+  maxCountItemsBuyed: -1
+  buff: {fileID: 1401263574237597199, guid: 96dc4b2d39ddb17409e8cde03d37272d, type: 3}

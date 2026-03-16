@@ -177,6 +177,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isInvincible: 0
+  currentTypeDamage: 
 --- !u!114 &5895137351392605238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79790e0af5589a9dbb02f3de30fa85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageStandart: {r: 1, g: 0, b: 0, a: 1}
+  toxicDamage: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1001 &1209208523438952561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +248,10 @@ PrefabInstance:
       propertyPath: parametersBullet.owner
       value: 
       objectReference: {fileID: 3714683291074585926}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: parametersBullet.toxicBullet
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

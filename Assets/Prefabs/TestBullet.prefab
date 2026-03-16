@@ -52,7 +52,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7013670186522817227
 MonoBehaviour:
@@ -72,6 +72,7 @@ MonoBehaviour:
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  lastDamagedTarget: {fileID: 0}
 --- !u!1 &7704451624214823731
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +88,7 @@ GameObject:
   - component: {fileID: 7653082982572935576}
   m_Layer: 0
   m_Name: TestBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,3 +201,7 @@ MonoBehaviour:
   layerWall:
     serializedVersion: 2
     m_Bits: 8
+  radiusWallCollision: 0.01
+  toxicColor: {r: 0, g: 1, b: 0, a: 1}
+  xRayColor: {r: 1, g: 0, b: 1, a: 1}
+  bounceColor: {r: 0, g: 1, b: 1, a: 1}

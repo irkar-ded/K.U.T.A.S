@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54c3f362cb500cf0a9ee4f03c195b4b, type: 3}
+  m_Name: Soda
+  m_EditorClassIdentifier: 
+  iconItem: {fileID: 21300000, guid: 4345d1b4e22d84a47bcdf09be05fd4e5, type: 3}
+  nameItem: Soda
+  description: 
+  costItem: 225
+  maxCountItemsBuyed: -1
+  buff: {fileID: 1401263574237597199, guid: a64b13584719d190fa82ff9cc3fa50b1, type: 3}

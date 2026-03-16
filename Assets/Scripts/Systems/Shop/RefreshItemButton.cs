@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 //using EasyTextEffects;
 //using FMODUnity;
 
 
-public class RefreshItem : MonoBehaviour
+public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     //[SerializeField] EventReference soundEnter;
     [SerializeField] int costItem;
@@ -16,20 +18,34 @@ public class RefreshItem : MonoBehaviour
     [SerializeField] TextMeshProUGUI textDescription;
     //TextEffect textNameEffect;
     //TextEffect textDescriptionEffect;
+    Button buttonItem;
     Animator anim;
     CanvasGroup aboutItem;
     bool entered;
-    SpriteRenderer img;
+    Image img;
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        img = GetComponent<SpriteRenderer>();
+        img = GetComponent<Image>();
+        buttonItem = GetComponent<Button>();
         aboutItem = GetComponentInChildren<CanvasGroup>();
         //textNameEffect = textName.GetComponent<TextEffect>();
         //textDescriptionEffect = textDescription.GetComponent<TextEffect>();
         ShopManager.instance.onBuy.AddListener(setInfoItem);
     }
-    public void SetItem() => setInfoItem();
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        /*if (isPurched == false)
+            RuntimeManager.PlayOneShot(soundEnter);*/
+        entered = true;
+    }
+    public void OnPointerExit(PointerEventData eventData)=>entered = false;
+    public void SetItem()
+    {
+        if(buttonItem != null)
+            buttonItem.interactable = activeCheakItem();
+        setInfoItem();
+    }
     private void Update()
     {
         anim.SetBool("Selected", entered);

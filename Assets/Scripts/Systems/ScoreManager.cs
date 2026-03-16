@@ -6,18 +6,16 @@ using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
-    TextMeshProUGUI scoreText;
-    TextMeshProUGUI timerText;
-    TextMeshProUGUI killText;
+    [SerializeField]TextMeshProUGUI stagesText;
+    [SerializeField]TextMeshProUGUI scoreText;
+    [SerializeField]TextMeshProUGUI timerText;
+    [SerializeField]TextMeshProUGUI killText;
     [SerializeField] int score;
     [SerializeField] float timer;
     [SerializeField] int kill;
     [HideInInspector] public UnityEvent onKill;
     public static ScoreManager instance;
-    private void Awake()
-    {
-        instance = this;
-    }
+    private void Awake()=>instance = this;
     public void addScore(int add)=>score += add;
     public void addKill()
     {
@@ -26,8 +24,8 @@ public class ScoreManager : MonoBehaviour
     }
     private void Update()
     {
-        /*if (GameManager.gameAllReady == false)
-            return;*/
+        if (GameManager.instance.gameIsStarted == false)
+            return;
         timer += Time.deltaTime;
     }
     public void setInfo()
@@ -39,6 +37,7 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = $"SCORE:{score.ToString("D4")}";
         killText.text = $"KILL:{kill.ToString("D3")}";
         timerText.text = $"TIME:{formattedTime}";
+        stagesText.text = $"STAGES:{GameManager.instance.stage}";
     }
 
 }

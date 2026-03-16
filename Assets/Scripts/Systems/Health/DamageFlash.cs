@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageFlash : MonoBehaviour
 {
+    [SerializeField] Color damageStandart = Color.red;
+    [SerializeField] Color toxicDamage = Color.green;
     HealtSystem healtSystem;
     MeshRenderer model;
     void Start()
@@ -16,6 +18,15 @@ public class DamageFlash : MonoBehaviour
     public void OnTakeDamage()=>StartCoroutine(AnimatedDamage());
     IEnumerator AnimatedDamage()
     {
+        switch (healtSystem.currentTypeDamage)
+        {
+            case "Toxic":
+                model.material.SetColor("_ColorFlash",toxicDamage);
+            break;
+            default:
+                model.material.SetColor("_ColorFlash",damageStandart);
+            break;
+        }
         for(int i = 0; i < 5; i++)
         {
             model.material.SetFloat("_FlashAmount", i % 2);

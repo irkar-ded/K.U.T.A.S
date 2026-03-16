@@ -8,7 +8,6 @@ public class EnemyKamikaze : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] float distanceToExplosion = 5;
     [SerializeField] float timeToExplosion = 0.5f;
-    HealtSystem healtSystem;
     bool isExplosionState;
     Transform player;
     EnemyMain enemyMain;
@@ -16,8 +15,11 @@ public class EnemyKamikaze : MonoBehaviour
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
-        healtSystem = GetComponent<HealtSystem>();
-        healtSystem.onDie.AddListener(Explosion);
+        enemyMain.healtSystem.onDie.AddListener(Explosion);
+        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
+        timeToExplosion = timeToExplosion - GameManager.instance.stage * 0.025f;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + Mathf.Clamp(GameManager.instance.stage - 1,0,Mathf.Infinity) * 0.25f;
+        enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         player = enemyMain.target;
     }
 
@@ -39,7 +41,7 @@ public class EnemyKamikaze : MonoBehaviour
         }
         enemyMain.Move();
     }
-    void TakeDamageAfterTime()=>healtSystem.TakeDamage(1488);
+    void TakeDamageAfterTime()=>enemyMain.healtSystem.TakeDamage(1488,"LOL");
     void Explosion()
     {
         EZ_PoolManager.Spawn(explosion.transform,transform.position,transform.rotation);
