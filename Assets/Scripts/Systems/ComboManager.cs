@@ -19,7 +19,7 @@ public class ComboManager : MonoBehaviour
     int bonusCoin;
     Material mat;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
         /*textEffectCombo = textCombo.GetComponent<TextEffect>();
@@ -29,11 +29,14 @@ public class ComboManager : MonoBehaviour
         //mat = new Material(textCombo.fontMaterial);
         //textCombo.fontMaterial = mat;
         //textEffectCombo.Refresh();
+    }
+    void Start()
+    {
         GameManager.instance.onStartLevel.AddListener(() =>
         {
             if(HealtSystem.instance != null)
                 HealtSystem.instance.onTakeDamage.AddListener((Vector3) => removeCombo());
-        });
+        });   
     }
     private void OnEnable()
     {
