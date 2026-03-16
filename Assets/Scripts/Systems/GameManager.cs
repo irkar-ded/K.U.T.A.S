@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI textTimer;
     [SerializeField] TextMeshProUGUI textStages;
     [SerializeField] GameObject resultsPanel;
+    [SerializeField] GameObject otherUI;
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject shop;
     [SerializeField] GameObject buttonNext;
@@ -249,6 +250,7 @@ public class GameManager : MonoBehaviour
             break;
             default:
                 resultsPanel.SetActive(true);
+                otherUI.SetActive(false);
                 ScoreManager.instance.setInfo();
                 BuffManager.instance.cheakUIEndContent();
             break;
