@@ -84,7 +84,7 @@ public class SecondBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.01f);
         bossState = SecondBossStates.Teleport;
     }
     public void Teleport()
@@ -100,7 +100,7 @@ public class SecondBoss : MonoBehaviour
     IEnumerator bulletHellStateBoss()
     {
         isLastExplosion = false;
-        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.01f);
         float timer = 0;
         float timerToSpawnBullet = 0;
         bool isRevers = false;
@@ -133,16 +133,16 @@ public class SecondBoss : MonoBehaviour
     IEnumerator explosionStateBoss()
     {
         isLastExplosion = true;
-        yield return new WaitForSeconds(1f-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(1f-GameManager.instance.stage * 0.01f);
         for(int i = 0; i < 10; i++)
         {
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;
             markToExplosion.transform.position = randomPositionExplosion;
             markToExplosion.SetActive(true);
-            yield return new WaitForSeconds(0.65f-GameManager.instance.stage * 0.015f);
+            yield return new WaitForSeconds(0.65f-GameManager.instance.stage * 0.01f);
             EZ_PoolManager.Spawn(explosion.transform,randomPositionExplosion + Vector3.up * 0.5f,Quaternion.identity);
             markToExplosion.SetActive(false);
-            yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
+            yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.01f);
         }
         bossState = SecondBossStates.BulletHell;
     }

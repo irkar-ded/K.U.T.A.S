@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6920384947422282555}
   - component: {fileID: 5985647211241745640}
   - component: {fileID: 5895137351392605238}
+  - component: {fileID: 2278955996651304934}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -192,6 +193,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageStandart: {r: 1, g: 0, b: 0, a: 1}
   toxicDamage: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &2278955996651304934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714683291074585926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a7112b623d605649a64c014fc40edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1209208523438952561
 PrefabInstance:
   m_ObjectHideFlags: 0

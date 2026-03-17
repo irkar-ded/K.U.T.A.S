@@ -75,7 +75,7 @@ public class ThirdBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.01f);
         bossState = ThirdBossStates.Shoot;
     }
     IEnumerator shootStateBoss()
@@ -106,7 +106,7 @@ public class ThirdBoss : MonoBehaviour
         rotToPlayer.x = 0;
         transform.rotation = rotToPlayer;
         Vector3 target = player.position + rbPlayer.velocity.normalized;
-        yield return new WaitForSeconds(0.15f - GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(0.15f - GameManager.instance.stage * 0.01f);
         enemyMain.agent.enabled = true;
         enemyMain.agent.isStopped = false;
         enemyMain.speed = 50;
@@ -117,7 +117,7 @@ public class ThirdBoss : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        yield return new WaitForSeconds(0.1f - GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(0.1f - GameManager.instance.stage * 0.01f);
         bossState = ThirdBossStates.Shoot;
     }
 }
