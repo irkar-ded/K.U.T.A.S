@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(startGameCountdown());
         currentChoosenCell = idCell;
-        gameIsStarted = true;
         isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
         gameUI.SetActive(true);
         TicTacToeManager.instance.SetTicTacToe(false);
@@ -86,6 +85,8 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator startGameCountdown()
     {
+        Pause.canPause = false;
+        Pause.isPaused = true;
         Time.timeScale = 0;
         textCountdown.gameObject.SetActive(true);
         textCountdown.text = "<color=green>3</color>";
@@ -94,7 +95,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f - stage * 0.05f);
         textCountdown.text = "<color=red>1</color>";
         yield return new WaitForSecondsRealtime(0.5f - stage * 0.05f);
+        gameIsStarted = true;
         textCountdown.gameObject.SetActive(false);
+        Pause.canPause = true;
+        Pause.isPaused = false;
         Time.timeScale = 1;
     }
     void Update()
@@ -142,6 +146,7 @@ public class GameManager : MonoBehaviour
         else
         {
             timer = 10;
+            textTimer.text = timer.ToString("F2");
             textTimer.gameObject.SetActive(true);
             if(currentRoomPool.Count <= 0)
             {
@@ -230,11 +235,14 @@ public class GameManager : MonoBehaviour
         {
             switch (TicTacToeManager.instance.currentWinner)
             {
+                case TicTacToeManager.Winner.Player:
+                    textStages.text = "YOU WIN";
+                break;
                 case TicTacToeManager.Winner.Enemy:
                     textStages.text = "YOU LOSE";
                 break;
                 case TicTacToeManager.Winner.Tie:
-                    textStages.text = "THIS TIE BUT YOU STILL LOSE";
+                    textStages.text = "THIS TIE BUT YOU STILL LOSE :)";
                 break;
             }
             buttonNext.SetActive(true);

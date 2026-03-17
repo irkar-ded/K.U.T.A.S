@@ -28,6 +28,8 @@ public class ShopManager : MonoBehaviour
     List<ShopItemHolder> currentItems = new List<ShopItemHolder>();
     public static ShopManager instance;
     [SerializeField] public UnityEvent onBuy;
+    Controls gameInputs;
+    InputAction pauseKey;
     RefreshItem refreshItem;
     // Start is called before the first frame update
     void Awake()
@@ -39,16 +41,26 @@ public class ShopManager : MonoBehaviour
             if(ScoreManager.instance != null)
                 ScoreManager.instance.addScore(10); 
         });
+        if (SettingsManager.instance != null)
+            gameInputs = SettingsManager.gameInputs;
+        else
+            gameInputs = new Controls();
+        pauseKey = gameInputs.Player.Pause;
+        pauseKey.Enable();
     }
     void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (pauseKey.WasPerformedThisFrame())
         {
             gameObject.SetActive(false);
             GameManager.instance.NextStage();
         }
     }
-    void OnEnable()=>createItems();
+    void OnEnable()
+    {
+        Pause.canPause = false;
+        createItems();
+    }
     public void createItems()
     {
         //bool isOutStock = false;
@@ -95,7 +107,11 @@ public class ShopManager : MonoBehaviour
         destroyItems();
         createItems();
     }
-    private void OnDisable() => destroyItems();
+    private void OnDisable()
+    {
+        Pause.canPause = true;
+        destroyItems();
+    }
     public void destroyItems()
     {
         foreach (ShopItemHolder shopButton in currentItems)

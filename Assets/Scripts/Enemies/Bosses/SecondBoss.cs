@@ -55,6 +55,8 @@ public class SecondBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
+            return;
         if(currentBossState != bossState)
             SetStateBoss(bossState);
     }

@@ -22,6 +22,8 @@ public class Gun : MonoBehaviour
     [Header("Gun:")]
     public float recoil = 0;
     public float kdBeetwenShoots = 0.1f;
+    Controls gameInputs;
+    InputAction shootKey;
     float timerKd;
     Transform player;
     void Start()
@@ -31,16 +33,32 @@ public class Gun : MonoBehaviour
             player = GetComponentInParent<EnemyMain>().target;
             timerKd = Random.Range(0,kdBeetwenShoots);
         }
+        else
+        {
+            if (SettingsManager.instance != null)
+                gameInputs = SettingsManager.gameInputs;
+            else
+                gameInputs = new Controls();
+            shootKey = gameInputs.Player.Fire;
+            shootKey.Enable();
+        }
     }
     // Update is called once per frame
     void Update()
     {
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
+            return;
         RotateGun();
         Reload();
         if(ownerGun != OwnerGun.Player)
             return;
-        if(Mouse.current.leftButton.isPressed)
+        if(shootKey.IsPressed())
             Shoot();
+    }
+    void OnDisable()
+    {
+        if(ownerGun == OwnerGun.Player)
+            shootKey.Disable();
     }
     public void RotateGun() => transform.rotation = LookRotate();
     public void Reload()

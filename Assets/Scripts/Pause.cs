@@ -13,11 +13,15 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour
 {
     [Header("Values")]
+    [SerializeField] GameObject panelUI;
+    [SerializeField] GameObject settingsPanel;
+    [SerializeField] Button settingsButtonExit;
     [SerializeField] bool debug;
     //[SerializeField] EventReference effectPause;
     public static Pause instance;
     //EventInstance effectInstance;
     Controls gameInputs;
+    InputAction restartKey;
     InputAction pauseKey;
     public static bool canPause = true;
     //Window window;
@@ -35,10 +39,13 @@ public class Pause : MonoBehaviour
         else
             gameInputs = new Controls();
         pauseKey = gameInputs.Player.Pause;
+        restartKey = gameInputs.Player.Restart;
     }
     private void OnDisable()
     {
         //effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        pauseKey.Disable();
+        restartKey.Disable();
         isPaused = false;
     }
     // Update is called once per frame
@@ -46,17 +53,31 @@ public class Pause : MonoBehaviour
     {
         if (debug == true)
             return;
-        if (pauseKey.WasPressedThisFrame() && isPaused == false && canPause == true)
-            OnOpenPause();
+        if(canPause == true)
+        {
+            if (pauseKey.WasPressedThisFrame() && isPaused == false)
+                OnOpenPause();
+            else if (pauseKey.WasPressedThisFrame() && isPaused == true)
+            {
+                if(settingsPanel.activeSelf)
+                    settingsButtonExit.onClick.Invoke();
+                else
+                    OnClosePause();
+            }
+        }
+        if(restartKey.WasPerformedThisFrame())
+            LoadingScreen.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OnClosePause()
     {
         //effectInstance.start();
+        panelUI.SetActive(false);
         Time.timeScale = 1;
         isPaused = false;
     }
     public void OnOpenPause()
     {
+        panelUI.SetActive(true);
         isPaused = true;
         //effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         Time.timeScale = 0;
@@ -75,12 +96,14 @@ public class Pause : MonoBehaviour
         if (!hasFocus && isPaused == false && canPause)
             OnOpenPause();
     }
-    private void OnEnable() => pauseKey.Enable();
+    private void OnEnable()
+    {
+        pauseKey.Enable();
+        restartKey.Enable();
+    }
     public void OnExit()
     {
         canPause = false;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
         LoadingScreen.LoadScene("Menu");
     }
 }

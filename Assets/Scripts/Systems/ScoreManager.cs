@@ -37,7 +37,7 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = $"SCORE:{score.ToString("D4")}";
         killText.text = $"KILL:{kill.ToString("D3")}";
         timerText.text = $"TIME:{formattedTime}";
-        stagesText.text = $"STAGES:{GameManager.instance.stage}";
+        stagesText.text = $"STAGE:{GameManager.instance.stage}";
     }
 
 }

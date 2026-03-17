@@ -47,6 +47,8 @@ public class EnemyMain : MonoBehaviour
     }
     public void Move()
     {
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
+            return;
         if(agent != null)
             agent.speed = speed;
         Collider[] avoidObjects = Physics.OverlapSphere(transform.position,3,layerAvoidObjects);
@@ -94,6 +96,8 @@ public class EnemyMain : MonoBehaviour
     }
     public void Move(Vector3 customTarget)
     {
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
+            return;
         if(agent != null)
             agent.speed = speed;
         switch (typeMovement)

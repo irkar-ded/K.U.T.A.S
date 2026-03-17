@@ -14,6 +14,8 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
+            return;
         if(enemyMain == null)
         {
             Destroy(this);
