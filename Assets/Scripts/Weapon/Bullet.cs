@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        model = GetComponent<MeshRenderer>();
+        model = GetComponentInChildren<MeshRenderer>();
         startColor = model.material.color;
         damage = GetComponentInChildren<DamageOnCollision>();
         damage.OnTakeDamage.AddListener(OnTakeDamage);

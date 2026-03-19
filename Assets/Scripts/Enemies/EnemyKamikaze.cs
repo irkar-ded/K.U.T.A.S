@@ -8,6 +8,7 @@ public class EnemyKamikaze : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] float distanceToExplosion = 5;
     [SerializeField] float timeToExplosion = 0.5f;
+    Animator anim;
     bool isExplosionState;
     Transform player;
     EnemyMain enemyMain;
@@ -15,6 +16,7 @@ public class EnemyKamikaze : MonoBehaviour
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
+        anim = GetComponentInChildren<Animator>();
         enemyMain.healtSystem.onDie.AddListener(Explosion);
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
         timeToExplosion = timeToExplosion - GameManager.instance.stage * 0.025f;
@@ -38,10 +40,17 @@ public class EnemyKamikaze : MonoBehaviour
         if(Vector3.Distance(transform.position,player.position) <= distanceToExplosion)
         {
             isExplosionState = true;
+            anim.SetTrigger("Dash");
             Invoke("TakeDamageAfterTime",timeToExplosion);
             return;
         }
         enemyMain.Move();
+        WalkAnimation();
+    }
+    public void WalkAnimation()
+    {
+        anim.SetFloat("x",enemyMain.agent.velocity.x);
+        anim.SetFloat("y",enemyMain.agent.velocity.z);
     }
     void TakeDamageAfterTime()=>enemyMain.healtSystem.TakeDamage(1488,"LOL");
     void Explosion()

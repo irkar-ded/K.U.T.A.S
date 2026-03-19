@@ -11,6 +11,7 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] float reactionTime = 0.1f;
     [SerializeField] float distanceToBack = 2;
     [SerializeField] float distanceToStay = 6;
+    Animator anim;
     bool backMove;
     float timerToLeavePlayer;
     float timerReaction;
@@ -19,14 +20,15 @@ public class EnemyGun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         player = enemyMain.target;
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
-        enemyMain.kdToRandomPath = enemyMain.kdToRandomPath - GameManager.instance.stage * 0.025f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.015f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.25f;
         reactionTime = reactionTime - GameManager.instance.stage * 0.015f;
+        enemyMain.healtSystem.onDie.AddListener(Die);
     }
 
     // Update is called once per frame
@@ -57,6 +59,13 @@ public class EnemyGun : MonoBehaviour
             backMove = false;
         if(CanAtackPlayer())
             gun.Shoot();
+        WalkAnimation();
+    }
+    public void Die()=>anim.SetBool("Death",true);
+    public void WalkAnimation()
+    {
+        anim.SetFloat("x",enemyMain.agent.velocity.x);
+        anim.SetFloat("y",enemyMain.agent.velocity.z);
     }
     public bool isSeePlayer()
     {

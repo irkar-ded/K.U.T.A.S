@@ -26,11 +26,13 @@ public class SecondBoss : MonoBehaviour
     HealtSystem healtSystem;
     Coroutine currentWorkState;
     List<Transform> teleportPoints = new List<Transform>();
+    Animator anim;
     Transform player;
     Rigidbody rbPlayer;
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         rbPlayer = player.GetComponent<Rigidbody>();
         healtSystem = GetComponent<HealtSystem>();
@@ -63,6 +65,7 @@ public class SecondBoss : MonoBehaviour
     public void SetStateBoss(SecondBossStates state)
     {
         markToExplosion.SetActive(false);
+        anim.SetBool("Atack",false);
         currentBossState = state;
         if(currentWorkState != null)
             StopCoroutine(currentWorkState);
@@ -78,7 +81,7 @@ public class SecondBoss : MonoBehaviour
                 currentWorkState = StartCoroutine(explosionStateBoss());
             break;
             case SecondBossStates.Teleport:
-                Teleport();
+                anim.SetTrigger("Teleport");
             break;
         }
     }
@@ -105,6 +108,7 @@ public class SecondBoss : MonoBehaviour
         float timerToSpawnBullet = 0;
         bool isRevers = false;
         float rotationOffset = -5;
+        anim.SetBool("Atack",true);
         while(timer <= 10)
         {
             timer+=Time.deltaTime;
@@ -136,10 +140,12 @@ public class SecondBoss : MonoBehaviour
         yield return new WaitForSeconds(1f-GameManager.instance.stage * 0.01f);
         for(int i = 0; i < 10; i++)
         {
+            anim.SetBool("Atack",true);
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;
             markToExplosion.transform.position = randomPositionExplosion;
             markToExplosion.SetActive(true);
             yield return new WaitForSeconds(0.65f-GameManager.instance.stage * 0.01f);
+            anim.SetBool("Atack",false);
             EZ_PoolManager.Spawn(explosion.transform,randomPositionExplosion + Vector3.up * 0.5f,Quaternion.identity);
             markToExplosion.SetActive(false);
             yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.01f);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
         public int stageOn = 0;
     }
     [Header("Game:")]
+    public Transform playerPositionCamera;
+    public Transform mousePositionCamera;
     [SerializeField] Player player;
     [SerializeField] RoomSettings[] rooms;
     [SerializeField] RoomSettings[] bossRooms;
@@ -103,7 +106,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if(gameIsStarted == false || isBossFight)
+        if(gameIsStarted == false || isBossFight || debugRoom != null && debugRoom.room != null)
             return;
         if(timer > 0)
             timer-= Time.deltaTime - BuffManager.instance.passiveBuff.lessTimeFade;

@@ -21,6 +21,7 @@ public class FirstBoss : MonoBehaviour
     [SerializeField] Transform[] spawnPointsToBullet;
     [Header("Spawn Enemey State:")]
     [SerializeField] EnemySpawner[] enemySpawners;
+    Animator anim;
     EnemyMain enemyMain;
     Transform player;
     int aliveEnemies;
@@ -29,6 +30,7 @@ public class FirstBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         room = FindObjectOfType<Room>();
         enemyMain = GetComponent<EnemyMain>();
@@ -52,6 +54,7 @@ public class FirstBoss : MonoBehaviour
     }
     public void SetStateBoss(FirstBossStates state)
     {
+        anim.SetBool("Shoot",false);
         currentBossState = state;
         if(currentWorkState != null)
             StopCoroutine(currentWorkState);
@@ -79,6 +82,7 @@ public class FirstBoss : MonoBehaviour
         float timer = 0;
         float timerToSpawnBullet = 0;
         float currentRot = 0;
+        anim.SetBool("Shoot",true);
         while(timer <= 10)
         {
             timer+=Time.deltaTime;
@@ -99,6 +103,7 @@ public class FirstBoss : MonoBehaviour
     IEnumerator enemyAtackStateBoss()
     {
         yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
+        anim.SetBool("Shoot",true);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
@@ -108,8 +113,10 @@ public class FirstBoss : MonoBehaviour
             aliveEnemies++;
             print(aliveEnemies);
         }
+        yield return new WaitForSeconds(0.25f);
+        anim.SetBool("Shoot",false);
         float timer = 0;
-        while(timer <= 10 && aliveEnemies > 0)
+        while(timer <= 9.75f && aliveEnemies > 0)
         {
             timer += Time.deltaTime;
             yield return null;

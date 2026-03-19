@@ -20,6 +20,8 @@ public class Gun : MonoBehaviour
     public Transform bulletSpawnPosition;
     public Bullet.ParametersBullet parametersBullet;
     [Header("Gun:")]
+    public Transform mainGun;
+    public Animator gunAnim;
     public float recoil = 0;
     public float kdBeetwenShoots = 0.1f;
     Controls gameInputs;
@@ -60,7 +62,7 @@ public class Gun : MonoBehaviour
         if(ownerGun == OwnerGun.Player)
             shootKey.Disable();
     }
-    public void RotateGun() => transform.rotation = LookRotate();
+    public void RotateGun() => mainGun.rotation = LookRotate();
     public void Reload()
     {
         if(timerKd > 0)
@@ -70,13 +72,17 @@ public class Gun : MonoBehaviour
     {
         if(timerKd > 0)
             return;
+        if(gunAnim != null)
+            gunAnim.SetTrigger("Shoot");
         SpawnBullet();
         timerKd = kdBeetwenShoots;
+        //Debug.LogError("LOL");
     }
+    public Vector3 getTargetLook() => ownerGun == OwnerGun.Player ? MouseHit() : player.position;
     public void SpawnBullet()=>EZ_PoolManager.Spawn(bullet.transform, bulletSpawnPosition.position + bulletSpawnPosition.right * Random.Range(-recoil,recoil), bulletSpawnPosition.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
     public Quaternion LookRotate()
     {
-        Quaternion rotToLook = Quaternion.LookRotation(((ownerGun == OwnerGun.Player ? MouseHit() : player.position) - transform.position).normalized);
+        Quaternion rotToLook = Quaternion.LookRotation(getTargetLook() - mainGun.position).normalized;
         rotToLook.z = 0;
         rotToLook.x = 0;
         return rotToLook;

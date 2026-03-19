@@ -14,6 +14,7 @@ public class ThirdBoss : MonoBehaviour
     [SerializeField] ThirdBossStates bossState;
     [SerializeField] float distanceToBack = 2;
     [SerializeField] float distanceToStay = 6;
+    Animator anim;
     bool backMove;
     ThirdBossStates currentBossState;
     float startSpeed;
@@ -25,13 +26,13 @@ public class ThirdBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.1f;
-        enemyMain.kdToRandomPath = enemyMain.kdToRandomPath - GameManager.instance.stage * 0.015f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.01f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.1f;
         startSpeed = enemyMain.speed;
@@ -51,6 +52,12 @@ public class ThirdBoss : MonoBehaviour
         rotToPlayer.z = 0;
         rotToPlayer.x = 0;
         transform.rotation = rotToPlayer;*/
+        WalkAnimation();
+    }
+    public void WalkAnimation()
+    {
+        anim.SetFloat("x",enemyMain.agent.velocity.x);
+        anim.SetFloat("y",enemyMain.agent.velocity.z);
     }
     public void SetStateBoss(ThirdBossStates state)
     {
@@ -99,6 +106,7 @@ public class ThirdBoss : MonoBehaviour
     }
     IEnumerator dashStateBoss()
     {
+        anim.SetTrigger("Dash");
         enemyMain.agent.isStopped = true;
         enemyMain.agent.enabled = false;
         Quaternion rotToPlayer = Quaternion.LookRotation((player.position - transform.position).normalized + rbPlayer.velocity.normalized);

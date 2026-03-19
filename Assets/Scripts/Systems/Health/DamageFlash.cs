@@ -7,10 +7,9 @@ public class DamageFlash : MonoBehaviour
     [SerializeField] Color damageStandart = Color.red;
     [SerializeField] Color toxicDamage = Color.green;
     HealtSystem healtSystem;
-    MeshRenderer model;
+    [SerializeField] Renderer[] model;
     void Start()
     {
-        model = GetComponentInChildren<MeshRenderer>();
         healtSystem = GetComponent<HealtSystem>();
         healtSystem.onTakeDamage.AddListener((Vector3) => OnTakeDamage());
         healtSystem.onDie.AddListener(() => Destroy(healtSystem));
@@ -21,15 +20,18 @@ public class DamageFlash : MonoBehaviour
         switch (healtSystem.currentTypeDamage)
         {
             case "Toxic":
-                model.material.SetColor("_ColorFlash",toxicDamage);
+                for(int i = 0; i < model.Length;i++)
+                    model[i].materials[0].SetColor("_ColorFlash",toxicDamage);
             break;
             default:
-                model.material.SetColor("_ColorFlash",damageStandart);
+                for(int i = 0; i < model.Length;i++)
+                    model[i].materials[0].SetColor("_ColorFlash",damageStandart);
             break;
         }
         for(int i = 0; i < 5; i++)
         {
-            model.material.SetFloat("_FlashAmount", i % 2);
+            for(int j = 0; j < model.Length;j++)
+                model[j].materials[0].SetFloat("_FlashAmount", i % 2);
             yield return new WaitForSeconds(0.1f);
         }
     }

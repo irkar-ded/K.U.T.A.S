@@ -83,7 +83,7 @@ public class EnemyMain : MonoBehaviour
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
-                rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection.normalized :  (target.position - transform.position).normalized)  * speed,ForceMode.Acceleration);
+                rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection.normalized :  (target.position - transform.position).normalized) * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             case TypeMovement.None:
                 if(refreshPathCoroutine != null)
