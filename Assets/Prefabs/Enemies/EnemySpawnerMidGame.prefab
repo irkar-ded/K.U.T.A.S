@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 157709070459134454, guid: fb658b827b57a7acaa0645a021319621, type: 3}
     - target: {fileID: 1614899596058140004, guid: ac2cf77f3326f300c88a3ef4c79e64d4, type: 3}
       propertyPath: enemyContents.Array.data[0].chance
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1614899596058140004, guid: ac2cf77f3326f300c88a3ef4c79e64d4, type: 3}
       propertyPath: enemyContents.Array.data[1].chance
