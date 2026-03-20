@@ -127,6 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageStandart: {r: 1, g: 0, b: 0, a: 1}
   toxicDamage: {r: 0, g: 1, b: 0, a: 1}
+  model:
+  - {fileID: 101852849867525466}
 --- !u!114 &6842946729119622290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   healtSystem: {fileID: 0}
   agent: {fileID: 0}
   target: {fileID: 0}
+  nameEnemy: 
   typeMovement: 1
   speed: 10
   layerAvoidObjects:

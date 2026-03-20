@@ -121,10 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useTag: 0
   owner: {fileID: 0}
-  damage: 1
+  damage: 2
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  lastDamagedTarget: {fileID: 0}
 --- !u!114 &-4301317381937720248
 MonoBehaviour:
   m_ObjectHideFlags: 0

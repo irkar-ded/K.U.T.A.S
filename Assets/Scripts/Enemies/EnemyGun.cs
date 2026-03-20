@@ -24,9 +24,9 @@ public class EnemyGun : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         player = enemyMain.target;
-        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.015f;
-        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.25f;
+        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         reactionTime = reactionTime - GameManager.instance.stage * 0.015f;
         enemyMain.healtSystem.onDie.AddListener(Die);
     }

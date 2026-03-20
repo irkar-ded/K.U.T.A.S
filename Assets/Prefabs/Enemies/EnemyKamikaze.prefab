@@ -394,6 +394,7 @@ MonoBehaviour:
   explosion: {fileID: 5059559244069807908, guid: 1c6797024b86af3e3a4bceb9c4af31c5, type: 3}
   distanceToExplosion: 5
   timeToExplosion: 0.5
+  anim: {fileID: 796148345863101931}
 --- !u!114 &7915207023847925205
 MonoBehaviour:
   m_ObjectHideFlags: 0

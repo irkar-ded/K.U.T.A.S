@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyKamikaze : MonoBehaviour
 {
+    [Header("Values")]
     [SerializeField] GameObject explosion;
     [SerializeField] float distanceToExplosion = 5;
     [SerializeField] float timeToExplosion = 0.5f;
-    Animator anim;
+    [SerializeField] Animator anim;
+    [SerializeField] UnityEvent onExplosion;
     bool isExplosionState;
     Transform player;
     EnemyMain enemyMain;
@@ -16,7 +19,6 @@ public class EnemyKamikaze : MonoBehaviour
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
-        anim = GetComponentInChildren<Animator>();
         enemyMain.healtSystem.onDie.AddListener(Explosion);
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
         timeToExplosion = timeToExplosion - GameManager.instance.stage * 0.025f;
@@ -40,12 +42,15 @@ public class EnemyKamikaze : MonoBehaviour
         if(Vector3.Distance(transform.position,player.position) <= distanceToExplosion)
         {
             isExplosionState = true;
-            anim.SetTrigger("Dash");
+            if(anim != null)
+                anim.SetTrigger("Dash");
+            onExplosion.Invoke();
             Invoke("TakeDamageAfterTime",timeToExplosion);
             return;
         }
         enemyMain.Move();
-        WalkAnimation();
+        if(anim != null)
+            WalkAnimation();
     }
     public void WalkAnimation()
     {

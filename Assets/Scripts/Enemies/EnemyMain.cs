@@ -45,6 +45,11 @@ public class EnemyMain : MonoBehaviour
             });
         }
     }
+    void Update()
+    {
+        if(transform.position.y <= -10)
+            Destroy(gameObject);
+    }
     public void Move()
     {
         if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
@@ -83,6 +88,10 @@ public class EnemyMain : MonoBehaviour
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
+                Quaternion lookAtPlayerRot = Quaternion.LookRotation((target.position - transform.position).normalized);
+                lookAtPlayerRot.z = 0;
+                lookAtPlayerRot.x = 0;
+                transform.rotation = lookAtPlayerRot;
                 rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection.normalized :  (target.position - transform.position).normalized) * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             case TypeMovement.None:
@@ -103,6 +112,10 @@ public class EnemyMain : MonoBehaviour
         switch (typeMovement)
         {
             case TypeMovement.Fly:
+                Quaternion lookAtPlayerRot = Quaternion.LookRotation((target.position - transform.position).normalized);
+                lookAtPlayerRot.z = 0;
+                lookAtPlayerRot.x = 0;
+                transform.rotation = lookAtPlayerRot;
                 rb.AddForce((customTarget - transform.position).normalized * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             default:

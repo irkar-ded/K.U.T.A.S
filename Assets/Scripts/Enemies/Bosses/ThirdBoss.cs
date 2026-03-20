@@ -32,9 +32,9 @@ public class ThirdBoss : MonoBehaviour
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
-        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.1f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.01f;
-        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.1f;
+        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         startSpeed = enemyMain.speed;
         player = enemyMain.target;
         rbPlayer = player.GetComponent<Rigidbody>();
