@@ -39,6 +39,8 @@ public class EnemyMain : MonoBehaviour
             {
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);
+                if(typeMovement == TypeMovement.Fly)
+                    SetLookAtPlayer();
                 Destroy(this);
                 if(agent != null)
                     Destroy(agent);
@@ -88,10 +90,7 @@ public class EnemyMain : MonoBehaviour
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
-                Quaternion lookAtPlayerRot = Quaternion.LookRotation((target.position - transform.position).normalized);
-                lookAtPlayerRot.z = 0;
-                lookAtPlayerRot.x = 0;
-                transform.rotation = lookAtPlayerRot;
+                SetLookAtPlayer();
                 rb.AddForce((avoidDirection != Vector3.zero ? avoidDirection.normalized :  (target.position - transform.position).normalized) * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             case TypeMovement.None:
@@ -112,10 +111,7 @@ public class EnemyMain : MonoBehaviour
         switch (typeMovement)
         {
             case TypeMovement.Fly:
-                Quaternion lookAtPlayerRot = Quaternion.LookRotation((target.position - transform.position).normalized);
-                lookAtPlayerRot.z = 0;
-                lookAtPlayerRot.x = 0;
-                transform.rotation = lookAtPlayerRot;
+                SetLookAtPlayer();
                 rb.AddForce((customTarget - transform.position).normalized * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             default:
@@ -127,6 +123,13 @@ public class EnemyMain : MonoBehaviour
             StopCoroutine(refreshPathCoroutine);
             refreshPathCoroutine = null;
         }
+    }
+    public void SetLookAtPlayer()
+    {
+        Quaternion lookAtPlayerRot = Quaternion.LookRotation((target.position - transform.position).normalized);
+        lookAtPlayerRot.z = 0;
+        lookAtPlayerRot.x = 0;
+        transform.rotation = lookAtPlayerRot;
     }
     IEnumerator PathOffset()
     {
