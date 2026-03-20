@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class DeadPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    HealtSystem healtSystem;
+    Coroutine invincibleCoroutine;
     void Start()
     {
-        
+        healtSystem = GetComponent<HealtSystem>();
+        healtSystem.onTakeDamage.AddListener((Vector3) => MakePlayerInvincible());
     }
-
-    // Update is called once per frame
-    void Update()
+    public void MakePlayerInvincible()
     {
-        
+        if(invincibleCoroutine != null)
+            StopCoroutine(invincibleCoroutine);
+        invincibleCoroutine = StartCoroutine(Invincible());
+    }
+    IEnumerator Invincible()
+    {
+        healtSystem.isInvincible = true;
+        yield return new WaitForSeconds(1);
+        healtSystem.isInvincible = false;
     }
 }

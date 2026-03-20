@@ -20,6 +20,7 @@ public class FirstBoss : MonoBehaviour
     [SerializeField] Transform spawnPointToBulletParent;
     [SerializeField] Transform[] spawnPointsToBullet;
     [Header("Spawn Enemey State:")]
+    [SerializeField] GameObject VFXSpawnEnemy;
     [SerializeField] EnemySpawner[] enemySpawners;
     Animator anim;
     EnemyMain enemyMain;
@@ -104,8 +105,16 @@ public class FirstBoss : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
         anim.SetBool("Shoot",true);
+        yield return new WaitForSeconds(0.15f);
+        anim.SetBool("Shoot",false);
+        yield return new WaitForSeconds(0.15f);
+        List<Transform> tempsVFXSpawnEnemy = new List<Transform>();
+        for(int i = 0; i < enemySpawners.Length; i++)
+            tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up,Quaternion.Euler(-90,0,0)));
+        yield return new WaitForSeconds(1f);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
+            enemySpawners[i].transform.position = tempsVFXSpawnEnemy[i].transform.position + Vector3.up;
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
             print(enemy.gameObject.name);
             enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
@@ -114,7 +123,6 @@ public class FirstBoss : MonoBehaviour
             print(aliveEnemies);
         }
         yield return new WaitForSeconds(0.25f);
-        anim.SetBool("Shoot",false);
         float timer = 0;
         while(timer <= 9.75f && aliveEnemies > 0)
         {

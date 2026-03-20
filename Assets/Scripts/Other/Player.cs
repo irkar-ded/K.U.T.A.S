@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         gun = GetComponentInChildren<Gun>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        anim.speed *= 1 + BuffManager.instance.passiveBuff.bonusSpeed * 0.25f;
     }
     void OnDisable()=>moveInput.Disable();
     // Update is called once per frame
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
         input = inputs.Player.Move.ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(input.x,0,input.y);
         rb.AddForce(moveDir * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
-        GameManager.instance.mousePositionCamera.position = gun.getTargetLook();
+        Vector3 posCameraLimit = ConvertorValue.Clamp(gun.getTargetLook(),new Vector3(-20,0,-20),new Vector3(20,0,20));
+        GameManager.instance.mousePositionCamera.position = posCameraLimit;
         GameManager.instance.playerPositionCamera.position = transform.position;
         WalkAnimation();
     }

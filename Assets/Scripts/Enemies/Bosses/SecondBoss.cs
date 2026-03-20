@@ -142,6 +142,7 @@ public class SecondBoss : MonoBehaviour
         {
             anim.SetBool("Atack",true);
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;
+            randomPositionExplosion.y = -1;
             markToExplosion.transform.position = randomPositionExplosion;
             markToExplosion.SetActive(true);
             yield return new WaitForSeconds(0.65f-GameManager.instance.stage * 0.01f);

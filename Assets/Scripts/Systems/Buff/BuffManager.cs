@@ -20,6 +20,7 @@ public class BuffManager : MonoBehaviour
         public int toxicBullet;
         public int xRayBullet;
         public int bounceBullet;
+        public bool isExplosionAfterDeath;
     }
     [SerializeField] GameObject textYourBuffs;
     [SerializeField] Transform endBuffsContent;
@@ -52,6 +53,7 @@ public class BuffManager : MonoBehaviour
                 tempBuff.xRayBullet += item.passiveBuff.xRayBullet;
                 tempBuff.bounceBullet += item.passiveBuff.bounceBullet;
                 tempBuff.bonusForceBullet += item.passiveBuff.bonusForceBullet;
+                tempBuff.isExplosionAfterDeath = item.passiveBuff.isExplosionAfterDeath;
             }
         }
         passiveBuff = tempBuff;

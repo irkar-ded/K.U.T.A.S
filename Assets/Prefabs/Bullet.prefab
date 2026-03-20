@@ -152,8 +152,8 @@ MonoBehaviour:
   layerWall:
     serializedVersion: 2
     m_Bits: 8
-  decal: {fileID: 2096560480728924634, guid: b29507820888a8a869232fbe04b17cc0, type: 3}
   radiusWallCollision: 0.01
+  bloodVFX: {fileID: 3597534099132337091, guid: 093eeda709f057f47b7a2e7ae255a015, type: 3}
   toxicColor: {r: 0, g: 1, b: 0, a: 1}
   xRayColor: {r: 1, g: 0, b: 1, a: 1}
   bounceColor: {r: 0, g: 1, b: 1, a: 1}

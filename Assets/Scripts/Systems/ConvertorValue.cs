@@ -1,3 +1,4 @@
+using UnityEngine;
 public class ConvertorValue
 {
     public static double ConvertValue(double value, double fromMax, double toMax)
@@ -6,6 +7,16 @@ public class ConvertorValue
         double convertedValue = (scaledValue * toMax);
         return convertedValue;
     }
-    public static float ConvertNumber(float inputNumber) { return 1 - inputNumber / 100f; }
     public static float GetAnimValue(float startSpeed,float newSpeed) => startSpeed / newSpeed;
+    public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
+    {
+        if (value.x < min.x || value.y < min.y || value.z < min.z ||
+            value.x > max.x || value.y > max.y || value.z > max.z)
+        {
+            value.x = Mathf.Clamp(value.x, min.x, max.x);
+            value.y = Mathf.Clamp(value.y, min.y, max.y);
+            value.z = Mathf.Clamp(value.z, min.z, max.z);
+        }
+        return value;
+    }
 }

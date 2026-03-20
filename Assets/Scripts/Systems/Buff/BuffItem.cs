@@ -12,7 +12,6 @@ public class BuffItem : MonoBehaviour
     public string nameBuff;
     public Sprite icon;
     public BuffManager.PassiveBuff passiveBuff;
-    public int idWeapon;
     public TYPE_BUFF_ON typeBuffOn;
     public float timeBuff = 1;
     [HideInInspector]public float timerBuff;

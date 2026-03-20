@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageFlash : MonoBehaviour
 {
+    [SerializeField] int idMaterialDamage;
     [SerializeField] Color damageStandart = Color.red;
     [SerializeField] Color toxicDamage = Color.green;
     HealtSystem healtSystem;
@@ -21,17 +22,17 @@ public class DamageFlash : MonoBehaviour
         {
             case "Toxic":
                 for(int i = 0; i < model.Length;i++)
-                    model[i].materials[0].SetColor("_ColorFlash",toxicDamage);
+                    model[i].materials[idMaterialDamage].SetColor("_ColorFlash",toxicDamage);
             break;
             default:
                 for(int i = 0; i < model.Length;i++)
-                    model[i].materials[0].SetColor("_ColorFlash",damageStandart);
+                    model[i].materials[idMaterialDamage].SetColor("_ColorFlash",damageStandart);
             break;
         }
         for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < model.Length;j++)
-                model[j].materials[0].SetFloat("_FlashAmount", i % 2);
+                model[j].materials[idMaterialDamage].SetFloat("_FlashAmount", i % 2);
             yield return new WaitForSeconds(0.1f);
         }
     }

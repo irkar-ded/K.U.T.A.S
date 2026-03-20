@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel(int idCell)
     {
         StartCoroutine(startGameCountdown());
+        ClearMap();
         currentChoosenCell = idCell;
         isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
         gameUI.SetActive(true);
@@ -173,11 +174,14 @@ public class GameManager : MonoBehaviour
         currentRoom.gameObject.SetActive(true);
         currentRoom.PrepareRoom();
     }
-    public void ClearBullets()
+    public void ClearMap()
     {
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         for(int i = 0; i < bullets.Length;i++)
             bullets[i].SetActive(false);
+        GameObject[] particles = GameObject.FindGameObjectsWithTag("Particle");
+        for(int i = 0; i < particles.Length;i++)
+            particles[i].SetActive(false);
     }
     public GameObject SpawnPlayer(Vector3 pos)
     {
@@ -220,7 +224,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0;i < enemies.Count;i++)
             Destroy(enemies[i].gameObject);
         enemies.Clear();
-        ClearBullets();
+        ClearMap();
         Destroy(currentPlayer);
         TicTacToeManager.instance.SetTicTacToe(true);
         switch (winner)

@@ -605,6 +605,7 @@ MonoBehaviour:
   - {fileID: 3680332486636773934}
   - {fileID: 654669938701125641}
   - {fileID: 8578891526712688268}
+  VFXSpawnEnemy: {fileID: 1740049899059948564, guid: c9f36ba266d757708aae074e1de18f6d, type: 3}
   enemySpawners:
   - {fileID: 5169110307303227632}
   - {fileID: 2706957998860493409}
@@ -623,6 +624,7 @@ MonoBehaviour:
   outlineMode: 3
   outlineColor: {r: 1, g: 0.8509804, b: 0.68235296, a: 1}
   outlineWidth: 5
+  ignoreRenders: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

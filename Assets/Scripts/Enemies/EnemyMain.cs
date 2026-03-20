@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EZ_Pooling;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,6 +26,8 @@ public class EnemyMain : MonoBehaviour
     public LayerMask layerAvoidObjects;
     public float randomOffsetDistance = 10;
     public float kdToRandomPath = 0.5f;
+    public GameObject bloodVFX;
+    public GameObject explosion;
     void Awake()
     {
         TryGetComponent(out agent);
@@ -37,6 +40,8 @@ public class EnemyMain : MonoBehaviour
         {
             healtSystem.onDie.AddListener(() =>
             {
+                if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
+                    EZ_PoolManager.Spawn(explosion.transform,transform.position,Quaternion.identity);
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);
                 if(typeMovement == TypeMovement.Fly)
@@ -45,6 +50,7 @@ public class EnemyMain : MonoBehaviour
                 if(agent != null)
                     Destroy(agent);
             });
+            healtSystem.onTakeDamage.AddListener((Vector3 pos) => EZ_PoolManager.Spawn(bloodVFX.transform,pos,transform.rotation));
         }
     }
     void Update()
@@ -153,6 +159,8 @@ public class EnemyMainEditor : Editor
     SerializedProperty m_randomOffsetDistance;
     SerializedProperty m_kdToRandomPath;
     SerializedProperty m_layerAvoidObjects;
+    SerializedProperty m_bloodVFX;
+    SerializedProperty m_explosion;
     void OnEnable()
     {
         m_layerAvoidObjects = serializedObject.FindProperty("layerAvoidObjects");
@@ -161,6 +169,8 @@ public class EnemyMainEditor : Editor
         m_randomOffsetDistance = serializedObject.FindProperty("randomOffsetDistance");
         m_kdToRandomPath = serializedObject.FindProperty("kdToRandomPath");
         m_nameEnemy = serializedObject.FindProperty("nameEnemy");
+        m_bloodVFX = serializedObject.FindProperty("bloodVFX");
+        m_explosion = serializedObject.FindProperty("explosion");
     }
     public override void OnInspectorGUI()
     {
@@ -179,6 +189,9 @@ public class EnemyMainEditor : Editor
             break;
 
         }
+        GUILayout.Label("Damage:");
+        EditorGUILayout.PropertyField(m_bloodVFX, new GUIContent("Blood VFX"));
+        EditorGUILayout.PropertyField(m_explosion, new GUIContent("Explosion"));
         serializedObject.ApplyModifiedProperties();
     }
 }

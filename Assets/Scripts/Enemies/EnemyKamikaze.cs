@@ -24,6 +24,8 @@ public class EnemyKamikaze : MonoBehaviour
         timeToExplosion = timeToExplosion - GameManager.instance.stage * 0.025f;
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + Mathf.Clamp(GameManager.instance.stage - 1,0,Mathf.Infinity) * 0.25f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
+        if(anim != null)
+            anim.speed *= 1 + GameManager.instance.stage * 0.25f;
         player = enemyMain.target;
     }
 

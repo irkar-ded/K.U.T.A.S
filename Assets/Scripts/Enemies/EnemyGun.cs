@@ -29,6 +29,7 @@ public class EnemyGun : MonoBehaviour
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         reactionTime = reactionTime - GameManager.instance.stage * 0.015f;
         enemyMain.healtSystem.onDie.AddListener(Die);
+        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
     }
 
     // Update is called once per frame
@@ -61,7 +62,11 @@ public class EnemyGun : MonoBehaviour
             gun.Shoot();
         WalkAnimation();
     }
-    public void Die()=>anim.SetBool("Death",true);
+    public void Die()
+    {
+        anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
+        anim.SetBool("Death",true);
+    }
     public void WalkAnimation()
     {
         anim.SetFloat("x",enemyMain.agent.velocity.x);

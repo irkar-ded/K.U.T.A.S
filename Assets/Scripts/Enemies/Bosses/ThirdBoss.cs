@@ -14,6 +14,7 @@ public class ThirdBoss : MonoBehaviour
     [SerializeField] ThirdBossStates bossState;
     [SerializeField] float distanceToBack = 2;
     [SerializeField] float distanceToStay = 6;
+    [SerializeField] LineRenderer dashVFX;
     Animator anim;
     bool backMove;
     ThirdBossStates currentBossState;
@@ -22,6 +23,7 @@ public class ThirdBoss : MonoBehaviour
     Transform player;
     Rigidbody rbPlayer;
     Coroutine currentWorkState;
+    Coroutine currentFadeDashVFX;
     Gun gun;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class ThirdBoss : MonoBehaviour
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
+        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.01f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         startSpeed = enemyMain.speed;
@@ -119,13 +122,37 @@ public class ThirdBoss : MonoBehaviour
         enemyMain.agent.isStopped = false;
         enemyMain.speed = 50;
         float timer = 0;
+        Vector3 startPosDashVFX = transform.position;
+        dashVFX.enabled = true;
+        FadeDashVFX();
         while(timer <= 1 && Vector3.Distance(transform.position,target) > 1)
         {
             enemyMain.Move(target);
             timer += Time.deltaTime;
+            dashVFX.SetPosition(0,startPosDashVFX);
+            dashVFX.SetPosition(1,transform.position);
             yield return null;
         }
         yield return new WaitForSeconds(0.1f - GameManager.instance.stage * 0.01f);
         bossState = ThirdBossStates.Shoot;
+    }
+    public void FadeDashVFX()
+    {
+        if(currentFadeDashVFX != null)
+            StopCoroutine(currentFadeDashVFX);
+        currentFadeDashVFX = StartCoroutine(fadeDashVFXAnimation());
+    }
+    IEnumerator fadeDashVFXAnimation()
+    {
+        dashVFX.startColor = Color.white;
+        while(dashVFX.startColor.a > 0)
+        {
+            Color colorDash = dashVFX.startColor;
+            colorDash.a -= Time.deltaTime * (2 + GameManager.instance.stage * 0.2f);
+            dashVFX.startColor = colorDash;
+            dashVFX.endColor = colorDash;
+            yield return null;
+        }
+        dashVFX.enabled = false;
     }
 }
