@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: nameEnemy
-      value: Third Boss
+      value: Cool Guy
       objectReference: {fileID: 0}
     - target: {fileID: 3974067801348483038, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: typeMovement

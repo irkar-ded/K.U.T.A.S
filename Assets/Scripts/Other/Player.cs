@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Animator anim;
     InputAction moveInput;
     [HideInInspector]public Controls inputs;
+    HealtSystem healtSystem;
     Gun gun;
     Vector2 input;
     Vector2 animMovement;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
         moveInput = inputs.Player.Move;
         moveInput.Enable();
         gun = GetComponentInChildren<Gun>();
+        healtSystem = GetComponent<HealtSystem>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         anim.speed *= 1 + BuffManager.instance.passiveBuff.bonusSpeed * 0.25f;
@@ -32,12 +34,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        input = inputs.Player.Move.ReadValue<Vector2>();
-        Vector3 moveDir = new Vector3(input.x,0,input.y);
-        rb.AddForce(moveDir * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
         Vector3 posCameraLimit = ConvertorValue.Clamp(gun.getTargetLook(),new Vector3(-20,0,-20),new Vector3(20,0,20));
         GameManager.instance.mousePositionCamera.position = posCameraLimit;
         GameManager.instance.playerPositionCamera.position = transform.position;
+        if(Pause.isPaused || GameManager.instance.gameIsStarted == false || healtSystem.healt <= 0)
+            return;
+        input = inputs.Player.Move.ReadValue<Vector2>();
+        Vector3 moveDir = new Vector3(input.x,0,input.y);
+        rb.AddForce(moveDir * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
         WalkAnimation();
     }
     public void WalkAnimation()

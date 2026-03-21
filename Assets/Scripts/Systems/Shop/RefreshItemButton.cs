@@ -12,8 +12,6 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     //[SerializeField] EventReference soundEnter;
     [SerializeField] int costItem;
-    [SerializeField] Sprite activeRefreshIcon;
-    [SerializeField] Sprite deactiveRefreshIcon;
     [SerializeField] TextMeshProUGUI textName;
     [SerializeField] TextMeshProUGUI textDescription;
     //TextEffect textNameEffect;
@@ -22,11 +20,9 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     Animator anim;
     CanvasGroup aboutItem;
     bool entered;
-    Image img;
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        img = GetComponent<Image>();
         buttonItem = GetComponent<Button>();
         aboutItem = GetComponentInChildren<CanvasGroup>();
         //textNameEffect = textName.GetComponent<TextEffect>();
@@ -54,9 +50,8 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void setInfoItem()
     {
         bool activeButton = activeCheakItem();
-        textName.text = $"{"Refresher"}-<color={(activeButton ? "green" : "red")}>{(costItem > 0 ? costItem + "$" : "FREE")}";
-        textDescription.text = "I DKN";
-        img.sprite = activeButton ? activeRefreshIcon : deactiveRefreshIcon;
+        textName.text = $"{"Refresher"}-<color={(activeButton ? "#78d8b7" : "#ff5470")}>{(costItem > 0 ? costItem + "$" : "FREE")}";
+        textDescription.text = "Refresh all items in the shop";
         //textNameEffect.Refresh();
         //textDescriptionEffect.Refresh();
     }

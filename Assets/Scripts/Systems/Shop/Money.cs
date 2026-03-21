@@ -1,4 +1,3 @@
-//using EasyTextEffects;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,7 +7,6 @@ public class Money : MonoBehaviour
 {
     public int currentMoney;
     [SerializeField] TextMeshProUGUI textMoney;
-    //TextEffect textEffect;
     Animator anim;
     public static Money instance;
     private void Start()
@@ -17,11 +15,8 @@ public class Money : MonoBehaviour
         if (textMoney != null)
         {
             textMoney.TryGetComponent(out anim);
-            //textMoney.TryGetComponent<TextEffect>(out textEffect);
             textMoney.text = $"{currentMoney}$";
         }
-        /*if(textEffect != null)
-            textEffect.Refresh();*/
     }
     public void AddMoney(int count)
     {
@@ -30,8 +25,6 @@ public class Money : MonoBehaviour
             anim.SetTrigger("Bounce");
         if(textMoney != null)
             textMoney.text = $"{currentMoney}$";
-        /*if(textEffect != null)
-            textEffect.Refresh();*/
     }
     public void MinusMoney(int count)
     {
@@ -40,7 +33,5 @@ public class Money : MonoBehaviour
             anim.SetTrigger("Bounce");
         if(textMoney != null)
             textMoney.text = $"{currentMoney}$";
-        /*if(textEffect != null)
-            textEffect.Refresh();*/
     }
 }

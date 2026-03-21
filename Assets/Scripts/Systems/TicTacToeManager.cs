@@ -190,13 +190,13 @@ public class TicTacToeManager : MonoBehaviour
         switch (value)
         {
             case 0:
-                return "-";
+                return "<color=white>-</color>";
             case 1:
-                return "X";
+                return "<color=#bae6ff>X</color>";
             case -1:
-                return "O";
+                return "<color=#ff5470>O</color>";
         }
-        return "-";
+        return "<color=white>-</color>";
     }
     public Winner CheckWin()
     {

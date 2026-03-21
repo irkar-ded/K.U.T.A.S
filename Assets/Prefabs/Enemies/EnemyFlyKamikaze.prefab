@@ -190,3 +190,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7011529331186957797}
+        m_TargetAssemblyTypeName: EnemyMain, Assembly-CSharp
+        m_MethodName: SetLookAtPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7011529331186957797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2088482292109903880, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
+  m_PrefabInstance: {fileID: 9058484134112327149}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131976533880283913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536b522e5e7154453abb6ec5bd869a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

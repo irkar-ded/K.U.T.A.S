@@ -119,6 +119,7 @@ MonoBehaviour:
   randomOffsetDistance: 10
   kdToRandomPath: 0.5
   bloodVFX: {fileID: 3597534099132337091, guid: 093eeda709f057f47b7a2e7ae255a015, type: 3}
+  markDead: {fileID: 49840175312429789, guid: 7acf096efc219a5cc9aa842ac2640a4b, type: 3}
   explosion: {fileID: 5059559244069807908, guid: 1c6797024b86af3e3a4bceb9c4af31c5, type: 3}
 --- !u!54 &3694414412952861009
 Rigidbody:

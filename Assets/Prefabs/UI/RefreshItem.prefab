@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RefreshItem
       objectReference: {fileID: 0}
+    - target: {fileID: 7452985653924359608, guid: 7ad699715d0d8374bbb1596e6efa8f15, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 406c9503c3dd6eafe856d8c37075835b, type: 3}
     m_RemovedComponents:
     - {fileID: 4357185659091163129, guid: 7ad699715d0d8374bbb1596e6efa8f15, type: 3}
     m_RemovedGameObjects: []
@@ -142,8 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costItem: 70
-  activeRefreshIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  deactiveRefreshIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   textName: {fileID: 4660357408381560762}
   textDescription: {fileID: 7998008911489164000}
 --- !u!114 &7998008911489164000 stripped

@@ -5,6 +5,7 @@ using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,11 +27,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI textCountdown;
     [SerializeField] TextMeshProUGUI textTimer;
     [SerializeField] TextMeshProUGUI textStages;
+    [SerializeField] Animator blackLines;
+    [SerializeField] GameObject bossOrbitalCamera;
+    [SerializeField] TextMeshProUGUI bossText;
     [SerializeField] GameObject resultsPanel;
     [SerializeField] GameObject otherUI;
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject shop;
     [SerializeField] GameObject buttonNext;
+    [Header("Colors")]
+    [SerializeField] Color colorNumberOne;
+    [SerializeField] Color colorNumberTwo;
+    [SerializeField] Color colorNumberThree;
+    bool isBossCutscene;
     public int stage;
     public static GameManager instance;
     List<GameObject> enemies = new List<GameObject>();
@@ -45,6 +54,9 @@ public class GameManager : MonoBehaviour
     float timer;
     Room currentRoom;
     GameObject currentPlayer;
+    Controls gameInputs;
+    InputAction pauseKey;
+    bool endGameState;
     // Start is called before the first frame update
     void Awake()
     {
@@ -56,7 +68,14 @@ public class GameManager : MonoBehaviour
         UpdateTextStage();
         ComboManager.instance.SetupCombo();
         SetupRoomsPool();
+        if (SettingsManager.instance != null)
+            gameInputs = SettingsManager.gameInputs;
+        else
+            gameInputs = new Controls();
+        pauseKey = gameInputs.Player.Pause;
+        pauseKey.Enable();
     }
+    void OnDisable()=>pauseKey.Disable();
     void SetupRoomsPool()
     {
         SetupBossRoomPool();
@@ -77,36 +96,97 @@ public class GameManager : MonoBehaviour
     void UpdateTextStage()=>textStages.text = $"STAGE:{stage}";
     public void StartLevel(int idCell)
     {
-        StartCoroutine(startGameCountdown());
         ClearMap();
+        Pause.canPause = false;
         currentChoosenCell = idCell;
         isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
         gameUI.SetActive(true);
         TicTacToeManager.instance.SetTicTacToe(false);
         DestroyAllRooms();
         SetupRoom();
+        if(isBossFight == false)
+            StartCoroutine(startGameCountdown());
+        else
+            StartCoroutine(startBossFightCutscene());
         onStartLevel.Invoke();
+    }
+    IEnumerator startBossFightCutscene()
+    {
+        StartCoroutine(textBossNameCutscene());
+        isBossCutscene = true;
+        bossOrbitalCamera.SetActive(true);
+        blackLines.SetInteger("FadeState",1);
+        yield return new WaitForSeconds(4f);
+        bossOrbitalCamera.SetActive(false);
+        blackLines.SetInteger("FadeState",-1);
+        isBossCutscene = false;
+        StartCoroutine(startGameCountdown());
+    }
+    IEnumerator textBossNameCutscene()
+    {
+            //RuntimeManager.PlayOneShot(soundOpenWindow);
+            //yield return new WaitForSeconds(0.125f);
+            bossText.gameObject.SetActive(true);
+            string final = currentRoom.getNameEnemy(0);
+            bossText.text = "";
+            string currentText = "";
+            for (int i = 0; i < final.Length; i++)
+            {
+                currentText += final[i];
+                if (final[i] == ' ')
+                    continue;
+                bossText.text = currentText + "_";
+                //RuntimeManager.PlayOneShot(soundTyping);
+                yield return new WaitForSeconds(0.075f);
+            }
+            bossText.text = currentText;
+            yield return new WaitForSeconds(2f);
+            currentText = final;
+            while (currentText.Length > 0)
+            {
+                currentText = currentText.Remove(currentText.Length - 1,1);
+                if(currentText.Length <= 0)
+                    break;
+                if (currentText[currentText.Length - 1] == ' ')
+                {
+                    bossText.text = currentText;
+                    continue;
+                }
+                bossText.text = currentText + "_";
+                //RuntimeManager.PlayOneShot(soundBackspace);
+                yield return new WaitForSeconds(0.075f);
+            }
+            //RuntimeManager.PlayOneShot(soundCloseWindow);
+            bossText.text = currentText;
+            bossText.gameObject.SetActive(false);
     }
     IEnumerator startGameCountdown()
     {
-        Pause.canPause = false;
-        Pause.isPaused = true;
-        Time.timeScale = 0;
         textCountdown.gameObject.SetActive(true);
-        textCountdown.text = "<color=green>3</color>";
-        yield return new WaitForSecondsRealtime(0.5f - stage * 0.05f);
-        textCountdown.text = "<color=yellow>2</color>";
-        yield return new WaitForSecondsRealtime(0.5f - stage * 0.05f);
-        textCountdown.text = "<color=red>1</color>";
-        yield return new WaitForSecondsRealtime(0.5f - stage * 0.05f);
+        textCountdown.color = colorNumberThree;
+        textCountdown.text = "3";
+        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        textCountdown.color = colorNumberTwo;
+        textCountdown.text = "2";
+        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        textCountdown.color = colorNumberOne;
+        textCountdown.text = "1";
+        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        Pause.canPause = true;
         gameIsStarted = true;
         textCountdown.gameObject.SetActive(false);
-        Pause.canPause = true;
-        Pause.isPaused = false;
-        Time.timeScale = 1;
     }
     void Update()
     {
+        if(pauseKey.WasPerformedThisFrame() && isBossCutscene)
+        {
+            StopAllCoroutines();
+            bossText.gameObject.SetActive(false);
+            bossOrbitalCamera.SetActive(false);
+            blackLines.SetInteger("FadeState",-1);
+            isBossCutscene = false;
+            StartCoroutine(startGameCountdown());
+        }
         if(gameIsStarted == false || isBossFight || debugRoom != null && debugRoom.room != null)
             return;
         if(timer > 0)
@@ -214,19 +294,26 @@ public class GameManager : MonoBehaviour
     }
     public void EndLevel(TicTacToeManager.Winner winner)
     {
-        if(gameIsStarted == false)
+        if(gameIsStarted == false || endGameState)
             return;
+        endGameState = true;
         gameUI.SetActive(false);
-        gameIsStarted = false;
+        Pause.canPause = false;
+        Time.timeScale = 0.25f;
+        timer = 10;
         for(int i = 0;i < healthBars.Count; i++)
             UIManagerGame.instance.RemoveHealthBar(healthBars[i]);
         healthBars.Clear();
-        for(int i = 0;i < enemies.Count;i++)
-            Destroy(enemies[i].gameObject);
-        enemies.Clear();
-        ClearMap();
-        Destroy(currentPlayer);
-        TicTacToeManager.instance.SetTicTacToe(true);
+        if(winner == TicTacToeManager.Winner.Enemy)
+        {
+            if(PostEffectsManager.instance != null)
+                PostEffectsManager.instance.SetBackAndWhite(true);
+        }
+        StartCoroutine(waitToEndLevel(winner));
+    }
+    IEnumerator waitToEndLevel(TicTacToeManager.Winner winner)
+    {
+        yield return new WaitForSecondsRealtime(isBossFight || winner == TicTacToeManager.Winner.Enemy ? 3f : 2f);
         switch (winner)
         {
             case TicTacToeManager.Winner.Player:
@@ -234,10 +321,22 @@ public class GameManager : MonoBehaviour
                 TicTacToeManager.instance.PlayCell(currentChoosenCell);
             break;
             case TicTacToeManager.Winner.Enemy:
+                if(PostEffectsManager.instance != null)
+                    PostEffectsManager.instance.SetBackAndWhite(true);
                 TicTacToeManager.instance.whatsTurn = TicTacToeManager.Winner.Enemy;
                 TicTacToeManager.instance.MoveEnemy();
             break;
         }
+        if(PostEffectsManager.instance != null && winner == TicTacToeManager.Winner.Enemy)
+            PostEffectsManager.instance.SetBackAndWhite(false);
+        endGameState = false;
+        gameIsStarted = false;
+        ClearMap();
+        for(int i = 0;i < enemies.Count;i++)
+            Destroy(enemies[i].gameObject);
+        enemies.Clear();
+        Destroy(currentPlayer);
+        TicTacToeManager.instance.SetTicTacToe(true);
         if(TicTacToeManager.instance.currentWinner != TicTacToeManager.Winner.None)
         {
             switch (TicTacToeManager.instance.currentWinner)
@@ -255,6 +354,8 @@ public class GameManager : MonoBehaviour
             buttonNext.SetActive(true);
         }
         DestroyAllRooms();
+        Time.timeScale = 1f;
+        Pause.canPause = true;
     }
     public void Next()
     {

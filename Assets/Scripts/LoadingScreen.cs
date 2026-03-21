@@ -13,15 +13,11 @@ public class LoadingScreen : MonoBehaviour
     //[SerializeField] EventReference openSoundLoading;
     //[SerializeField] EventReference closeSoundLoading;
     [HideInInspector] public bool isLoading;
-    [SerializeField] TextMeshProUGUI text;
-    [SerializeField] TextMeshProUGUI text2;
-    [SerializeField] Slider slider;
-    Animator anim;
+    [SerializeField] GameObject panelLoading;
+    Coroutine fadeScreenCoroutine;
+    CanvasGroup canvasGroup;
     private void Awake()
     {
-        anim = GetComponent<Animator>();
-        Application.targetFrameRate = -1;
-        QualitySettings.vSyncCount = 0;
         if (instance == null)
         {
             instance = this;
@@ -29,6 +25,8 @@ public class LoadingScreen : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        canvasGroup = GetComponent<CanvasGroup>();
+        Application.targetFrameRate = -1;
     }
     /*private void Start()
     {
@@ -53,38 +51,62 @@ public class LoadingScreen : MonoBehaviour
     private IEnumerator LoadSceneCoroutine(string sceneName)
     {
         //MusicManager.instance.StopAllMusic();
-        FadeIn();
-        text.text = "0%";
-        text2.text = text.text;
-        slider.value = 0;
         isLoading = true;
+        Time.timeScale = 0;
+        Pause.canPause = false;
+        panelLoading.SetActive(true);
+        canvasGroup.alpha = 0;
+        while(canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.unscaledDeltaTime;
+            yield return null;
+        }
         yield return new WaitForSecondsRealtime(0.3f);
         loadingOperation = SceneManager.LoadSceneAsync(sceneName);
         while (!loadingOperation.isDone)
-        {
-            text.text = $"{Mathf.RoundToInt(loadingOperation.progress * 100)}%";
-            text2.text = text.text;
-            slider.value = loadingOperation.progress;
             yield return null;
-        }
-        text.text = "100%";
-        text2.text = text.text;
-        slider.value = 1;
         yield return new WaitForSecondsRealtime(0.3f);
-        FadeOut();
         isLoading = false;
         Time.timeScale = 1;
         Pause.canPause = true;
+        FadeOut();
+    }
+    IEnumerator fadeScreen(bool fadeIn)
+    {
+        if (fadeIn)
+        {
+            panelLoading.SetActive(true);
+            canvasGroup.alpha = 0;
+            while(canvasGroup.alpha < 1)
+            {
+                canvasGroup.alpha += Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            canvasGroup.alpha = 1;
+            while(canvasGroup.alpha > 0)
+            {
+                canvasGroup.alpha -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+            panelLoading.SetActive(false);
+        }
     }
     public void FadeIn()
     {
-        anim.SetBool("IsOpen", true);
+        if(fadeScreenCoroutine != null)
+            StopCoroutine(fadeScreenCoroutine);
+        fadeScreenCoroutine = StartCoroutine(fadeScreen(true));
         //RuntimeManager.PlayOneShot(openSoundLoading);
     }
 
     public void FadeOut()
     {
-        anim.SetBool("IsOpen", false);
+        if(fadeScreenCoroutine != null)
+            StopCoroutine(fadeScreenCoroutine);
+        fadeScreenCoroutine = StartCoroutine(fadeScreen(false));
         //RuntimeManager.PlayOneShot(closeSoundLoading);
     }
 }

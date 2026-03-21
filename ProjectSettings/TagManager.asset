@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - TeleportBullet
   - Bullet
+  - Undefined
+  - Particle
   layers:
   - Default
   - TransparentFX

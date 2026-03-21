@@ -9,6 +9,8 @@ public class ComboManager : MonoBehaviour
 {
     [SerializeField] int combo;
     [SerializeField] TextMeshProUGUI textCombo;
+    [SerializeField] Color colorCombo;
+    [SerializeField] Color colorBreak;
     [SerializeField] Image comboFill;
     //Animator animCombo;
     public static ComboManager instance;
@@ -17,7 +19,6 @@ public class ComboManager : MonoBehaviour
     bool comboBreak;
     float timerCombo;
     int bonusCoin;
-    Material mat;
     // Start is called before the first frame update
     void Awake()
     {
@@ -70,7 +71,8 @@ public class ComboManager : MonoBehaviour
             Money.instance.AddMoney(instCombo + bonusCoin);
         }
         comboFill.fillAmount = 0;
-        textCombo.text = $"<color=red>COMBO BREAK AT {combo}</color>";
+        textCombo.color = colorBreak;
+        textCombo.text = $"COMBO BREAK AT {combo}";
         timerCombo = 0;
         combo = 0;
         comboBreak = true;
@@ -85,6 +87,7 @@ public class ComboManager : MonoBehaviour
         combo++;
         //animCombo.SetTrigger("Bounce");
         timerCombo = 2.5f;
+        textCombo.color = colorBreak;
         textCombo.text = $"<color=black>COMBO {combo}</color>";
         textCombo.gameObject.SetActive(true);
         //textEffectCombo.Refresh();

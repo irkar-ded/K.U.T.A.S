@@ -57,7 +57,7 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             return;
         if (textName != null /*&& textNameEffect != null*/)
         {
-            textName.text = $"{item.nameItem}-<color={(Money.instance != null && Money.instance.currentMoney >= item.costItem || Money.instance == null ? "green" : "red")}>{(item.costItem > 0 && Money.instance != null ? item.costItem + "$" : "FREE")}";
+            textName.text = $"{item.nameItem}-<color={(Money.instance != null && Money.instance.currentMoney >= item.costItem || Money.instance == null ? "#78d8b7" : "#ff5470")}>{(item.costItem > 0 && Money.instance != null ? item.costItem + "$" : "FREE")}";
             //textNameEffect.Refresh();
         }
         if (textDescription != null /*&& textDescriptionEffect != null*/)
@@ -107,9 +107,9 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public string getColorNumber(float number, bool invert)
     {
         if (invert == false)
-            return number > 0 ? "\"green\"" : "\"red\"";
+            return number > 0 ? "#78d8b7" : "#ff5470";
         else
-            return number > 0 ? "\"red\"" : "\"green\"";
+            return number > 0 ? "#ff5470" : "#78d8b7";
     }
     public string numberToText(float number, bool invert, bool chance)
     {

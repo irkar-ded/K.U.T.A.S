@@ -46,6 +46,14 @@ public class FirstBoss : MonoBehaviour
     {
         if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
             return;
+        if(enemyMain == null)
+        {
+            anim.SetTrigger("Death");
+            Destroy(this);
+            if(currentWorkState != null)
+                StopCoroutine(currentWorkState);
+            return;
+        }
         if(currentBossState != bossState)
             SetStateBoss(bossState);
         Quaternion rotToPlayer = Quaternion.LookRotation((player.position - transform.position).normalized);
@@ -110,11 +118,11 @@ public class FirstBoss : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         List<Transform> tempsVFXSpawnEnemy = new List<Transform>();
         for(int i = 0; i < enemySpawners.Length; i++)
-            tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up,Quaternion.Euler(-90,0,0)));
+            tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up *1.5f,Quaternion.Euler(-90,0,0)));
         yield return new WaitForSeconds(1f);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
-            enemySpawners[i].transform.position = tempsVFXSpawnEnemy[i].transform.position + Vector3.up;
+            enemySpawners[i].transform.position = tempsVFXSpawnEnemy[i].transform.position + Vector3.up * 1.5f;
             EnemyMain enemy = enemySpawners[i].SpawnEnemy();
             print(enemy.gameObject.name);
             enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);

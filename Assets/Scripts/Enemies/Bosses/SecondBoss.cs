@@ -26,6 +26,7 @@ public class SecondBoss : MonoBehaviour
     HealtSystem healtSystem;
     Coroutine currentWorkState;
     List<Transform> teleportPoints = new List<Transform>();
+    EnemyMain enemyMain;
     Animator anim;
     Transform player;
     Rigidbody rbPlayer;
@@ -35,7 +36,8 @@ public class SecondBoss : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         player = GameObject.FindWithTag("Player").transform;
         rbPlayer = player.GetComponent<Rigidbody>();
-        healtSystem = GetComponent<HealtSystem>();
+        enemyMain = GetComponent<EnemyMain>();
+        healtSystem = enemyMain.healtSystem;
         healtSystem.maxHealt = healtSystem.maxHealt + GameManager.instance.stage * 5;
         healtSystem.healt = healtSystem.maxHealt;
         healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
@@ -59,6 +61,15 @@ public class SecondBoss : MonoBehaviour
     {
         if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
             return;
+        if(enemyMain == null)
+        {
+            markToExplosion.SetActive(false);
+            anim.SetTrigger("Death");
+            Destroy(this);
+            if(currentWorkState != null)
+                StopCoroutine(currentWorkState);
+            return;
+        }
         if(currentBossState != bossState)
             SetStateBoss(bossState);
     }

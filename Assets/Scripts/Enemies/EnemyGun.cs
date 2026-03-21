@@ -65,7 +65,7 @@ public class EnemyGun : MonoBehaviour
     public void Die()
     {
         anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
-        anim.SetBool("Death",true);
+        anim.SetTrigger("Death");
     }
     public void WalkAnimation()
     {

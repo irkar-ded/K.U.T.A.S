@@ -49,6 +49,15 @@ public class ThirdBoss : MonoBehaviour
     {
         if(Pause.isPaused || GameManager.instance.gameIsStarted == false)
             return;
+        if(enemyMain == null)
+        {
+            Die();
+            Destroy(this);
+            Destroy(gun);
+            if(currentWorkState != null)
+                StopCoroutine(currentWorkState);
+            return;
+        }
         if(currentBossState != bossState)
             SetStateBoss(bossState);
         /*Quaternion rotToPlayer = Quaternion.LookRotation((player.position - transform.position).normalized);
@@ -56,6 +65,11 @@ public class ThirdBoss : MonoBehaviour
         rotToPlayer.x = 0;
         transform.rotation = rotToPlayer;*/
         WalkAnimation();
+    }
+    public void Die()
+    {
+        anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
+        anim.SetTrigger("Death");
     }
     public void WalkAnimation()
     {
