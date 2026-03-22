@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-//using FMODUnity;
+using FMODUnity;
 
 public class LoadingScreen : MonoBehaviour
 {
     public static LoadingScreen instance;
     private AsyncOperation loadingOperation;
-    //[SerializeField] EventReference openSoundLoading;
+    [SerializeField] EventReference openSoundLoading;
     //[SerializeField] EventReference closeSoundLoading;
     [HideInInspector] public bool isLoading;
     [SerializeField] GameObject panelLoading;
