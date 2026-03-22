@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] RoomSettings[] bossRooms;
     [SerializeField] RoomSettings debugRoom;
     public UnityEvent onStartLevel;
+    [Header("Beetwen Game Content")]
+    [SerializeField] GameObject beetwenGameBackground;
+    [SerializeField] GameObject beetwenGameCamera;
     [Header("UI")]
     [SerializeField] TextMeshProUGUI textCountdown;
     [SerializeField] TextMeshProUGUI textTimer;
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
     public void StartLevel(int idCell)
     {
         ClearMap();
+        StartCoroutine(beetwenGameOutCutscene());
         Pause.canPause = false;
         currentChoosenCell = idCell;
         isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
@@ -109,6 +113,12 @@ public class GameManager : MonoBehaviour
         else
             StartCoroutine(startBossFightCutscene());
         onStartLevel.Invoke();
+    }
+    IEnumerator beetwenGameOutCutscene()
+    {
+        beetwenGameCamera.SetActive(false);
+        yield return new WaitForSecondsRealtime(1);
+        beetwenGameBackground.SetActive(false);
     }
     IEnumerator startBossFightCutscene()
     {
@@ -314,6 +324,9 @@ public class GameManager : MonoBehaviour
     IEnumerator waitToEndLevel(TicTacToeManager.Winner winner)
     {
         yield return new WaitForSecondsRealtime(isBossFight || winner == TicTacToeManager.Winner.Enemy ? 3f : 2f);
+        beetwenGameCamera.SetActive(true);
+        beetwenGameBackground.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
         switch (winner)
         {
             case TicTacToeManager.Winner.Player:
