@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator startGameCountdown()
     {
+        yield return new WaitForSeconds(0.25f);
         textCountdown.gameObject.SetActive(true);
         textCountdown.color = colorNumberThree;
         textCountdown.text = "3";
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
             timer-= Time.deltaTime - BuffManager.instance.passiveBuff.lessTimeFade;
         else
             EndLevel(TicTacToeManager.Winner.Enemy);
-        textTimer.text = timer.ToString("F2");
+        textTimer.text = $"<color={(timer > 3 ? "white" : "#ff5470")}>{timer.ToString("F2")}</color>";
     }
     public void DestroyAllRooms()
     {

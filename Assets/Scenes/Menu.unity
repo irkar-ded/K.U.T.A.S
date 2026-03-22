@@ -892,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3473635051835509152, guid: 03da2d5a6d03f98dfb1b8a9ec5305600, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.23583698
+      value: 1.6689863
       objectReference: {fileID: 0}
     - target: {fileID: 3473635051835509152, guid: 03da2d5a6d03f98dfb1b8a9ec5305600, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1899,8 +1899,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1971,7 +1971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 79969b570008ec61e8185e332640c5d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.366851
+      value: 7.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 79969b570008ec61e8185e332640c5d9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18431373, g: 0.14509805, b: 0.3372549, a: 1}
+  m_Color: {r: 0.34509805, g: 0.29803923, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3589,7 +3589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18431373, g: 0.14509805, b: 0.3372549, a: 1}
+  m_Color: {r: 0.34509805, g: 0.29803923, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3641,7 +3641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3473635051835509152, guid: 03da2d5a6d03f98dfb1b8a9ec5305600, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.6
+      value: 13.03315
       objectReference: {fileID: 0}
     - target: {fileID: 3473635051835509152, guid: 03da2d5a6d03f98dfb1b8a9ec5305600, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18431373, g: 0.14509805, b: 0.3372549, a: 1}
+  m_Color: {r: 0.34509805, g: 0.29803923, b: 0.5176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4822,8 +4822,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5264,8 +5264,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
