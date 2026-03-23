@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -79,6 +80,9 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject frameRateText;
     [SerializeField] global::VideoSettings videoSettings;
     [SerializeField] SetVolume[] volumeSettings;
+    [Header("Sound")]
+    [SerializeField] EventReference soundOpen;
+    [SerializeField] EventReference soundClose;
     public static Controls gameInputs;
     public static SettingsManager instance;
     /*[Header("Delete Save:")]
@@ -103,6 +107,8 @@ public class SettingsManager : MonoBehaviour
         else
             CreateSave();
     }
+    public void PlaySoundOpen() => RuntimeManager.PlayOneShot(soundOpen);
+    public void PlaySoundClose() => RuntimeManager.PlayOneShot(soundClose);
     public void CreateSave()
     {
         Save();

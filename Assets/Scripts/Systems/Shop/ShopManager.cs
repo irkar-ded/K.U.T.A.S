@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using EZ_Pooling;
-//using FMODUnity;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,7 +18,6 @@ public class ShopManager : MonoBehaviour
             countBuyedItem = 0;
         }
     }
-    //[SerializeField] EventReference soundExit;
     [SerializeField] RefreshItem itemRefresh;
     [SerializeField] ShopItemHolder itemShopHolder;
     [SerializeField] Transform contentItems;
@@ -28,6 +27,9 @@ public class ShopManager : MonoBehaviour
     List<ShopItemHolder> currentItems = new List<ShopItemHolder>();
     public static ShopManager instance;
     [SerializeField] public UnityEvent onBuy;
+    [Header("Sound")]
+    [SerializeField] EventReference soundOpen;
+    [SerializeField] EventReference soundExit;
     Controls gameInputs;
     InputAction pauseKey;
     RefreshItem refreshItem;
@@ -59,6 +61,7 @@ public class ShopManager : MonoBehaviour
     void OnEnable()
     {
         Pause.canPause = false;
+        RuntimeManager.PlayOneShot(soundOpen);
         createItems();
     }
     public void createItems()
@@ -110,6 +113,7 @@ public class ShopManager : MonoBehaviour
     private void OnDisable()
     {
         Pause.canPause = true;
+        RuntimeManager.PlayOneShot(soundExit);
         destroyItems();
     }
     public void destroyItems()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
+using FMODUnity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,6 +29,8 @@ public class EnemyMain : MonoBehaviour
     public float kdToRandomPath = 0.5f;
     public GameObject bloodVFX;
     public GameObject explosion;
+    public EventReference soundDeath;
+    public EventReference soundHit;
     void Awake()
     {
         TryGetComponent(out agent);
@@ -42,6 +45,7 @@ public class EnemyMain : MonoBehaviour
             {
                 if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
                     EZ_PoolManager.Spawn(explosion.transform,transform.position,Quaternion.identity);
+                RuntimeManager.PlayOneShot(soundDeath,transform.position);
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);
                 if(typeMovement == TypeMovement.Fly)
@@ -50,7 +54,12 @@ public class EnemyMain : MonoBehaviour
                 if(agent != null)
                     Destroy(agent);
             });
-            healtSystem.onTakeDamage.AddListener((Vector3 pos) => EZ_PoolManager.Spawn(bloodVFX.transform,pos,transform.rotation));
+            healtSystem.onTakeDamage.AddListener((Vector3 pos) =>
+            {
+                EZ_PoolManager.Spawn(bloodVFX.transform,pos,transform.rotation);
+                if(healtSystem.healt > 0)
+                    RuntimeManager.PlayOneShot(soundHit,transform.position);
+            });
         }
     }
     void Update()
@@ -161,6 +170,8 @@ public class EnemyMainEditor : Editor
     SerializedProperty m_layerAvoidObjects;
     SerializedProperty m_bloodVFX;
     SerializedProperty m_explosion;
+    SerializedProperty m_soundDeath;
+    SerializedProperty m_soundHit;
     void OnEnable()
     {
         m_layerAvoidObjects = serializedObject.FindProperty("layerAvoidObjects");
@@ -171,6 +182,8 @@ public class EnemyMainEditor : Editor
         m_nameEnemy = serializedObject.FindProperty("nameEnemy");
         m_bloodVFX = serializedObject.FindProperty("bloodVFX");
         m_explosion = serializedObject.FindProperty("explosion");
+        m_soundHit = serializedObject.FindProperty("soundHit");
+        m_soundDeath = serializedObject.FindProperty("soundDeath");
     }
     public override void OnInspectorGUI()
     {
@@ -192,6 +205,9 @@ public class EnemyMainEditor : Editor
         GUILayout.Label("Damage:");
         EditorGUILayout.PropertyField(m_bloodVFX, new GUIContent("Blood VFX"));
         EditorGUILayout.PropertyField(m_explosion, new GUIContent("Explosion"));
+        GUILayout.Label("Sound:");
+        EditorGUILayout.PropertyField(m_soundDeath, new GUIContent("Sound Death"));
+        EditorGUILayout.PropertyField(m_soundHit, new GUIContent("Sound Hit"));
         serializedObject.ApplyModifiedProperties();
     }
 }

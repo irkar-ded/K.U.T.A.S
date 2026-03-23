@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
+using FMODUnity;
 
 public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,7 +13,7 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     Button buttonItem;
     CanvasGroup aboutItem;
     [HideInInspector]public ShopItem item;
-    //[SerializeField] EventReference soundEnter;
+    [SerializeField] EventReference soundBuy;
     Animator anim;
     bool entered;
     [HideInInspector]public bool isPurched;
@@ -137,6 +138,7 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         if(ScoreManager.instance != null)
             ScoreManager.instance.addScore(10);
+        RuntimeManager.PlayOneShot(soundBuy);
         CheakStateItem();
     }
 }

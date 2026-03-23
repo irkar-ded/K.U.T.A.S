@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 4357185659091163129}
   - component: {fileID: 1396709880914571333}
   - component: {fileID: 6856014420155787297}
+  - component: {fileID: -5451225025272932280}
   m_Layer: 5
   m_Name: ShopItemHolder
   m_TagString: Untagged
@@ -228,6 +229,13 @@ MonoBehaviour:
   textName: {fileID: 2198603981236244498}
   textDescription: {fileID: 3517674464904058184}
   item: {fileID: 0}
+  soundBuy:
+    Guid:
+      Data1: 2135217041
+      Data2: 1169787143
+      Data3: 1626458280
+      Data4: -1962237544
+    Path: event:/Shop/Buy
   isPurched: 0
 --- !u!114 &1396709880914571333
 MonoBehaviour:
@@ -306,6 +314,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-5451225025272932280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648740123807058668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ebeccaad01ec17d99be0c670a755e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTextHover: 0
+  textColorEnter: {r: 1, g: 0.8509804, b: 0.68235296, a: 1}
+  textColorPressed: {r: 1, g: 0.64705884, b: 0.50980395, a: 1}
 --- !u!1 &6281268423193326072
 GameObject:
   m_ObjectHideFlags: 0

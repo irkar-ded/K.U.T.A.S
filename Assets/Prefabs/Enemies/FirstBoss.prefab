@@ -492,6 +492,26 @@ PrefabInstance:
       propertyPath: maxHealt
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7739535390669072224, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: m_Height
+      value: 3.6761386
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739535390669072224, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: m_Radius
+      value: 1.1796818
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739535390669072224, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0907135
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739535390669072224, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: m_Center.y
+      value: 0.56767404
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739535390669072224, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: m_Center.z
+      value: 0.017451763
+      objectReference: {fileID: 0}
     - target: {fileID: 8336325526326271816, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -609,6 +629,20 @@ MonoBehaviour:
   enemySpawners:
   - {fileID: 5169110307303227632}
   - {fileID: 2706957998860493409}
+  soundAtack:
+    Guid:
+      Data1: -1251742781
+      Data2: 1134871999
+      Data3: -1911532917
+      Data4: 270584030
+    Path: event:/Feel/Woosh
+  soundSpawnEnemy:
+    Guid:
+      Data1: -970080820
+      Data2: 1261489564
+      Data3: -541281881
+      Data4: 1894537181
+    Path: event:/Bosses/SecondBoss/AtackExplosion
 --- !u!114 &3704913744304800317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +858,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8735656a3a5b7fc028f580807f263145, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8151386721021547632}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8735656a3a5b7fc028f580807f263145, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4145771093348483398}
   m_SourcePrefab: {fileID: 100100000, guid: 8735656a3a5b7fc028f580807f263145, type: 3}
 --- !u!23 &669332647946758765 stripped
 MeshRenderer:
@@ -871,3 +908,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4145771093348483398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709220508272144909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7d97c7ece350197b6a7d979a9bcc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggered:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2447292149454222595}
+        m_TargetAssemblyTypeName: FirstBoss, Assembly-CSharp
+        m_MethodName: PlaySoundAtack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  invokeStart: 0
+  timerToInvokeStart: 0

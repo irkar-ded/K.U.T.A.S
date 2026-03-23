@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -42,6 +43,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Color colorNumberOne;
     [SerializeField] Color colorNumberTwo;
     [SerializeField] Color colorNumberThree;
+    [Header("Sound")]
+    [SerializeField] EventReference soundTick;
+    [SerializeField] EventReference soundTyping;
+    [SerializeField] EventReference soundBackspace;
+    [SerializeField] EventReference soundClose;
+    [SerializeField] EventReference soundOpen;
+    [SerializeField] EventReference soundVHSDeath;
     bool isBossCutscene;
     public int stage;
     public static GameManager instance;
@@ -99,6 +107,7 @@ public class GameManager : MonoBehaviour
     void UpdateTextStage()=>textStages.text = $"STAGE:{stage}";
     public void StartLevel(int idCell)
     {
+        RuntimeManager.PlayOneShot(soundClose);
         ClearMap();
         StartCoroutine(beetwenGameOutCutscene());
         Pause.canPause = false;
@@ -146,7 +155,7 @@ public class GameManager : MonoBehaviour
                 if (final[i] == ' ')
                     continue;
                 bossText.text = currentText + "_";
-                //RuntimeManager.PlayOneShot(soundTyping);
+                RuntimeManager.PlayOneShot(soundTyping);
                 yield return new WaitForSeconds(0.075f);
             }
             bossText.text = currentText;
@@ -163,7 +172,7 @@ public class GameManager : MonoBehaviour
                     continue;
                 }
                 bossText.text = currentText + "_";
-                //RuntimeManager.PlayOneShot(soundBackspace);
+                RuntimeManager.PlayOneShot(soundBackspace);
                 yield return new WaitForSeconds(0.075f);
             }
             //RuntimeManager.PlayOneShot(soundCloseWindow);
@@ -176,12 +185,15 @@ public class GameManager : MonoBehaviour
         textCountdown.gameObject.SetActive(true);
         textCountdown.color = colorNumberThree;
         textCountdown.text = "3";
+        RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
         yield return new WaitForSeconds(0.5f - stage * 0.05f);
         textCountdown.color = colorNumberTwo;
         textCountdown.text = "2";
+        RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
         yield return new WaitForSeconds(0.5f - stage * 0.05f);
         textCountdown.color = colorNumberOne;
         textCountdown.text = "1";
+        RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
         yield return new WaitForSeconds(0.5f - stage * 0.05f);
         Pause.canPause = true;
         gameIsStarted = true;
@@ -319,6 +331,7 @@ public class GameManager : MonoBehaviour
         {
             if(PostEffectsManager.instance != null)
                 PostEffectsManager.instance.SetBackAndWhite(true);
+            RuntimeManager.PlayOneShot(soundVHSDeath);
         }
         StartCoroutine(waitToEndLevel(winner));
     }
@@ -370,6 +383,7 @@ public class GameManager : MonoBehaviour
         DestroyAllRooms();
         Time.timeScale = 1f;
         Pause.canPause = true;
+        RuntimeManager.PlayOneShot(soundOpen);
     }
     public void Next()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class ThirdBoss : MonoBehaviour
@@ -15,6 +16,8 @@ public class ThirdBoss : MonoBehaviour
     [SerializeField] float distanceToBack = 2;
     [SerializeField] float distanceToStay = 6;
     [SerializeField] LineRenderer dashVFX;
+    [Header("Sound")]
+    [SerializeField] EventReference soundDash;
     Animator anim;
     bool backMove;
     ThirdBossStates currentBossState;
@@ -139,6 +142,7 @@ public class ThirdBoss : MonoBehaviour
         Vector3 startPosDashVFX = transform.position;
         dashVFX.enabled = true;
         FadeDashVFX();
+        RuntimeManager.PlayOneShot(soundDash,transform.position);
         while(timer <= 1 && Vector3.Distance(transform.position,target) > 1)
         {
             enemyMain.Move(target);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
+using FMODUnity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ public class Gun : MonoBehaviour
     public Transform bulletSpawnPosition;
     public Bullet.ParametersBullet parametersBullet;
     [Header("Gun:")]
+    public EventReference soundShoot;
     public Transform mainGun;
     public Animator gunAnim;
     public float recoil = 0;
@@ -74,6 +76,7 @@ public class Gun : MonoBehaviour
             return;
         if(gunAnim != null)
             gunAnim.SetTrigger("Shoot");
+        RuntimeManager.PlayOneShot(soundShoot,transform.position);
         SpawnBullet();
         timerKd = kdBeetwenShoots;
         //Debug.LogError("LOL");

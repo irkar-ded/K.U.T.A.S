@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79790e0af5589a9dbb02f3de30fa85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idMaterialDamage: 0
   damageStandart: {r: 1, g: 0, b: 0, a: 1}
   toxicDamage: {r: 0, g: 1, b: 0, a: 1}
   model:
@@ -158,6 +159,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a7112b623d605649a64c014fc40edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundDamage:
+    Guid:
+      Data1: 699060986
+      Data2: 1198742935
+      Data3: -74913879
+      Data4: -1621509445
+    Path: event:/Feel/Flesh
+  soundDeath:
+    Guid:
+      Data1: 1543135071
+      Data2: 1253759266
+      Data3: -1195880825
+      Data4: 1383946479
+    Path: event:/Feel/Kill
+  soundVHSDeath:
+    Guid:
+      Data1: 114764994
+      Data2: 1144572813
+      Data3: -1493807477
+      Data4: 1051128588
+    Path: event:/VHS/VHSDEATH
 --- !u!114 &7832105128210817214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +195,7 @@ MonoBehaviour:
   outlineMode: 3
   outlineColor: {r: 0.7294118, g: 0.9019608, b: 1, a: 1}
   outlineWidth: 3
+  ignoreRenders: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -241,9 +264,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2158978348546271329}
     - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: soundShoot.Path
+      value: event:/Gun/Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
       propertyPath: bulletSpawnPosition
       value: 
       objectReference: {fileID: 7822423515833826918}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: soundShoot.Guid.Data1
+      value: -467373844
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: soundShoot.Guid.Data2
+      value: 1321380435
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: soundShoot.Guid.Data3
+      value: 821258917
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
+      propertyPath: soundShoot.Guid.Data4
+      value: -12039221
+      objectReference: {fileID: 0}
     - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
       propertyPath: parametersBullet.owner
       value: 

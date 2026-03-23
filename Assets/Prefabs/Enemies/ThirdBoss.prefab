@@ -586,6 +586,13 @@ MonoBehaviour:
   distanceToBack: 10
   distanceToStay: 15
   dashVFX: {fileID: 7073092796562989521}
+  soundDash:
+    Guid:
+      Data1: -1173396730
+      Data2: 1102273548
+      Data3: -533682778
+      Data4: 749828827
+    Path: event:/Bosses/ThirdBoss/Dash
 --- !u!114 &451931201459360335
 MonoBehaviour:
   m_ObjectHideFlags: 0

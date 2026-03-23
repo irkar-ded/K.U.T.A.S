@@ -176,6 +176,7 @@ MonoBehaviour:
   outlineMode: 3
   outlineColor: {r: 1, g: 0.32941177, b: 0.4392157, a: 1}
   outlineWidth: 3
+  ignoreRenders: []
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

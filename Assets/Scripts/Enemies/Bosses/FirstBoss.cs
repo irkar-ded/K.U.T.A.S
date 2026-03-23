@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
+using FMODUnity;
 using UnityEngine;
 
 public class FirstBoss : MonoBehaviour
@@ -22,6 +23,9 @@ public class FirstBoss : MonoBehaviour
     [Header("Spawn Enemey State:")]
     [SerializeField] GameObject VFXSpawnEnemy;
     [SerializeField] EnemySpawner[] enemySpawners;
+    [Header("Sound")]
+    [SerializeField] EventReference soundAtack;
+    [SerializeField] EventReference soundSpawnEnemy;
     Animator anim;
     EnemyMain enemyMain;
     Transform player;
@@ -109,6 +113,7 @@ public class FirstBoss : MonoBehaviour
         }
         bossState = FirstBossStates.EnemyAtack;
     }
+    public void PlaySoundAtack()=>RuntimeManager.PlayOneShot(soundAtack,transform.position);
     IEnumerator enemyAtackStateBoss()
     {
         yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
@@ -120,6 +125,7 @@ public class FirstBoss : MonoBehaviour
         for(int i = 0; i < enemySpawners.Length; i++)
             tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up *1.5f,Quaternion.Euler(-90,0,0)));
         yield return new WaitForSeconds(1f);
+        RuntimeManager.PlayOneShot(soundSpawnEnemy,transform.position);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
             enemySpawners[i].transform.position = tempsVFXSpawnEnemy[i].transform.position + Vector3.up * 1.5f;

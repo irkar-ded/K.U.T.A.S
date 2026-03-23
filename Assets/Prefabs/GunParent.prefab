@@ -87,6 +87,18 @@ MonoBehaviour:
     owner: {fileID: 0}
     force: 70
     damage: 1
+    toxicBullet: 0
+    xRayBullet: 0
+    bounceBullet: 0
+  soundShoot:
+    Guid:
+      Data1: -1442258550
+      Data2: 1094976904
+      Data3: 761901717
+      Data4: 115790198
+    Path: event:/Gun/Shoot 3
+  mainGun: {fileID: 0}
+  gunAnim: {fileID: 0}
   recoil: 0
   kdBeetwenShoots: 0.25
 --- !u!1 &4873252947649915125

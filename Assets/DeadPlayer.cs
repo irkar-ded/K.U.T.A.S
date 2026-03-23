@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class DeadPlayer : MonoBehaviour
 {
+    [Header("Sound")]
+    [SerializeField] EventReference soundDamage;
+    [SerializeField] EventReference soundDeath;
+    [SerializeField] EventReference soundVHSDeath;
     HealtSystem healtSystem;
     Animator anim;
     Gun gun;
@@ -22,9 +27,11 @@ public class DeadPlayer : MonoBehaviour
         Destroy(this);
         anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
         anim.SetTrigger("Death");
+        RuntimeManager.PlayOneShot(soundDeath);
     }
     public void MakePlayerInvincible()
     {
+        RuntimeManager.PlayOneShot(soundDamage);
         if(invincibleCoroutine != null)
             StopCoroutine(invincibleCoroutine);
         invincibleCoroutine = StartCoroutine(Invincible());

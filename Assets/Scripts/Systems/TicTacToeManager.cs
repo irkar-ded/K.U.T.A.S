@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -125,30 +126,26 @@ public class TicTacToeManager : MonoBehaviour
     }
     public void SelectCell(int id)
     {
-        if(currentWinner != Winner.None)
+        if(currentWinner != Winner.None || currentGrid.cells[id] != 0)
             return;
-        if(currentGrid.cells[id] == 0)
-            onChooseCell.Invoke(id);
+        onChooseCell.Invoke(id);
     }
     public void PlayCell(int idCell)
     {
-        if(currentWinner != Winner.None)
+        if(currentWinner != Winner.None || currentGrid.cells[idCell] != 0)
             return;
-        if(currentGrid.cells[idCell] == 0)
+        switch (whatsTurn)
         {
-            switch (whatsTurn)
-            {
-                case Winner.Player:
-                    currentGrid.cells[idCell] = 1;
-                    if(isDebug)
-                        whatsTurn = Winner.Enemy;
+            case Winner.Player:
+                currentGrid.cells[idCell] = 1;
+                if(isDebug)
+                    whatsTurn = Winner.Enemy;
                 break;
                 case Winner.Enemy:
                     currentGrid.cells[idCell] = -1;
-                    if(isDebug)
-                        whatsTurn = Winner.Player;
-                break;
-            }
+                if(isDebug)
+                    whatsTurn = Winner.Player;
+            break;
         }
         RefreshCells();
         if(CheckWin() != Winner.None)

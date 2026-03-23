@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
+using FMODUnity;
 using UnityEngine;
 
 public class SecondBoss : MonoBehaviour
@@ -21,6 +22,8 @@ public class SecondBoss : MonoBehaviour
     [Header("Bullet Hell:")]
     [SerializeField] GameObject bullet;
     [SerializeField] Bullet.ParametersBullet parametersBullet;
+    [Header("Sound")]
+    [SerializeField] EventReference soundAtackExplosion;
     bool isLastExplosion;
     float currentHealthToTeleport;
     HealtSystem healtSystem;
@@ -151,6 +154,7 @@ public class SecondBoss : MonoBehaviour
         yield return new WaitForSeconds(1f-GameManager.instance.stage * 0.01f);
         for(int i = 0; i < 10; i++)
         {
+            RuntimeManager.PlayOneShot(soundAtackExplosion,transform.position);
             anim.SetBool("Atack",true);
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;
             randomPositionExplosion.y = -1;

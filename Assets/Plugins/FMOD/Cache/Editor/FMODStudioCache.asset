@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9084781192779223295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun/Shoot 3
+  m_EditorClassIdentifier: 
+  Path: event:/Gun/Shoot 3
+  Guid:
+    Data1: -1442258550
+    Data2: 1094976904
+    Data3: 761901717
+    Data4: 115790198
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 400
 --- !u!114 &-8268593260075480177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 150
   Length: 818
+--- !u!114 &-8152713350550403437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/Pause
+  m_EditorClassIdentifier: 
+  Path: snapshot:/Pause
+  Guid:
+    Data1: 854073536
+    Data2: 1324001117
+    Data3: -202277970
+    Data4: -632246669
+  Banks:
+  - {fileID: 9183022969918313183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-7891013745993378848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +134,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 618
+  Length: 586
 --- !u!114 &-7014067820610248656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +177,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Music.bank
   Name: Desktop/Music
   StudioPath: bank:/Music
-  lastModified: 639098156769512391
+  lastModified: 639098965352466323
   FileSizes: []
   Exists: 1
 --- !u!114 &-6386337865686795475
@@ -234,6 +288,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 202
+--- !u!114 &-4124585129072107201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bosses/SecondBoss/AtackExplosion
+  m_EditorClassIdentifier: 
+  Path: event:/Bosses/SecondBoss/AtackExplosion
+  Guid:
+    Data1: -970080820
+    Data2: 1261489564
+    Data3: -541281881
+    Data4: 1894537181
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 606
 --- !u!114 &-1657264294786000526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,9 +330,36 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/SFX.bank
   Name: Desktop/SFX
   StudioPath: bank:/SFX
-  lastModified: 639098156777665242
+  lastModified: 639098965354191655
   FileSizes: []
   Exists: 1
+--- !u!114 &-1222981048802768018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/EnemyAtack
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/EnemyAtack
+  Guid:
+    Data1: 1369632954
+    Data2: 1116095681
+    Data3: 1867646630
+    Data4: -105352014
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 950
+  Length: 90
 --- !u!114 &-1150309811396636142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +386,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 200
-  Length: 282
+  Length: 2053
 --- !u!114 &-492822809197560716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,10 +429,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639098156769480039
+  lastModified: 639098965352252975
   FileSizes:
   - Name: 
-    Value: 1736
+    Value: 2258
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -354,9 +462,7 @@ MonoBehaviour:
   - {fileID: 6613958309311925341}
   - {fileID: -7014067820610248656}
   - {fileID: 1503270325063906855}
-  - {fileID: 6845685558843964138}
   - {fileID: 753854316903909555}
-  - {fileID: 4795928006642549751}
   - {fileID: -8268593260075480177}
   - {fileID: 6915154852758322741}
   - {fileID: -6386337865686795475}
@@ -364,13 +470,51 @@ MonoBehaviour:
   - {fileID: 6508138876226524157}
   - {fileID: -5075956533042385867}
   - {fileID: -7021444135513315217}
+  - {fileID: 546364448788820973}
+  - {fileID: -1222981048802768018}
+  - {fileID: -8152713350550403437}
+  - {fileID: 8889657458798643845}
+  - {fileID: 7650267460390332603}
+  - {fileID: 6921347241394985740}
+  - {fileID: 7452888400661244314}
+  - {fileID: 3428282628025355785}
+  - {fileID: -9084781192779223295}
+  - {fileID: 916429500016452198}
+  - {fileID: -4124585129072107201}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9183022969918313183}
   StringsBanks:
   - {fileID: -95222392929912446}
-  cacheTime: 639098156777665242
+  cacheTime: 639098965354191655
   cacheVersion: 131635
+--- !u!114 &546364448788820973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Text Writing/Backspace
+  m_EditorClassIdentifier: 
+  Path: event:/Text Writing/Backspace
+  Guid:
+    Data1: 1688588339
+    Data2: 1182946798
+    Data3: 790245818
+    Data4: -363645014
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 224
 --- !u!114 &753854316903909555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +542,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 29852
+--- !u!114 &916429500016452198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Feel/Woosh
+  m_EditorClassIdentifier: 
+  Path: event:/Feel/Woosh
+  Guid:
+    Data1: -1251742781
+    Data2: 1134871999
+    Data3: -1911532917
+    Data4: 270584030
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 150
+  Length: 160
 --- !u!114 &1503270325063906855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,8 +622,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1200
---- !u!114 &4795928006642549751
+  Length: 1152
+--- !u!114 &3428282628025355785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,23 +633,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Bosses/ThirdBoss/DashThirdBoss
+  m_Name: event:/Bosses/SecondBoss/TeleportOut
   m_EditorClassIdentifier: 
-  Path: event:/Bosses/ThirdBoss/DashThirdBoss
+  Path: event:/Bosses/SecondBoss/TeleportOut
   Guid:
-    Data1: -1251742781
-    Data2: 1134871999
-    Data3: -1911532917
-    Data4: 270584030
+    Data1: 1856566137
+    Data2: 1258047762
+    Data3: -111009864
+    Data4: 950038898
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 150
-  Length: 160
+  MaxDistance: 20
+  Length: 1271
 --- !u!114 &4860880591275111623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,33 +758,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1253
---- !u!114 &6845685558843964138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Feel/MetalShot
-  m_EditorClassIdentifier: 
-  Path: event:/Feel/MetalShot
-  Guid:
-    Data1: 1597070006
-    Data2: 1139054840
-    Data3: -539453776
-    Data4: -1893549459
-  Banks:
-  - {fileID: -1657264294786000526}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 667
 --- !u!114 &6915154852758322741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +785,114 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 107
+--- !u!114 &6921347241394985740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bosses/SecondBoss/TeleportIn
+  m_EditorClassIdentifier: 
+  Path: event:/Bosses/SecondBoss/TeleportIn
+  Guid:
+    Data1: -2028608745
+    Data2: 1136571385
+    Data3: -687666794
+    Data4: 649909542
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1174
+--- !u!114 &7452888400661244314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Feel/BulletDestroy
+  m_EditorClassIdentifier: 
+  Path: event:/Feel/BulletDestroy
+  Guid:
+    Data1: 137626152
+    Data2: 1153412951
+    Data3: 1891368360
+    Data4: -1616690420
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 156
+--- !u!114 &7650267460390332603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bosses/ThirdBoss/Dash
+  m_EditorClassIdentifier: 
+  Path: event:/Bosses/ThirdBoss/Dash
+  Guid:
+    Data1: -1173396730
+    Data2: 1102273548
+    Data3: -533682778
+    Data4: 749828827
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 528
+--- !u!114 &8889657458798643845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VHS/VHSDEATH
+  m_EditorClassIdentifier: 
+  Path: event:/VHS/VHSDEATH
+  Guid:
+    Data1: 114764994
+    Data2: 1144572813
+    Data3: -1493807477
+    Data4: 1051128588
+  Banks:
+  - {fileID: -6605949105081211498}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5800
 --- !u!114 &9183022969918313183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +908,6 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 639098156769449239
+  lastModified: 639098965352126667
   FileSizes: []
   Exists: 1

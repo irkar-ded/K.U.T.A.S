@@ -4900,6 +4900,7 @@ GameObject:
   - component: {fileID: 1054523463713795285}
   - component: {fileID: 3112967077521942255}
   - component: {fileID: -4301317381937720248}
+  - component: {fileID: 8834656039940922428}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -4975,6 +4976,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d34a814cc175d82ba92ab646ad09e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8834656039940922428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059559244069807908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2013753537
+      Data2: 1167051900
+      Data3: 609249443
+      Data4: -734186908
+    Path: event:/Enemies/Explosion
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 200
 --- !u!1 &7242749053345470815
 GameObject:
   m_ObjectHideFlags: 0

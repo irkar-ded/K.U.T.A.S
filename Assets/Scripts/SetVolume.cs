@@ -3,40 +3,38 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Audio;
-//using FMOD.Studio;
-using System.IO;
-using System;
-//using FMODUnity;
+using FMOD.Studio;
+using FMODUnity;
 using TMPro;
 
 public class SetVolume : MonoBehaviour
 {
     [SerializeField] string saveIndex;
-    //[SerializeField] string pathBus;
+    [SerializeField] string pathBus;
     //[SerializeField] EventReference soundReference;
     //[SerializeField] TextMeshProUGUI textValue;
-    //EventInstance soundInstance;
-    //Bus audioLayer;
+    EventInstance soundInstance;
+    Bus audioLayer;
     Slider slider;
     public void PrepareSettings()
     {
-        /*audioLayer = RuntimeManager.GetBus(pathBus);
-        if (soundReference.IsNull == false)
+        audioLayer = RuntimeManager.GetBus(pathBus);
+        /*if (soundReference.IsNull == false)
             soundInstance = RuntimeManager.CreateInstance(soundReference);*/
         slider = GetComponent<Slider>();
         float volume = SettingsManager.instance.getVolume(saveIndex);
         slider.value = volume;
-        //audioLayer.setVolume(volume);
+        audioLayer.setVolume(volume);
         //textValue.text = slider.value.ToString("F2");
         print(volume);
-        //slider.value = PlayerPrefs.GetFloat(saveIndex,slider.value);
+        slider.value = PlayerPrefs.GetFloat(saveIndex,slider.value);
     }
     public void ChangeValue()
     {
         float newVolume = slider.value;
         SettingsManager.instance.SaveVolume(saveIndex, newVolume);
-        /*audioLayer.setVolume(newVolume);
-        if (soundReference.IsNull == false)
+        audioLayer.setVolume(newVolume);
+        /*if (soundReference.IsNull == false)
         {
             soundInstance.getPlaybackState(out PLAYBACK_STATE state);
             if(state != PLAYBACK_STATE.PLAYING)
@@ -44,7 +42,7 @@ public class SetVolume : MonoBehaviour
         }*/
         //textValue.text = slider.value.ToString("F2");
         //PlayerPrefs.SetFloat(saveIndex, newVolume);
-        //audioLayer.setVolume(newVolume);
+        audioLayer.setVolume(newVolume);
         Debug.Log("Slider value: " + newVolume);
     }
 }

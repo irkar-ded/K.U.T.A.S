@@ -145,6 +145,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4ce6a07dee2d078b5cf116ee01247a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundBuy:
+    Guid:
+      Data1: 2135217041
+      Data2: 1169787143
+      Data3: 1626458280
+      Data4: -1962237544
+    Path: event:/Shop/Buy
   costItem: 70
   textName: {fileID: 4660357408381560762}
   textDescription: {fileID: 7998008911489164000}

@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 //using EasyTextEffects;
-//using FMODUnity;
+using FMODUnity;
 
 
 public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //[SerializeField] EventReference soundEnter;
+    [SerializeField] EventReference soundBuy;
     [SerializeField] int costItem;
     [SerializeField] TextMeshProUGUI textName;
     [SerializeField] TextMeshProUGUI textDescription;
@@ -27,7 +27,7 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         aboutItem = GetComponentInChildren<CanvasGroup>();
         //textNameEffect = textName.GetComponent<TextEffect>();
         //textDescriptionEffect = textDescription.GetComponent<TextEffect>();
-        ShopManager.instance.onBuy.AddListener(setInfoItem);
+        ShopManager.instance.onBuy.AddListener(SetItem);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -58,6 +58,7 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public bool activeCheakItem() => Money.instance.currentMoney >= costItem;
     public void buyItem()
     {
+        RuntimeManager.PlayOneShot(soundBuy);
         Money.instance.MinusMoney(costItem);
         ShopManager.instance.onBuy.Invoke();
         ScoreManager.instance.addScore(10);

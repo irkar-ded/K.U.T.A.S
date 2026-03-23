@@ -2,6 +2,8 @@
 //using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,9 +19,12 @@ public class Pause : MonoBehaviour
     [SerializeField] GameObject settingsPanel;
     [SerializeField] Button settingsButtonExit;
     [SerializeField] bool debug;
-    //[SerializeField] EventReference effectPause;
+    [Header("Sound")]
+    [SerializeField] EventReference soundOpen;
+    [SerializeField] EventReference soundClose;
+    [SerializeField] EventReference effectPause;
     public static Pause instance;
-    //EventInstance effectInstance;
+    EventInstance effectInstance;
     Controls gameInputs;
     InputAction restartKey;
     InputAction pauseKey;
@@ -33,7 +38,7 @@ public class Pause : MonoBehaviour
         isPaused = false;
         //window.onOpenWindow.AddListener(OnOpenPause);
         //window.onCloseWindow.AddListener(OnClosePause);
-        //effectInstance = RuntimeManager.CreateInstance(effectPause);
+        effectInstance = RuntimeManager.CreateInstance(effectPause);
         if (SettingsManager.instance != null)
             gameInputs = SettingsManager.gameInputs;
         else
@@ -43,7 +48,7 @@ public class Pause : MonoBehaviour
     }
     private void OnDisable()
     {
-        //effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         pauseKey.Disable();
         restartKey.Disable();
         isPaused = false;
@@ -70,7 +75,8 @@ public class Pause : MonoBehaviour
     }
     public void OnClosePause()
     {
-        //effectInstance.start();
+        effectInstance.start();
+        RuntimeManager.PlayOneShot(soundClose);
         panelUI.SetActive(false);
         Time.timeScale = 1;
         isPaused = false;
@@ -79,7 +85,8 @@ public class Pause : MonoBehaviour
     {
         panelUI.SetActive(true);
         isPaused = true;
-        //effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        RuntimeManager.PlayOneShot(soundOpen);
         Time.timeScale = 0;
     }
     void OnApplicationPause(bool pause)
