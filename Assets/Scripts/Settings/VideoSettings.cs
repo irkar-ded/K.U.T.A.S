@@ -13,8 +13,6 @@ public class VideoSettings : MonoBehaviour
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] TMP_Dropdown qualityDropdown;
     Resolution[] resolutions;
-    [Header("Pixel Scale:")]
-    //[SerializeField] TextMeshProUGUI textPixelScaleValue;
     [SerializeField] Slider sliderPixelScale;
     public void PrepareSettings()
     {
@@ -22,18 +20,8 @@ public class VideoSettings : MonoBehaviour
         PrepareQuality();
         LoadSettings();
     }
-    public void LoadPixelScale()
-    {
-        sliderPixelScale.value = SettingsManager.instance.settings.videoSettings.pixelScale;
-        //textPixelScaleValue.text = sliderPixelScale.value.ToString();
-    }
-    public void SavePixelScale()
-    {
-        SettingsManager.instance.savePixelScale((int)sliderPixelScale.value);
-        //textPixelScaleValue.text = sliderPixelScale.value.ToString();
-        //PlayerPrefs.SetFloat(saveIndex, newVolume);
-        //audioLayer.setVolume(newVolume);
-    }
+    public void LoadPixelScale()=>sliderPixelScale.value = SettingsManager.instance.settings.videoSettings.pixelScale;
+    public void SavePixelScale()=>SettingsManager.instance.savePixelScale((int)sliderPixelScale.value);
     public void PrepareResolution()
     {
         List<string> options = new List<string>();

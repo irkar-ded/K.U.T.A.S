@@ -42,6 +42,7 @@ public class SecondBoss : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         healtSystem = enemyMain.healtSystem;
         healtSystem.maxHealt = healtSystem.maxHealt + GameManager.instance.stage * 5;
+        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
         healtSystem.healt = healtSystem.maxHealt;
         healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         currentHealthToTeleport = healtSystem.healt;

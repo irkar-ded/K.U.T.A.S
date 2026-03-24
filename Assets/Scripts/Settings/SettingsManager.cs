@@ -1,4 +1,3 @@
-//using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-//using static KeyIcon;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -43,7 +41,6 @@ public class SettingsManager : MonoBehaviour
             this.save = key;
             this.keyBind = bind;
         }
-        //public string axisName;
     }
     [Serializable]
     public class VideoSettings
@@ -85,9 +82,6 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] EventReference soundClose;
     public static Controls gameInputs;
     public static SettingsManager instance;
-    /*[Header("Delete Save:")]
-    [SerializeField] Button exitButton;
-    [SerializeField] Button[] buttonsToTurnOffInDeleteSave;*/
     string pathSave;
     // Start is called before the first frame update
     void Awake()
@@ -132,23 +126,6 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-    /*public void DeleteSave()
-    {
-        setSettings.CloseCurrentPanel();
-        WindowAnswer windowAnswer = WindowsManager.instance.CreateWindowAnswer(new List<string>{noButtonLocalization.GetLocalizedString(),
-            yesButtonLocalization.GetLocalizedString()},
-            nameWindowLocalization.GetLocalizedString(),
-            textContentLocalization.GetLocalizedString(),buttonsToTurnOffInDeleteSave);
-            if(exitButton != null)
-                windowAnswer.window.selectExitButton = exitButton.gameObject;
-            windowAnswer.window.onCloseWindow.AddListener(() => setSettings.OpenPanel(0));
-            windowAnswer.getButtonByName(noButtonLocalization.GetLocalizedString()).onClick.AddListener(() => windowAnswer.window.SetWindow(false));
-            windowAnswer.getButtonByName(yesButtonLocalization.GetLocalizedString()).onClick.AddListener(() =>
-            {
-                File.Delete(pathSave);
-                LoadingScreen.LoadScene("Start");
-            });
-    }*/
     public void PrepareNullKeybinding()
     {
         if (cheakNullKeybinds() == false)
@@ -210,15 +187,6 @@ public class SettingsManager : MonoBehaviour
         }
         return "";
     }
-    /*public string getAxisName(Key save)
-    {
-        foreach (keybindsObject keybind in _settings.keybindsSettings) 
-        {
-            if (keybind.save == save)
-                return keybind.axisName;
-        }
-        return "None";
-    }*/
     public float getVolume(string save)
     {
         foreach (VolumePlayer volumePlayer in settings.soundSettings.volumesPlayer)

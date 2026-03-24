@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
-//using EasyTextEffects;
 using FMODUnity;
 
 
@@ -14,8 +13,6 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] int costItem;
     [SerializeField] TextMeshProUGUI textName;
     [SerializeField] TextMeshProUGUI textDescription;
-    //TextEffect textNameEffect;
-    //TextEffect textDescriptionEffect;
     Button buttonItem;
     Animator anim;
     CanvasGroup aboutItem;
@@ -25,16 +22,9 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         anim = GetComponent<Animator>();
         buttonItem = GetComponent<Button>();
         aboutItem = GetComponentInChildren<CanvasGroup>();
-        //textNameEffect = textName.GetComponent<TextEffect>();
-        //textDescriptionEffect = textDescription.GetComponent<TextEffect>();
         ShopManager.instance.onBuy.AddListener(SetItem);
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        /*if (isPurched == false)
-            RuntimeManager.PlayOneShot(soundEnter);*/
-        entered = true;
-    }
+    public void OnPointerEnter(PointerEventData eventData)=>entered = true;
     public void OnPointerExit(PointerEventData eventData)=>entered = false;
     public void SetItem()
     {
@@ -52,8 +42,6 @@ public class RefreshItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         bool activeButton = activeCheakItem();
         textName.text = $"{"Refresher"}-<color={(activeButton ? "#78d8b7" : "#ff5470")}>{(costItem > 0 ? costItem + "$" : "FREE")}";
         textDescription.text = "Refresh all items in the shop";
-        //textNameEffect.Refresh();
-        //textDescriptionEffect.Refresh();
     }
     public bool activeCheakItem() => Money.instance.currentMoney >= costItem;
     public void buyItem()

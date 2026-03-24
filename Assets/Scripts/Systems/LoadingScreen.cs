@@ -11,7 +11,7 @@ public class LoadingScreen : MonoBehaviour
     public static LoadingScreen instance;
     private AsyncOperation loadingOperation;
     [SerializeField] EventReference openSoundLoading;
-    //[SerializeField] EventReference closeSoundLoading;
+    [SerializeField] EventReference closeSoundLoading;
     [HideInInspector] public bool isLoading;
     [SerializeField] GameObject panelLoading;
     Coroutine fadeScreenCoroutine;
@@ -27,11 +27,8 @@ public class LoadingScreen : MonoBehaviour
             Destroy(gameObject);
         canvasGroup = GetComponent<CanvasGroup>();
         Application.targetFrameRate = -1;
-    }
-    /*private void Start()
-    {
         FadeOut();
-    }*/
+    }
     public static void LoadScene(string scene)
     {
         if (instance != null)
@@ -99,7 +96,7 @@ public class LoadingScreen : MonoBehaviour
         if(fadeScreenCoroutine != null)
             StopCoroutine(fadeScreenCoroutine);
         fadeScreenCoroutine = StartCoroutine(fadeScreen(true));
-        //RuntimeManager.PlayOneShot(openSoundLoading);
+        RuntimeManager.PlayOneShot(openSoundLoading);
     }
 
     public void FadeOut()
@@ -107,6 +104,6 @@ public class LoadingScreen : MonoBehaviour
         if(fadeScreenCoroutine != null)
             StopCoroutine(fadeScreenCoroutine);
         fadeScreenCoroutine = StartCoroutine(fadeScreen(false));
-        //RuntimeManager.PlayOneShot(closeSoundLoading);
+        RuntimeManager.PlayOneShot(closeSoundLoading);
     }
 }

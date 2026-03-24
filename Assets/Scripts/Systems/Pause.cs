@@ -1,5 +1,3 @@
-//using FMOD.Studio;
-//using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
@@ -29,15 +27,12 @@ public class Pause : MonoBehaviour
     InputAction restartKey;
     InputAction pauseKey;
     public static bool canPause = true;
-    //Window window;
     public static bool isPaused;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         isPaused = false;
-        //window.onOpenWindow.AddListener(OnOpenPause);
-        //window.onCloseWindow.AddListener(OnClosePause);
         effectInstance = RuntimeManager.CreateInstance(effectPause);
         if (SettingsManager.instance != null)
             gameInputs = SettingsManager.gameInputs;

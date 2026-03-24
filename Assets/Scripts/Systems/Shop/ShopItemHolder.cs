@@ -34,12 +34,7 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         anim.SetBool("Selected", isPurched == false && entered);
         aboutItem.alpha = Mathf.Lerp(aboutItem.alpha, isPurched == false && entered ? 1 : 0, Time.deltaTime * 10);
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        /*if (isPurched == false)
-            RuntimeManager.PlayOneShot(soundEnter);*/
-        entered = true;
-    }
+    public void OnPointerEnter(PointerEventData eventData)=>entered = true;
     public void OnPointerExit(PointerEventData eventData)=>entered = false;
     public void SetItemHolder(ShopItem shopItem)
     {
@@ -56,16 +51,10 @@ public class ShopItemHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if(item == null)
             return;
-        if (textName != null /*&& textNameEffect != null*/)
-        {
+        if (textName != null)
             textName.text = $"{item.nameItem}-<color={(Money.instance != null && Money.instance.currentMoney >= item.costItem || Money.instance == null ? "#78d8b7" : "#ff5470")}>{(item.costItem > 0 && Money.instance != null ? item.costItem + "$" : "FREE")}";
-            //textNameEffect.Refresh();
-        }
-        if (textDescription != null /*&& textDescriptionEffect != null*/)
-        {
+        if (textDescription != null)
             textDescription.text = getTextDescription();
-            //textDescriptionEffect.Refresh();
-        }
         if (img != null)
             img.sprite = item.iconItem;
     }

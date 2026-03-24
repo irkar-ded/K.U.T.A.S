@@ -19,7 +19,7 @@ public class BuffItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (GameManager.instance != null && GameManager.gameAllReady == false) return;
+        if (GameManager.instance != null && GameManager.instance.gameIsStarted == false) return;
         if(typeBuffOn != TYPE_BUFF_ON.Passive)
         {
             if (timerBuff > 0)

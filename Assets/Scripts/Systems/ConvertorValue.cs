@@ -3,11 +3,10 @@ public class ConvertorValue
 {
     public static double ConvertValue(double value, double fromMax, double toMax)
     {
-        double scaledValue = (value) / fromMax;
-        double convertedValue = (scaledValue * toMax);
+        double scaledValue = value / fromMax;
+        double convertedValue = scaledValue * toMax;
         return convertedValue;
     }
-    public static float GetAnimValue(float startSpeed,float newSpeed) => startSpeed / newSpeed;
     public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
     {
         if (value.x < min.x || value.y < min.y || value.z < min.z ||

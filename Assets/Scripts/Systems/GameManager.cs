@@ -143,8 +143,6 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator textBossNameCutscene()
     {
-            //RuntimeManager.PlayOneShot(soundOpenWindow);
-            //yield return new WaitForSeconds(0.125f);
             bossText.gameObject.SetActive(true);
             string final = currentRoom.getNameEnemy(0);
             bossText.text = "";
@@ -175,7 +173,6 @@ public class GameManager : MonoBehaviour
                 RuntimeManager.PlayOneShot(soundBackspace);
                 yield return new WaitForSeconds(0.075f);
             }
-            //RuntimeManager.PlayOneShot(soundCloseWindow);
             bossText.text = currentText;
             bossText.gameObject.SetActive(false);
     }

@@ -2629,6 +2629,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3541fe59c406cc1debe5ac977e5cc8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundReference:
+    Guid:
+      Data1: 94839648
+      Data2: 1183428968
+      Data3: 2062470532
+      Data4: -885921892
+    Path: event:/UI/Sound Test/SoundTestMusic
   saveIndex: Music
   pathBus: bus:/Music
 --- !u!114 &3060888477801116675
@@ -5370,6 +5377,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3541fe59c406cc1debe5ac977e5cc8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundReference:
+    Guid:
+      Data1: -1366604591
+      Data2: 1334129667
+      Data3: 1464526468
+      Data4: -943879328
+    Path: event:/UI/Sound Test/SoundTestSFX
   saveIndex: SFX
   pathBus: bus:/SFX
 --- !u!114 &6589120519059545969
@@ -5696,6 +5710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3541fe59c406cc1debe5ac977e5cc8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundReference:
+    Guid:
+      Data1: 174642038
+      Data2: 1092085075
+      Data3: -53731176
+      Data4: 269134033
+    Path: event:/UI/Sound Test/SoundTestGame
   saveIndex: Game
   pathBus: bus:/
 --- !u!114 &7996327183366124696

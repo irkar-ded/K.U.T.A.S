@@ -12,25 +12,12 @@ public class ComboManager : MonoBehaviour
     [SerializeField] Color colorCombo;
     [SerializeField] Color colorBreak;
     [SerializeField] Image comboFill;
-    //Animator animCombo;
     public static ComboManager instance;
-    //TextEffect textEffectCombo;
-    //TextEffect textEffectInfoCombo;
     bool comboBreak;
     float timerCombo;
     int bonusCoin;
     // Start is called before the first frame update
-    void Awake()
-    {
-        instance = this;
-        /*textEffectCombo = textCombo.GetComponent<TextEffect>();
-        textEffectInfoCombo = textInfoCombo.GetComponent<TextEffect>();*/
-        //animCombo = textCombo.GetComponent<Animator>();
-        //textCombo.text = "";
-        //mat = new Material(textCombo.fontMaterial);
-        //textCombo.fontMaterial = mat;
-        //textEffectCombo.Refresh();
-    }
+    void Awake()=>instance = this;
     void Start()
     {
         GameManager.instance.onStartLevel.AddListener(() =>
@@ -61,7 +48,6 @@ public class ComboManager : MonoBehaviour
         comboFill.fillAmount = (float)ConvertorValue.ConvertValue(timerCombo,2.5f,1);
         if (timerCombo <= 0 && combo > 0)
             removeCombo();
-        //mat.SetColor("_Color",new Color(0,0,0,(float)ConvertorValue.ConvertValue(timerCombo, 1.5f, 1)));
     }
     public void removeCombo()
     {
@@ -85,11 +71,9 @@ public class ComboManager : MonoBehaviour
         if(comboBreak)
             return;
         combo++;
-        //animCombo.SetTrigger("Bounce");
         timerCombo = 2.5f;
         textCombo.color = colorBreak;
         textCombo.text = $"<color=black>COMBO {combo}</color>";
         textCombo.gameObject.SetActive(true);
-        //textEffectCombo.Refresh();
     }
 }

@@ -32,10 +32,7 @@ public class BuffManager : MonoBehaviour
     public static UnityEvent<string> onBuff;
     public static BuffManager instance;
 
-    void Start()
-    {
-        instance = this;
-    }
+    void Start()=>instance = this;
     public void setPassiveBuff()
     {
         PassiveBuff tempBuff = new PassiveBuff();

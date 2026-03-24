@@ -108,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1332
+--- !u!114 &-7105517127965898531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Sound Test/SoundTestGame
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Sound Test/SoundTestGame
+  Guid:
+    Data1: 174642038
+    Data2: 1092085075
+    Data3: -53731176
+    Data4: 269134033
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 112
 --- !u!114 &-7021444135513315217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +342,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 606
+--- !u!114 &-2666700627837227048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Sound Test/SoundTestSFX
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Sound Test/SoundTestSFX
+  Guid:
+    Data1: -1366604591
+    Data2: 1334129667
+    Data3: 1464526468
+    Data4: -943879328
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 112
 --- !u!114 &-1657264294786000526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +384,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/SFX.bank
   Name: Desktop/SFX
   StudioPath: bank:/SFX
-  lastModified: 639098965354191655
+  lastModified: 639099451533973643
   FileSizes: []
   Exists: 1
 --- !u!114 &-1222981048802768018
@@ -387,6 +441,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 200
   Length: 2053
+--- !u!114 &-534577986507886405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Sound Test/SoundTestMusic
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Sound Test/SoundTestMusic
+  Guid:
+    Data1: 94839648
+    Data2: 1183428968
+    Data3: 2062470532
+    Data4: -885921892
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 112
 --- !u!114 &-492822809197560716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,10 +510,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639098965352252975
+  lastModified: 639099451532050592
   FileSizes:
   - Name: 
-    Value: 2258
+    Value: 2394
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -481,12 +562,15 @@ MonoBehaviour:
   - {fileID: -9084781192779223295}
   - {fileID: 916429500016452198}
   - {fileID: -4124585129072107201}
+  - {fileID: -534577986507886405}
+  - {fileID: -7105517127965898531}
+  - {fileID: -2666700627837227048}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9183022969918313183}
   StringsBanks:
   - {fileID: -95222392929912446}
-  cacheTime: 639098965354191655
+  cacheTime: 639099451533973643
   cacheVersion: 131635
 --- !u!114 &546364448788820973
 MonoBehaviour:
@@ -908,6 +992,6 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 639098965352126667
+  lastModified: 639099451532013889
   FileSizes: []
   Exists: 1

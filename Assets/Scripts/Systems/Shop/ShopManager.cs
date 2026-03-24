@@ -66,42 +66,25 @@ public class ShopManager : MonoBehaviour
     }
     public void createItems()
     {
-        //bool isOutStock = false;
         if (customItems.Length > 0)
         {
-           /* if (canSpawnItemsCustom(customItems.ToList()).Count <= 0)
-                isOutStock = true;
-            else
-            {*/
-                for(int j = 0;j < customItems.Length; j++)
-                {
-                    ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
-                    randomItem.SetItemHolder(canSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, canSpawnItemsCustom(customItems.ToList()).Count - 1)]);
-                    currentItems.Add(randomItem);
-                }
-            //}
+            for(int j = 0;j < customItems.Length; j++)
+            {
+                ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
+                randomItem.SetItemHolder(canSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, canSpawnItemsCustom(customItems.ToList()).Count - 1)]);
+                currentItems.Add(randomItem);
+            }
         }
         else
         {
-            /*if (canSpawnItems().Count <= 0)
-                isOutStock = true;
-            else
-            {*/
-                for(int i = 0; i < 3; i++)
-                {
-                    List<ShopItem> tempItems = canSpawnItems();
-                    ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
-                    randomItem.SetItemHolder(tempItems[Random.Range(0, tempItems.Count)]);
-                    currentItems.Add(randomItem);
-                }
-            //}
+            for(int i = 0; i < 3; i++)
+            {
+                List<ShopItem> tempItems = canSpawnItems();
+                ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
+                randomItem.SetItemHolder(tempItems[Random.Range(0, tempItems.Count)]);
+                currentItems.Add(randomItem);
+            }
         }
-        /*if (isOutStock == true)
-        {
-            dialoge.onDialoge("Out stock");
-            print("dadwaefgwafesaf");
-            return;
-        }*/
         refreshItem = Instantiate(itemRefresh, contentItems);
         refreshItem.SetItem();
     }

@@ -40,6 +40,7 @@ public class FirstBoss : MonoBehaviour
         room = FindObjectOfType<Room>();
         enemyMain = GetComponent<EnemyMain>();
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
+        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         SetStateBoss(FirstBossStates.Idle);
@@ -124,8 +125,9 @@ public class FirstBoss : MonoBehaviour
         List<Transform> tempsVFXSpawnEnemy = new List<Transform>();
         for(int i = 0; i < enemySpawners.Length; i++)
             tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up *1.5f,Quaternion.Euler(-90,0,0)));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         RuntimeManager.PlayOneShot(soundSpawnEnemy,transform.position);
+        yield return new WaitForSeconds(0.25f);
         for(int i = 0; i < enemySpawners.Length; i++)
         {
             enemySpawners[i].transform.position = tempsVFXSpawnEnemy[i].transform.position + Vector3.up * 1.5f;
