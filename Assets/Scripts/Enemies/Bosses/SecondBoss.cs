@@ -41,8 +41,8 @@ public class SecondBoss : MonoBehaviour
         rbPlayer = player.GetComponent<Rigidbody>();
         enemyMain = GetComponent<EnemyMain>();
         healtSystem = enemyMain.healtSystem;
-        healtSystem.maxHealt = healtSystem.maxHealt + GameManager.instance.stage * 5;
-        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
+        healtSystem.maxHealt = healtSystem.maxHealt + GameManager.instance.stage * 10;
+        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
         healtSystem.healt = healtSystem.maxHealt;
         healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         currentHealthToTeleport = healtSystem.healt;
@@ -155,6 +155,7 @@ public class SecondBoss : MonoBehaviour
         yield return new WaitForSeconds(1f-GameManager.instance.stage * 0.01f);
         for(int i = 0; i < 10; i++)
         {
+            yield return new WaitForSeconds(0.1f);
             RuntimeManager.PlayOneShot(soundAtackExplosion,transform.position);
             anim.SetBool("Atack",true);
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;

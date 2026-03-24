@@ -102,7 +102,7 @@ public class Bullet : MonoBehaviour
     void OnTakeDamage()
     {
         if(currentParameter.toxicBullet > 0)
-            damage.lastDamagedTarget.DamagePoison(currentParameter.toxicBullet,currentParameter.damage / 20);
+            damage.lastDamagedTarget.DamagePoison(currentParameter.toxicBullet,currentParameter.damage / 10);
         gameObject.SetActive(false);
     }
     void OnDrawGizmosSelected()

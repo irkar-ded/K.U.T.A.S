@@ -73,6 +73,11 @@ public class SettingsManager : MonoBehaviour
     [SerializeField]
     public Settings settings;
     [HideInInspector] public UnityEvent changeKey;
+    [Header("Panels Settings")]
+    [SerializeField] CanvasGroup[] panels;
+    [SerializeField] CanvasGroup panelSettings;
+    [SerializeField] CanvasGroup panelExit;
+    CanvasGroup lastPanelOpen;
     [Header("Set:")]
     [SerializeField] GameObject frameRateText;
     [SerializeField] global::VideoSettings videoSettings;
@@ -82,12 +87,14 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] EventReference soundClose;
     public static Controls gameInputs;
     public static SettingsManager instance;
+    MovePanelAnimation movePanelAnimation;
     string pathSave;
     // Start is called before the first frame update
     void Awake()
     {
         if (gameInputs == null)
             gameInputs = new Controls();
+        movePanelAnimation = GetComponentInParent<MovePanelAnimation>();
         instance = this;
         pathSave = Path.Combine(Application.persistentDataPath, "settings.json");
         if (File.Exists(pathSave))
@@ -101,8 +108,32 @@ public class SettingsManager : MonoBehaviour
         else
             CreateSave();
     }
-    public void PlaySoundOpen() => RuntimeManager.PlayOneShot(soundOpen);
-    public void PlaySoundClose() => RuntimeManager.PlayOneShot(soundClose);
+    public void OpenOrCloseSettings(bool open)
+    {
+        if (open)
+        {
+            foreach(CanvasGroup panel in panels)
+            {
+                panel.alpha = 0;
+                panel.gameObject.SetActive(false);
+            }
+            panels[0].alpha = 1;
+            panels[0].gameObject.SetActive(true);
+            movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(panelSettings,panelExit));
+            RuntimeManager.PlayOneShot(soundOpen);
+            lastPanelOpen = panels[0];
+        }
+        else
+        {
+            movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(panelExit,panelSettings));
+            RuntimeManager.PlayOneShot(soundClose);
+        }
+    }
+    public void OpenPanelSettings(int id)
+    {
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(panels[id],lastPanelOpen));
+        lastPanelOpen = panels[id];
+    }
     public void CreateSave()
     {
         Save();

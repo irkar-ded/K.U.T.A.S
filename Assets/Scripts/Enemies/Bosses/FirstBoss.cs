@@ -39,8 +39,8 @@ public class FirstBoss : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         room = FindObjectOfType<Room>();
         enemyMain = GetComponent<EnemyMain>();
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
-        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 10;
+        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         SetStateBoss(FirstBossStates.Idle);

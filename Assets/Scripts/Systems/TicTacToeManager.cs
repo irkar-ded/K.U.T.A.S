@@ -109,7 +109,6 @@ public class TicTacToeManager : MonoBehaviour
             currentGrid.cells[i] = 0;
         RefreshCells();
     }
-    public void SetTicTacToe(bool isPlay)=>mainPanelTicTacToe.SetActive(isPlay);
     public void CreateGrid()
     {
         for(int i = 0; i < currentGrid.cells.Count; i++)

@@ -35,7 +35,7 @@ public class ThirdBoss : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 5;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 10;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
         anim.speed *= 1 + GameManager.instance.stage * 0.25f;

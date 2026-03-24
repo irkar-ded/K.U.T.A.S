@@ -28,16 +28,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject beetwenGameBackground;
     [SerializeField] GameObject beetwenGameCamera;
     [Header("UI")]
+    [SerializeField] MovePanelAnimation movePanelAnimation;
     [SerializeField] TextMeshProUGUI textCountdown;
     [SerializeField] TextMeshProUGUI textTimer;
     [SerializeField] TextMeshProUGUI textStages;
     [SerializeField] Animator blackLines;
     [SerializeField] GameObject bossOrbitalCamera;
     [SerializeField] TextMeshProUGUI bossText;
-    [SerializeField] GameObject resultsPanel;
+    [SerializeField] CanvasGroup resultsPanel;
     [SerializeField] GameObject otherUI;
-    [SerializeField] GameObject gameUI;
-    [SerializeField] GameObject shop;
+    [SerializeField] CanvasGroup ticTacToeUI;
+    [SerializeField] CanvasGroup gameUI;
+    [SerializeField] CanvasGroup shop;
     [SerializeField] GameObject buttonNext;
     [Header("Colors")]
     [SerializeField] Color colorNumberOne;
@@ -67,12 +69,9 @@ public class GameManager : MonoBehaviour
     GameObject currentPlayer;
     Controls gameInputs;
     InputAction pauseKey;
-    bool endGameState;
+    [HideInInspector]public bool endGameState;
     // Start is called before the first frame update
-    void Awake()
-    {
-        instance = this;
-    }
+    void Awake()=>instance = this;
     void Start()
     {
         TicTacToeManager.instance.onChooseCell.AddListener(StartLevel);
@@ -101,7 +100,7 @@ public class GameManager : MonoBehaviour
         ComboManager.instance.SetupCombo();
         buttonNext.SetActive(false);
         gameIsStarted = false;
-        TicTacToeManager.instance.SetTicTacToe(true);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(ticTacToeUI,shop));
         TicTacToeManager.instance.SetupTicTacToe();
     }
     void UpdateTextStage()=>textStages.text = $"STAGE:{stage}";
@@ -113,8 +112,7 @@ public class GameManager : MonoBehaviour
         Pause.canPause = false;
         currentChoosenCell = idCell;
         isBossFight = TicTacToeManager.instance.TryMove(idCell) == TicTacToeManager.Winner.Player;
-        gameUI.SetActive(true);
-        TicTacToeManager.instance.SetTicTacToe(false);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(gameUI,ticTacToeUI));
         DestroyAllRooms();
         SetupRoom();
         if(isBossFight == false)
@@ -317,7 +315,7 @@ public class GameManager : MonoBehaviour
         if(gameIsStarted == false || endGameState)
             return;
         endGameState = true;
-        gameUI.SetActive(false);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(null,gameUI));
         Pause.canPause = false;
         Time.timeScale = 0.25f;
         timer = 10;
@@ -360,7 +358,7 @@ public class GameManager : MonoBehaviour
             Destroy(enemies[i].gameObject);
         enemies.Clear();
         Destroy(currentPlayer);
-        TicTacToeManager.instance.SetTicTacToe(true);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(ticTacToeUI,null));
         if(TicTacToeManager.instance.currentWinner != TicTacToeManager.Winner.None)
         {
             switch (TicTacToeManager.instance.currentWinner)
@@ -387,15 +385,14 @@ public class GameManager : MonoBehaviour
         switch (TicTacToeManager.instance.currentWinner)
         {
             case TicTacToeManager.Winner.Player:
-                shop.SetActive(true);
+                movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(shop,ticTacToeUI));
             break;
             default:
-                resultsPanel.SetActive(true);
+                movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(resultsPanel,ticTacToeUI));
                 otherUI.SetActive(false);
                 ScoreManager.instance.setInfo();
                 BuffManager.instance.cheakUIEndContent();
             break;
         }
-        TicTacToeManager.instance.SetTicTacToe(false);
     }
 }

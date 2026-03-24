@@ -13,7 +13,7 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour
 {
     [Header("Values")]
-    [SerializeField] GameObject panelUI;
+    [SerializeField] CanvasGroup panelUI;
     [SerializeField] GameObject settingsPanel;
     [SerializeField] Button settingsButtonExit;
     [SerializeField] bool debug;
@@ -28,11 +28,13 @@ public class Pause : MonoBehaviour
     InputAction pauseKey;
     public static bool canPause = true;
     public static bool isPaused;
+    MovePanelAnimation movePanelAnimation;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         isPaused = false;
+        movePanelAnimation = GetComponent<MovePanelAnimation>();
         effectInstance = RuntimeManager.CreateInstance(effectPause);
         if (SettingsManager.instance != null)
             gameInputs = SettingsManager.gameInputs;
@@ -72,13 +74,13 @@ public class Pause : MonoBehaviour
     {
         effectInstance.start();
         RuntimeManager.PlayOneShot(soundClose);
-        panelUI.SetActive(false);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(null,panelUI));
         Time.timeScale = 1;
         isPaused = false;
     }
     public void OnOpenPause()
     {
-        panelUI.SetActive(true);
+        movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(panelUI,null));
         isPaused = true;
         effectInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         RuntimeManager.PlayOneShot(soundOpen);

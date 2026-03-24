@@ -41,7 +41,7 @@ public class ComboManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(comboBreak || GameManager.instance.gameIsStarted == false)
+        if(comboBreak || GameManager.instance.gameIsStarted == false || GameManager.instance.endGameState)
             return;
         if (timerCombo > 0f && combo > 0)
             timerCombo -= Time.deltaTime;
