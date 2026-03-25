@@ -247,6 +247,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f71f8004b48ec1dc93ae4d74bc7f42b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 796148345863101931}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1f71f8004b48ec1dc93ae4d74bc7f42b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2783774355604436924}
   m_SourcePrefab: {fileID: 100100000, guid: 1f71f8004b48ec1dc93ae4d74bc7f42b, type: 3}
 --- !u!1 &2408490472287067996 stripped
 GameObject:
@@ -274,6 +277,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2783774355604436924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408490472287067996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1515921001
+      Data2: 1100807793
+      Data3: -2032531583
+      Data4: 1101126158
+    Path: event:/Feel/Walk
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &3037535005692986854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1f71f8004b48ec1dc93ae4d74bc7f42b, type: 3}

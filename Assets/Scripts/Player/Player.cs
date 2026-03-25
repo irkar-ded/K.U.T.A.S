@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         healtSystem = GetComponent<HealtSystem>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
-        anim.speed *= 1 + BuffManager.instance.passiveBuff.bonusSpeed * 0.25f;
+        anim.speed *= 1 + BuffManager.instance.passiveBuff.bonusSpeed * 0.15f;
     }
     void OnDisable()=>moveInput.Disable();
     // Update is called once per frame

@@ -101,7 +101,7 @@ public class FirstBoss : MonoBehaviour
         {
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
-            currentRot += Time.deltaTime * 30;
+            currentRot += Time.deltaTime * (30 * (1 + GameManager.instance.stage * 0.25f));
             if(timerToSpawnBullet >= 0.2f-GameManager.instance.stage * 0.01f)
             {
                 spawnPointToBulletParent.rotation = Quaternion.Euler(0,currentRot,0);

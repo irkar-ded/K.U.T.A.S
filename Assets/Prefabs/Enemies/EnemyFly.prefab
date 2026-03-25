@@ -394,6 +394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1222596755555171283}
   - component: {fileID: 4685218133913599365}
+  - component: {fileID: 3750914352489012267}
   m_Layer: 0
   m_Name: Wings
   m_TagString: Untagged
@@ -439,6 +440,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3750914352489012267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838603198687971450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1251742781
+      Data2: 1134871999
+      Data3: -1911532917
+      Data4: 270584030
+    Path: event:/Feel/Woosh
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 150
 --- !u!1001 &824405664658313893
 PrefabInstance:
   m_ObjectHideFlags: 0
