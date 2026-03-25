@@ -153,7 +153,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   radiusWallCollision: 0.01
-  bloodVFX: {fileID: 3597534099132337091, guid: 093eeda709f057f47b7a2e7ae255a015, type: 3}
+  soundDestroy:
+    Guid:
+      Data1: 137626152
+      Data2: 1153412951
+      Data3: 1891368360
+      Data4: -1616690420
+    Path: event:/Feel/BulletDestroy
   toxicColor: {r: 0, g: 1, b: 0, a: 1}
   xRayColor: {r: 1, g: 0, b: 1, a: 1}
   bounceColor: {r: 0, g: 1, b: 1, a: 1}

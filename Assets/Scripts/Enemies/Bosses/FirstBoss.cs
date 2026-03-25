@@ -101,7 +101,7 @@ public class FirstBoss : MonoBehaviour
         {
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
-            currentRot += Time.deltaTime * (30 * (1 + GameManager.instance.stage * 0.25f));
+            currentRot += Time.deltaTime * (30 * (1 + GameManager.instance.stage * 0.05f));
             if(timerToSpawnBullet >= 0.2f-GameManager.instance.stage * 0.01f)
             {
                 spawnPointToBulletParent.rotation = Quaternion.Euler(0,currentRot,0);
@@ -115,13 +115,12 @@ public class FirstBoss : MonoBehaviour
         bossState = FirstBossStates.EnemyAtack;
     }
     public void PlaySoundAtack()=>RuntimeManager.PlayOneShot(soundAtack,transform.position);
+    public void EndShootTriggerAnimation() => anim.SetBool("ShootTrigger", false);
     IEnumerator enemyAtackStateBoss()
     {
         yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
-        anim.SetBool("Shoot",true);
-        yield return new WaitForSeconds(0.15f);
-        anim.SetBool("Shoot",false);
-        yield return new WaitForSeconds(0.15f);
+        anim.SetBool("ShootTrigger",true);
+        yield return new WaitForSeconds(0.3f);
         List<Transform> tempsVFXSpawnEnemy = new List<Transform>();
         for(int i = 0; i < enemySpawners.Length; i++)
             tempsVFXSpawnEnemy.Add(EZ_PoolManager.Spawn(VFXSpawnEnemy.transform,enemySpawners[i].transform.position - Vector3.up *1.5f,Quaternion.Euler(-90,0,0)));

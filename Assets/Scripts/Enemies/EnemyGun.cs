@@ -29,7 +29,7 @@ public class EnemyGun : MonoBehaviour
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         reactionTime = reactionTime - GameManager.instance.stage * 0.015f;
         enemyMain.healtSystem.onDie.AddListener(Die);
-        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
+        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
     }
 
     // Update is called once per frame

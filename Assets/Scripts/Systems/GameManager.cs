@@ -181,15 +181,15 @@ public class GameManager : MonoBehaviour
         textCountdown.color = colorNumberThree;
         textCountdown.text = "3";
         RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
-        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        yield return new WaitForSeconds(0.5f);
         textCountdown.color = colorNumberTwo;
         textCountdown.text = "2";
         RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
-        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        yield return new WaitForSeconds(0.5f);
         textCountdown.color = colorNumberOne;
         textCountdown.text = "1";
         RuntimeManager.PlayOneShot(soundTick,Vector3.zero);
-        yield return new WaitForSeconds(0.5f - stage * 0.05f);
+        yield return new WaitForSeconds(0.5f);
         Pause.canPause = true;
         gameIsStarted = true;
         textCountdown.gameObject.SetActive(false);

@@ -38,7 +38,7 @@ public class ThirdBoss : MonoBehaviour
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 10;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
-        anim.speed *= 1 + GameManager.instance.stage * 0.25f;
+        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.01f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
         startSpeed = enemyMain.speed;

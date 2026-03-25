@@ -129,9 +129,9 @@ public class SecondBoss : MonoBehaviour
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
             if(isRevers)
-                rotationOffset+=Time.deltaTime * 10;
+                rotationOffset+=Time.deltaTime * (10 * (1 + GameManager.instance.stage * 0.05f));
             else
-                rotationOffset-=Time.deltaTime * 10;
+                rotationOffset-=Time.deltaTime * (10 * (1 + GameManager.instance.stage * 0.05f));
             if(rotationOffset >= 20 && isRevers)
                 isRevers = false;
             if(rotationOffset <= -20 && isRevers == false)
@@ -149,6 +149,7 @@ public class SecondBoss : MonoBehaviour
         }
         bossState = SecondBossStates.Explosion;
     }
+    public void EndAtackTriggerAnimation() => anim.SetBool("AtackTrigger", false);
     IEnumerator explosionStateBoss()
     {
         isLastExplosion = true;
@@ -157,13 +158,12 @@ public class SecondBoss : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             RuntimeManager.PlayOneShot(soundAtackExplosion,transform.position);
-            anim.SetBool("Atack",true);
+            anim.SetBool("AtackTrigger",true);
             Vector3 randomPositionExplosion = player.position + rbPlayer.velocity.normalized * 2.5f ;
             randomPositionExplosion.y = -1;
             markToExplosion.transform.position = randomPositionExplosion;
             markToExplosion.SetActive(true);
             yield return new WaitForSeconds(0.65f-GameManager.instance.stage * 0.01f);
-            anim.SetBool("Atack",false);
             EZ_PoolManager.Spawn(explosion.transform,randomPositionExplosion + Vector3.up * 0.5f,Quaternion.identity);
             markToExplosion.SetActive(false);
             yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.01f);

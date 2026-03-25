@@ -53,7 +53,7 @@ public class ComboManager : MonoBehaviour
     {
         if (combo >= 3)
         {
-            int instCombo = combo * 12;
+            int instCombo = combo * 15;
             Money.instance.AddMoney(instCombo + bonusCoin);
         }
         comboFill.fillAmount = 0;
@@ -65,7 +65,7 @@ public class ComboManager : MonoBehaviour
     }
     public void addCombo(int count)
     {
-        Money.instance.AddMoney((count * 12) + bonusCoin);
+        Money.instance.AddMoney((count * 14) + bonusCoin);
         if(ScoreManager.instance != null)
             ScoreManager.instance.addScore(count * 10);
         if(comboBreak)
