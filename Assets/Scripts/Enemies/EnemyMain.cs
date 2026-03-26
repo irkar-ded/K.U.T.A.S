@@ -27,10 +27,10 @@ public class EnemyMain : MonoBehaviour
     public LayerMask layerAvoidObjects;
     public float randomOffsetDistance = 10;
     public float kdToRandomPath = 0.5f;
+    float currentHealth;
+    public GameObject damageCounter;
     public GameObject bloodVFX;
     public GameObject explosion;
-    public EventReference soundDeath;
-    public EventReference soundHit;
     void Awake()
     {
         TryGetComponent(out agent);
@@ -41,11 +41,11 @@ public class EnemyMain : MonoBehaviour
             target = GameObject.FindWithTag("Player").transform;
         if(TryGetComponent(out healtSystem))
         {
+            currentHealth = healtSystem.healt;
             healtSystem.onDie.AddListener(() =>
             {
                 if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
                     EZ_PoolManager.Spawn(explosion.transform,transform.position,Quaternion.identity);
-                RuntimeManager.PlayOneShot(soundDeath,transform.position);
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);
                 if(typeMovement == TypeMovement.Fly)
@@ -57,8 +57,18 @@ public class EnemyMain : MonoBehaviour
             healtSystem.onTakeDamage.AddListener((Vector3 pos) =>
             {
                 EZ_PoolManager.Spawn(bloodVFX.transform,pos,transform.rotation);
-                if(healtSystem.healt > 0)
-                    RuntimeManager.PlayOneShot(soundHit,transform.position);
+                float damage = 0;
+                if (healtSystem != null)
+                {
+                    damage = currentHealth - healtSystem.healt;
+                    currentHealth = healtSystem.healt;
+                }
+                if (EZ_PoolManager.Instance != null && damageCounter != null)
+                {
+                    PopupDamage popupDamage = EZ_PoolManager.Spawn(damageCounter.transform, pos + Vector3.up * 0.5f, transform.rotation).GetComponent<PopupDamage>();
+                    popupDamage.SetText(Mathf.FloorToInt(Mathf.Abs(damage)) == 0 ? ":)" +
+                    "" : $"-{ConvertorValue.FormatFloat(Mathf.Abs(damage))}", currentHealth <= 0 || Mathf.FloorToInt(Mathf.Abs(damage)) == 0);
+                }
             });
         }
     }
@@ -170,8 +180,7 @@ public class EnemyMainEditor : Editor
     SerializedProperty m_layerAvoidObjects;
     SerializedProperty m_bloodVFX;
     SerializedProperty m_explosion;
-    SerializedProperty m_soundDeath;
-    SerializedProperty m_soundHit;
+    SerializedProperty m_damageCounter;
     void OnEnable()
     {
         m_layerAvoidObjects = serializedObject.FindProperty("layerAvoidObjects");
@@ -182,8 +191,7 @@ public class EnemyMainEditor : Editor
         m_nameEnemy = serializedObject.FindProperty("nameEnemy");
         m_bloodVFX = serializedObject.FindProperty("bloodVFX");
         m_explosion = serializedObject.FindProperty("explosion");
-        m_soundHit = serializedObject.FindProperty("soundHit");
-        m_soundDeath = serializedObject.FindProperty("soundDeath");
+        m_damageCounter = serializedObject.FindProperty("damageCounter");
     }
     public override void OnInspectorGUI()
     {
@@ -205,9 +213,7 @@ public class EnemyMainEditor : Editor
         GUILayout.Label("Damage:");
         EditorGUILayout.PropertyField(m_bloodVFX, new GUIContent("Blood VFX"));
         EditorGUILayout.PropertyField(m_explosion, new GUIContent("Explosion"));
-        GUILayout.Label("Sound:");
-        EditorGUILayout.PropertyField(m_soundDeath, new GUIContent("Sound Death"));
-        EditorGUILayout.PropertyField(m_soundHit, new GUIContent("Sound Hit"));
+        EditorGUILayout.PropertyField(m_damageCounter, new GUIContent("Damage Counter"));
         serializedObject.ApplyModifiedProperties();
     }
 }

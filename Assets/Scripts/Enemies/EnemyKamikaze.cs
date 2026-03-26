@@ -20,12 +20,12 @@ public class EnemyKamikaze : MonoBehaviour
     {
         enemyMain = GetComponent<EnemyMain>();
         enemyMain.healtSystem.onDie.AddListener(Explosion);
-        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
-        timeToExplosion = timeToExplosion - GameManager.instance.stage * 0.025f;
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + Mathf.Clamp(GameManager.instance.stage - 1,0,Mathf.Infinity) * 0.25f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.15f;
+        timeToExplosion = timeToExplosion - GameManager.instance.difficulty * 0.025f;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + Mathf.Clamp(GameManager.instance.difficulty - 1,0,Mathf.Infinity) * 0.25f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         if(anim != null)
-            anim.speed *= 1 + GameManager.instance.stage * 0.25f;
+            anim.speed *= 1 + GameManager.instance.difficulty * 0.25f;
         player = enemyMain.target;
     }
 

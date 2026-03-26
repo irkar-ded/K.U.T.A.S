@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EZ_Pooling;
+using FMODUnity;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -30,8 +31,11 @@ public class Bullet : MonoBehaviour
         public int bounceBullet;
     }
     [Header("Values:")]
+    [SerializeField] GameObject destroyBulletVFX;
     [SerializeField] LayerMask layerWall;
     [SerializeField] float radiusWallCollision = 0.01f;
+    [Header("Sound")]
+    [SerializeField] EventReference soundBounce;
     [Header("Buffs")]
     [SerializeField] Color toxicColor = Color.green;
     [SerializeField] Color xRayColor = Color.magenta;
@@ -70,16 +74,25 @@ public class Bullet : MonoBehaviour
             else if(canGoOutWall > 0)
             {
                 if(colliders[0].tag == "TeleportBullet")
-                {
-                    print(colliders[0].name);
                     TeleportBullet(colliders[0].gameObject.name);
-                }
                 else
                     canGoOutWall--;
             }
             else
-                gameObject.SetActive(false);
+            {
+                DestroyBullet();
+            }
         }
+    }
+    public void DestroyBullet()
+    {
+                if(destroyBulletVFX != null)
+                {
+                    ParticleSystem vfxDestoyBullet = EZ_PoolManager.Spawn(destroyBulletVFX.transform,transform.position,Quaternion.identity).GetComponent<ParticleSystem>();
+                    var pfxMain = vfxDestoyBullet.main;
+                    pfxMain.startColor = model.material.color;   
+                }
+                gameObject.SetActive(false);
     }
     public void BounceBullet()
     {
@@ -87,6 +100,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector3.zero;
         transform.rotation = Quaternion.LookRotation((Vector3.Reflect(rb.velocity.normalized,hit.normal)- transform.position).normalized);
         rb.AddForce(transform.forward * currentParameter.force,ForceMode.Impulse);
+        RuntimeManager.PlayOneShot(soundBounce,transform.position);
         canBounceWall--;
     }
     public void TeleportBullet(string nameTeleporter)

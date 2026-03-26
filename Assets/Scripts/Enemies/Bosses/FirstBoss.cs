@@ -39,8 +39,8 @@ public class FirstBoss : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         room = FindObjectOfType<Room>();
         enemyMain = GetComponent<EnemyMain>();
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 10;
-        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 15;
+        anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         SetStateBoss(FirstBossStates.Idle);
@@ -64,7 +64,7 @@ public class FirstBoss : MonoBehaviour
         Quaternion rotToPlayer = Quaternion.LookRotation((player.position - transform.position).normalized);
         rotToPlayer.z = 0;
         rotToPlayer.x = 0;
-        transform.rotation = rotToPlayer;
+        transform.rotation = Quaternion.Slerp(transform.rotation,rotToPlayer,Time.deltaTime * 10);
     }
     public void SetStateBoss(FirstBossStates state)
     {
@@ -87,12 +87,12 @@ public class FirstBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(1-GameManager.instance.difficulty * 0.015f);
         bossState = FirstBossStates.BulletHell;
     }
     IEnumerator bulletHellStateBoss()
     {
-        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.015f);
         float timer = 0;
         float timerToSpawnBullet = 0;
         float currentRot = 0;
@@ -101,8 +101,8 @@ public class FirstBoss : MonoBehaviour
         {
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
-            currentRot += Time.deltaTime * (30 * (1 + GameManager.instance.stage * 0.05f));
-            if(timerToSpawnBullet >= 0.2f-GameManager.instance.stage * 0.01f)
+            currentRot += Time.deltaTime * (30 * (1 + GameManager.instance.difficulty * 0.1f));
+            if(timerToSpawnBullet >= 0.2f-GameManager.instance.difficulty * 0.01f)
             {
                 spawnPointToBulletParent.rotation = Quaternion.Euler(0,currentRot,0);
                 for(int i = 0;i < spawnPointsToBullet.Length; i++)
@@ -118,7 +118,7 @@ public class FirstBoss : MonoBehaviour
     public void EndShootTriggerAnimation() => anim.SetBool("ShootTrigger", false);
     IEnumerator enemyAtackStateBoss()
     {
-        yield return new WaitForSeconds(0.5f-GameManager.instance.stage * 0.015f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.015f);
         anim.SetBool("ShootTrigger",true);
         yield return new WaitForSeconds(0.3f);
         List<Transform> tempsVFXSpawnEnemy = new List<Transform>();

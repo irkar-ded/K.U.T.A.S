@@ -22,6 +22,16 @@ public class BuffManager : MonoBehaviour
         public int bounceBullet;
         public bool isExplosionAfterDeath;
     }
+    public class UIStackItemHolder
+    {
+        public BuffItem buff;
+        public int count;
+        public UIStackItemHolder(BuffItem buff)
+        {
+            this.buff = buff;
+            count = 1;
+        }
+    }
     [SerializeField] GameObject textYourBuffs;
     [SerializeField] Transform endBuffsContent;
     [SerializeField] GameObject buffIcon;
@@ -60,12 +70,25 @@ public class BuffManager : MonoBehaviour
         foreach (GameObject t in buffIcons)
             Destroy(t);
         buffIcons.Clear();
-        for(int i = 0;i < itemsBuff.Count; i++)
+        List<UIStackItemHolder> UIStackItemHolders = new List<UIStackItemHolder>();
+        for(int j = 0;j < itemsBuff.Count; j++)
         {
-            if (itemsBuff[i].icon != null)
+            if(UIStackItemHolders.Exists(x=>x.buff.name == itemsBuff[j].name))
+                UIStackItemHolders.Find(x=>x.buff.name == itemsBuff[j].name).count++;
+            else
+                UIStackItemHolders.Add(new UIStackItemHolder(itemsBuff[j]));
+        }
+        for(int i = 0;i < UIStackItemHolders.Count; i++)
+        {
+            if (UIStackItemHolders[i].buff.icon != null)
             {
                 Image tempImg = Instantiate(buffIcon, contentIcons).GetComponent<Image>();
-                tempImg.sprite = itemsBuff[i].icon;
+                TextMeshProUGUI textStackBuff = tempImg.GetComponentInChildren<TextMeshProUGUI>();
+                if(UIStackItemHolders[i].count > 1)
+                    textStackBuff.text = UIStackItemHolders[i].count.ToString();
+                else
+                    textStackBuff.gameObject.SetActive(false);
+                tempImg.sprite = UIStackItemHolders[i].buff.icon;
                 buffIcons.Add(tempImg.gameObject);
             }
         }
@@ -75,12 +98,25 @@ public class BuffManager : MonoBehaviour
         if (itemsBuff.Count <= 0)
             return;
         textYourBuffs.SetActive(true);
-        for (int i = 0; i < itemsBuff.Count; i++)
+        List<UIStackItemHolder> UIStackItemHolders = new List<UIStackItemHolder>();
+        for(int j = 0;j < itemsBuff.Count; j++)
         {
-            if (itemsBuff[i].icon != null)
+            if(UIStackItemHolders.Exists(x=>x.buff == itemsBuff[j]))
+                UIStackItemHolders.Find(x=>x.buff == itemsBuff[j]).count++;
+            else
+                UIStackItemHolders.Add(new UIStackItemHolder(itemsBuff[j]));
+        }
+        for (int i = 0; i < UIStackItemHolders.Count; i++)
+        {
+            if (UIStackItemHolders[i].buff.icon != null)
             {
                 Image tempImg = Instantiate(buffIcon, endBuffsContent).GetComponent<Image>();
-                tempImg.sprite = itemsBuff[i].icon;
+                TextMeshProUGUI textStackBuff = tempImg.GetComponentInChildren<TextMeshProUGUI>();
+                if(UIStackItemHolders[i].count > 1)
+                    textStackBuff.text = UIStackItemHolders[i].count.ToString();
+                else
+                    textStackBuff.gameObject.SetActive(false);
+                tempImg.sprite = UIStackItemHolders[i].buff.icon;
             }
         }
     }

@@ -24,12 +24,12 @@ public class EnemyGun : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         player = enemyMain.target;
-        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.25f;
-        gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.stage * 0.015f;
-        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.stage * 0.5f;
-        reactionTime = reactionTime - GameManager.instance.stage * 0.015f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.25f;
+        gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.difficulty * 0.025f;
+        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.difficulty * 0.25f;
+        reactionTime = reactionTime - GameManager.instance.difficulty * 0.015f;
         enemyMain.healtSystem.onDie.AddListener(Die);
-        anim.speed *= 1 + GameManager.instance.stage * 0.15f;
+        anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
     }
 
     // Update is called once per frame

@@ -149,17 +149,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b91e3e48827bb33bcd08b47e7c265e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyBulletVFX: {fileID: 3438272757038157322, guid: 1dc1fcc709b410d3a97852e28c27a069, type: 3}
   layerWall:
     serializedVersion: 2
     m_Bits: 8
   radiusWallCollision: 0.01
-  soundDestroy:
+  soundBounce:
     Guid:
-      Data1: 137626152
-      Data2: 1153412951
-      Data3: 1891368360
-      Data4: -1616690420
-    Path: event:/Feel/BulletDestroy
+      Data1: -1367419282
+      Data2: 1265606301
+      Data3: -1292390479
+      Data4: 1389020730
+    Path: event:/Feel/Bounce
   toxicColor: {r: 0, g: 1, b: 0, a: 1}
   xRayColor: {r: 1, g: 0, b: 1, a: 1}
   bounceColor: {r: 0, g: 1, b: 1, a: 1}

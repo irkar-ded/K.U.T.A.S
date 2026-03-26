@@ -8,8 +8,8 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         enemyMain = GetComponent<EnemyMain>();
-        enemyMain.speed = enemyMain.speed + GameManager.instance.stage * 0.15f;
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.stage * 0.25f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.15f;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 0.25f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
     }
     void Update()

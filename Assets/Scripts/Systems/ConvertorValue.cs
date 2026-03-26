@@ -18,4 +18,5 @@ public class ConvertorValue
         }
         return value;
     }
+    public static string FormatFloat(float number)=> number % 1 == 0 ? ((int)number).ToString() : number.ToString("0.##");
 }

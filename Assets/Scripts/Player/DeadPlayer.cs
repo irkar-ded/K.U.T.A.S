@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class DeadPlayer : MonoBehaviour
 {
-    [Header("Sound")]
-    [SerializeField] EventReference soundDamage;
-    [SerializeField] EventReference soundDeath;
-    [SerializeField] EventReference soundVHSDeath;
+    [Header("Other")]
+    [SerializeField] Renderer[] model;
+    Color colorPlayer;
+    bool alwaysInvincible;
     HealtSystem healtSystem;
     Animator anim;
     Gun gun;
     Coroutine invincibleCoroutine;
     void Start()
     {
+        colorPlayer = model[0].material.GetColor("_Color");
         healtSystem = GetComponent<HealtSystem>();
         gun = GetComponentInChildren<Gun>();
         anim = GetComponentInChildren<Animator>();
@@ -27,11 +28,19 @@ public class DeadPlayer : MonoBehaviour
         Destroy(this);
         anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
         anim.SetTrigger("Death");
-        RuntimeManager.PlayOneShot(soundDeath);
+    }
+    public void MakeAlwaysInvincible()
+    {
+        StopAllCoroutines();
+        alwaysInvincible = true;
+        healtSystem.isInvincible = true;
     }
     public void MakePlayerInvincible()
     {
-        RuntimeManager.PlayOneShot(soundDamage);
+        if(alwaysInvincible)
+            return;
+        if(healtSystem.healt <= 0)
+            return;
         if(invincibleCoroutine != null)
             StopCoroutine(invincibleCoroutine);
         invincibleCoroutine = StartCoroutine(Invincible());
@@ -39,7 +48,14 @@ public class DeadPlayer : MonoBehaviour
     IEnumerator Invincible()
     {
         healtSystem.isInvincible = true;
-        yield return new WaitForSeconds(1);
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 0; j < model.Length;j++)
+                model[j].materials[0].SetColor("_Color",i % 2 == 1 ? colorPlayer : Color.yellow);
+            yield return new WaitForSeconds(0.1f);
+        }            
+        for(int j = 0; j < model.Length;j++)
+            model[j].materials[0].SetColor("_Color",colorPlayer);
         healtSystem.isInvincible = false;
-    }
+    }   
 }

@@ -21,11 +21,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 400
 --- !u!114 &-8268593260075480177
 MonoBehaviour:
@@ -156,11 +156,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 586
 --- !u!114 &-7014067820610248656
 MonoBehaviour:
@@ -261,6 +261,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 208
+--- !u!114 &-4959472150148382082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Feel/TouchToxic
+  m_EditorClassIdentifier: 
+  Path: event:/Feel/TouchToxic
+  Guid:
+    Data1: -956025273
+    Data2: 1095111613
+    Data3: 485909385
+    Data4: 664673798
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 150
+  Length: 1044
 --- !u!114 &-4765862875206818693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,11 +363,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 606
 --- !u!114 &-2666700627837227048
 MonoBehaviour:
@@ -384,7 +411,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/SFX.bank
   Name: Desktop/SFX
   StudioPath: bank:/SFX
-  lastModified: 639100394472207825
+  lastModified: 639101417909745933
   FileSizes: []
   Exists: 1
 --- !u!114 &-1222981048802768018
@@ -510,10 +537,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639100394469907333
+  lastModified: 639101411201253806
   FileSizes:
   - Name: 
-    Value: 2440
+    Value: 2530
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -566,12 +593,14 @@ MonoBehaviour:
   - {fileID: -7105517127965898531}
   - {fileID: -2666700627837227048}
   - {fileID: 1234745419175883189}
+  - {fileID: -4959472150148382082}
+  - {fileID: 7790638294332626581}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9183022969918313183}
   StringsBanks:
   - {fileID: -95222392929912446}
-  cacheTime: 639100394472207825
+  cacheTime: 639101417909745933
   cacheVersion: 131635
 --- !u!114 &546364448788820973
 MonoBehaviour:
@@ -675,11 +704,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 488
 --- !u!114 &1503270325063906855
 MonoBehaviour:
@@ -729,11 +758,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 1152
 --- !u!114 &3428282628025355785
 MonoBehaviour:
@@ -756,11 +785,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 1271
 --- !u!114 &4860880591275111623
 MonoBehaviour:
@@ -837,11 +866,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 1136
 --- !u!114 &6613958309311925341
 MonoBehaviour:
@@ -918,11 +947,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 1174
 --- !u!114 &7452888400661244314
 MonoBehaviour:
@@ -945,11 +974,11 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 156
 --- !u!114 &7650267460390332603
 MonoBehaviour:
@@ -972,12 +1001,39 @@ MonoBehaviour:
   Banks:
   - {fileID: -1657264294786000526}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 150
   Length: 528
+--- !u!114 &7790638294332626581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Feel/Bounce
+  m_EditorClassIdentifier: 
+  Path: event:/Feel/Bounce
+  Guid:
+    Data1: -1367419282
+    Data2: 1265606301
+    Data3: -1292390479
+    Data4: 1389020730
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 150
+  Length: 800
 --- !u!114 &8889657458798643845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,6 +1076,6 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 639100394469861470
+  lastModified: 639101411201137580
   FileSizes: []
   Exists: 1

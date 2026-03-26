@@ -127,6 +127,27 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  soundToxic:
+    Guid:
+      Data1: -956025273
+      Data2: 1095111613
+      Data3: 485909385
+      Data4: 664673798
+    Path: event:/Feel/TouchToxic
+  soundDamage:
+    Guid:
+      Data1: 699060986
+      Data2: 1198742935
+      Data3: -74913879
+      Data4: -1621509445
+    Path: event:/Feel/Flesh
+  soundDeath:
+    Guid:
+      Data1: 1543135071
+      Data2: 1253759266
+      Data3: -1195880825
+      Data4: 1383946479
+    Path: event:/Feel/Kill
   isInvincible: 0
   currentTypeDamage: 
 --- !u!114 &5895137351392605238
@@ -159,27 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a7112b623d605649a64c014fc40edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundDamage:
-    Guid:
-      Data1: 699060986
-      Data2: 1198742935
-      Data3: -74913879
-      Data4: -1621509445
-    Path: event:/Feel/Flesh
-  soundDeath:
-    Guid:
-      Data1: 1543135071
-      Data2: 1253759266
-      Data3: -1195880825
-      Data4: 1383946479
-    Path: event:/Feel/Kill
-  soundVHSDeath:
-    Guid:
-      Data1: 114764994
-      Data2: 1144572813
-      Data3: -1493807477
-      Data4: 1051128588
-    Path: event:/VHS/VHSDEATH
+  model:
+  - {fileID: 6845065856421769926}
+  - {fileID: 8163743590402045373}
 --- !u!114 &7832105128210817214
 MonoBehaviour:
   m_ObjectHideFlags: 0

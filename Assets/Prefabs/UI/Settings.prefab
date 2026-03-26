@@ -1903,6 +1903,7 @@ MonoBehaviour:
   - {fileID: 536056490311348952}
   - {fileID: 7124034438736021342}
   panelSettings: {fileID: 5298199427880686527}
+  panelExit: {fileID: 0}
   frameRateText: {fileID: 2373947782678949146}
   videoSettings: {fileID: 703149464156770455}
   volumeSettings:
@@ -1991,8 +1992,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FPS:100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f3336cf2aae411dd8b3b0f3131838b7, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 8f3336cf2aae411dd8b3b0f3131838b7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2022,7 +2023,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535

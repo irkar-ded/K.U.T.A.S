@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] EventReference soundVHSDeath;
     bool isBossCutscene;
     public int stage;
+    [HideInInspector]public float difficulty;
     public static GameManager instance;
     List<GameObject> enemies = new List<GameObject>();
     List<RoomSettings> currentRoomPool = new List<RoomSettings>();
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
     void UpdateTextStage()=>textStages.text = $"STAGE:{stage}";
     public void StartLevel(int idCell)
     {
+        difficulty = stage * 0.5f;
         RuntimeManager.PlayOneShot(soundClose);
         ClearMap();
         StartCoroutine(beetwenGameOutCutscene());
@@ -208,7 +210,7 @@ public class GameManager : MonoBehaviour
         if(gameIsStarted == false || isBossFight || debugRoom != null && debugRoom.room != null)
             return;
         if(timer > 0)
-            timer-= Time.deltaTime - BuffManager.instance.passiveBuff.lessTimeFade;
+            timer-= Time.deltaTime / (1 + BuffManager.instance.passiveBuff.lessTimeFade);
         else
             EndLevel(TicTacToeManager.Winner.Enemy);
         textTimer.text = $"<color={(timer > 3 ? "white" : "#ff5470")}>{timer.ToString("F2")}</color>";
@@ -318,7 +320,6 @@ public class GameManager : MonoBehaviour
         movePanelAnimation.MovePanel(new MovePanelAnimation.Transition(null,gameUI));
         Pause.canPause = false;
         Time.timeScale = 0.25f;
-        timer = 10;
         for(int i = 0;i < healthBars.Count; i++)
             UIManagerGame.instance.RemoveHealthBar(healthBars[i]);
         healthBars.Clear();
@@ -328,11 +329,13 @@ public class GameManager : MonoBehaviour
                 PostEffectsManager.instance.SetBackAndWhite(true);
             RuntimeManager.PlayOneShot(soundVHSDeath);
         }
+        currentPlayer.GetComponent<DeadPlayer>().MakeAlwaysInvincible();
         StartCoroutine(waitToEndLevel(winner));
     }
     IEnumerator waitToEndLevel(TicTacToeManager.Winner winner)
     {
         yield return new WaitForSecondsRealtime(isBossFight || winner == TicTacToeManager.Winner.Enemy ? 3f : 2f);
+        timer = 10;
         beetwenGameCamera.SetActive(true);
         beetwenGameBackground.SetActive(true);
         yield return new WaitForSecondsRealtime(1);

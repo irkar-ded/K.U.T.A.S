@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -14,6 +15,10 @@ public class HealtSystem : MonoBehaviour
     public UnityEvent onDie;
     public UnityEvent addHealth;
     public UnityEvent<Vector3> onTakeDamage;
+    [Header("Sound")]
+    [SerializeField] EventReference soundToxic;
+    [SerializeField] EventReference soundDamage;
+    [SerializeField] EventReference soundDeath;
     public static HealtSystem instance;
     [HideInInspector]public bool isInvincible;
     [HideInInspector]public string currentTypeDamage;
@@ -32,6 +37,8 @@ public class HealtSystem : MonoBehaviour
         onTakeDamage.Invoke(posBlood);
         if (healt <= 0)
             Die();
+        else
+            RuntimeManager.PlayOneShot(soundDamage,transform.position);
     }
     public void TakeDamage(float damage,string typeDamage)
     {
@@ -42,8 +49,14 @@ public class HealtSystem : MonoBehaviour
         healt = Mathf.Clamp(healt, minHealt, maxHealt);
         if (healt <= 0)
             Die();
+        else
+            RuntimeManager.PlayOneShot(soundDamage,transform.position);
     }
-    public void Die() => onDie.Invoke();
+    public void Die()
+    {
+        onDie.Invoke();
+        RuntimeManager.PlayOneShot(soundDeath,transform.position);
+    }
     public void TakeHealt(float hp)
     {
         healt += hp;
@@ -57,6 +70,7 @@ public class HealtSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             TakeDamage(damage,transform.position,"Toxic");
+            RuntimeManager.PlayOneShot(soundToxic,transform.position);
         }
     }
 }

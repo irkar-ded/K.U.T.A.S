@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 6953272508024269661}
     - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
       propertyPath: surfaceToLook.m_Bits
-      value: 4294967295
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 8216921817851524827, guid: 0d7b8252c3b4c0ac09a97d4623568f1f, type: 3}
       propertyPath: parametersBullet.force

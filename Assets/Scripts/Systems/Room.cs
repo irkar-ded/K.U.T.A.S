@@ -25,15 +25,17 @@ public class Room : MonoBehaviour
     public void AddEnemy(EnemyMain enemy,bool useHealthbar)
     {
         GameManager.instance.AddEnemy(enemy.gameObject,useHealthbar ? UIManagerGame.instance.CreateHealthBar(enemy.healtSystem,enemy.nameEnemy) : null);
-        enemy.GetComponent<HealtSystem>().onDie.AddListener(OnDieEnemy);
+        enemy.GetComponent<HealtSystem>().onDie.AddListener(() => OnDieEnemy(enemy));
+        TargetHolder.instance.CreatePoint(enemy.transform);
         enemies.Add(enemy);
         coutAliveEnemies++;
     }
-    public void OnDieEnemy()
+    public void OnDieEnemy(EnemyMain enemy)
     {
         coutAliveEnemies--;
         if(coutAliveEnemies <= 0)
             GameManager.instance.EndLevel(TicTacToeManager.Winner.Player);
+        TargetHolder.instance.DestroyPoint(enemy.transform);
     }
     public string getNameEnemy(int id) => enemies[id].nameEnemy;
 }

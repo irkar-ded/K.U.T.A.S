@@ -181,10 +181,12 @@ namespace EZ_Pooling
 
                             System.Threading.Thread.Sleep(5);
                         }
+                        if(prefabPreviewIcon != null)
+                        {
+                            EZ_EditorUtility.DrawTexture(prefabPreviewIcon, 100, 100);
 
-                        EZ_EditorUtility.DrawTexture(prefabPreviewIcon, 100, 100);
-
-                        EditorGUILayout.BeginVertical(GUILayout.MinHeight(prefabPreviewIcon.height));
+                            EditorGUILayout.BeginVertical(GUILayout.MinHeight(prefabPreviewIcon.height));
+                        }
 
 
                         if (!Application.isPlaying) //During Editor
