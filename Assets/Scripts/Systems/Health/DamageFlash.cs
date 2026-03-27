@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageFlash : MonoBehaviour
 {
-    [SerializeField] int idMaterialDamage;
+    [SerializeField] List<int> idMaterialDamage = new List<int>{0};
     [SerializeField] Color damageStandart = Color.red;
     [SerializeField] Color toxicDamage = Color.green;
     HealtSystem healtSystem;
@@ -21,19 +21,28 @@ public class DamageFlash : MonoBehaviour
         switch (healtSystem.currentTypeDamage)
         {
             case "Toxic":
-                for(int i = 0; i < model.Length;i++)
-                    model[i].materials[idMaterialDamage].SetColor("_ColorFlash",toxicDamage);
+                SetColorDamage(toxicDamage);
             break;
             default:
-                for(int i = 0; i < model.Length;i++)
-                    model[i].materials[idMaterialDamage].SetColor("_ColorFlash",damageStandart);
+                SetColorDamage(damageStandart);
             break;
         }
         for(int i = 0; i < 5; i++)
         {
-            for(int j = 0; j < model.Length;j++)
-                model[j].materials[idMaterialDamage].SetFloat("_FlashAmount", i % 2);
+            for(int j = 0; j < model.Length; j++)
+            {
+                for(int n = 0; n < idMaterialDamage.Count; n++)
+                    model[j].materials[n].SetFloat("_FlashAmount", i % 2);
+            }
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+    void SetColorDamage(Color damageColor)
+    {
+        for(int i = 0; i < model.Length; i++)
+        {
+            for(int j = 0; j < idMaterialDamage.Count; j++)
+                model[i].materials[j].SetColor("_ColorFlash",damageColor);
         }
     }
 }

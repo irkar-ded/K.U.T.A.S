@@ -8,12 +8,13 @@ public class Player : MonoBehaviour
 {
     [Header("Values")]
     public float speed = 10;
+    [HideInInspector]public bool canMove = true;
     public static Player instance;
     Animator anim;
     InputAction moveInput;
     [HideInInspector]public Controls inputs;
     HealtSystem healtSystem;
-    Gun gun;
+    [HideInInspector] public Gun gun;
     Vector2 input;
     Vector2 animMovement;
     Rigidbody rb;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         instance = this;
+        canMove = true;
         inputs = new Controls();
         moveInput = inputs.Player.Move;
         moveInput.Enable();
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(canMove == false)
+            return;
         Vector3 posCameraLimit = ConvertorValue.Clamp(gun.getTargetLook(),new Vector3(-20,0,-20),new Vector3(20,0,20));
         GameManager.instance.mousePositionCamera.position = posCameraLimit;
         GameManager.instance.playerPositionCamera.position = transform.position;

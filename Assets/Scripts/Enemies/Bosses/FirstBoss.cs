@@ -42,6 +42,7 @@ public class FirstBoss : MonoBehaviour
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 15;
         anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
+        enemyMain.SetCurrentHealth(enemyMain.healtSystem.maxHealt);
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         SetStateBoss(FirstBossStates.Idle);
     }

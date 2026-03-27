@@ -234,6 +234,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 211
+--- !u!114 &-6169426365612975081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bosses/FinalBoss/TetoBread
+  m_EditorClassIdentifier: 
+  Path: event:/Bosses/FinalBoss/TetoBread
+  Guid:
+    Data1: 1154184567
+    Data2: 1289829014
+    Data3: 1918666143
+    Data4: 523159548
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 150
+  Length: 503
 --- !u!114 &-5075956533042385867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +438,7 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/SFX.bank
   Name: Desktop/SFX
   StudioPath: bank:/SFX
-  lastModified: 639101417909745933
+  lastModified: 639102448615237752
   FileSizes: []
   Exists: 1
 --- !u!114 &-1222981048802768018
@@ -537,10 +564,10 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.strings.bank
   Name: Desktop/Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639101411201253806
+  lastModified: 639102448612782708
   FileSizes:
   - Name: 
-    Value: 2530
+    Value: 2636
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -595,12 +622,14 @@ MonoBehaviour:
   - {fileID: 1234745419175883189}
   - {fileID: -4959472150148382082}
   - {fileID: 7790638294332626581}
+  - {fileID: 3796956810015244535}
+  - {fileID: -6169426365612975081}
   EditorParameters: []
   MasterBanks:
   - {fileID: 9183022969918313183}
   StringsBanks:
   - {fileID: -95222392929912446}
-  cacheTime: 639101417909745933
+  cacheTime: 639102448615237752
   cacheVersion: 131635
 --- !u!114 &546364448788820973
 MonoBehaviour:
@@ -791,6 +820,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 150
   Length: 1271
+--- !u!114 &3796956810015244535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bosses/FinalBoss/AtackFinalBoss
+  m_EditorClassIdentifier: 
+  Path: event:/Bosses/FinalBoss/AtackFinalBoss
+  Guid:
+    Data1: 194064207
+    Data2: 1108222457
+    Data3: 1751747762
+    Data4: -1832090666
+  Banks:
+  - {fileID: -1657264294786000526}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 667
 --- !u!114 &4860880591275111623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1076,6 +1132,6 @@ MonoBehaviour:
   Path: Assets/FMODBanks/Desktop/Master.bank
   Name: Desktop/Master
   StudioPath: bank:/Master
-  lastModified: 639101411201137580
+  lastModified: 639102448612731936
   FileSizes: []
   Exists: 1

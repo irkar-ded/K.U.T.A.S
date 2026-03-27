@@ -1895,6 +1895,8 @@ MonoBehaviour:
         keyBind: <Keyboard>/escape
       - save: 2
         keyBind: <Keyboard>/r
+      - save: 3
+        keyBind: <Keyboard>/e
   changeKey:
     m_PersistentCalls:
       m_Calls: []

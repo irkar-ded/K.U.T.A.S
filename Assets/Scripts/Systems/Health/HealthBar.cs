@@ -24,7 +24,10 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         if(healthSystem == null)
+        {
+            UIManagerGame.instance.RemoveHealthBar(this);
             return;
+        }
         float healt = (float)ConvertorValue.ConvertValue(healthSystem.healt,healthSystem.maxHealt,1);
         fillBar.fillAmount = healt;
         if(timerToBackHardDamage > 0)

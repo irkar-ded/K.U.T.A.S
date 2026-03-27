@@ -59,7 +59,8 @@ public class SettingsManager : MonoBehaviour
         {
             new keybindSave(Keybinds.Fire,"<Mouse>/leftButton"),
             new keybindSave(Keybinds.Pause,"<Keyboard>/escape"),
-            new keybindSave(Keybinds.Restart,"<Keyboard>/r")
+            new keybindSave(Keybinds.Restart,"<Keyboard>/r"),
+            new keybindSave(Keybinds.Use,"<Keyboard>/r")
         };
     }
     [Serializable]
@@ -100,7 +101,7 @@ public class SettingsManager : MonoBehaviour
         if (File.Exists(pathSave))
         {
             Settings tempVolume = JsonUtility.FromJson<Settings>(File.ReadAllText(pathSave));
-            if (tempVolume == null)
+            if (tempVolume == null || tempVolume != null && tempVolume.gameSettings.keybinds.Length < settings.gameSettings.keybinds.Length)
                 CreateSave();
             else
                 LoadSave();
@@ -142,20 +143,7 @@ public class SettingsManager : MonoBehaviour
     public void PrepareKeybinds()
     {
         for (int i = 0; i < settings.gameSettings.keybinds.Length; i++)
-        {
-            switch (settings.gameSettings.keybinds[i].save)
-            {
-                case Keybinds.Fire:
-                    RebindKey(Keybinds.Fire, settings.gameSettings.keybinds[i].keyBind);
-                    break;
-                case Keybinds.Pause:
-                    RebindKey(Keybinds.Pause, settings.gameSettings.keybinds[i].keyBind);
-                    break;
-                case Keybinds.Restart:
-                    RebindKey(Keybinds.Restart, settings.gameSettings.keybinds[i].keyBind);
-                    break;
-            }
-        }
+            RebindKey(settings.gameSettings.keybinds[i].save, settings.gameSettings.keybinds[i].keyBind);
     }
     public void PrepareNullKeybinding()
     {
@@ -174,6 +162,9 @@ public class SettingsManager : MonoBehaviour
                     case Keybinds.Restart:
                         settings.gameSettings.keybinds[i].keyBind = gameInputs.Player.Restart.bindings[0].path;
                         break;
+                    case Keybinds.Use:
+                        settings.gameSettings.keybinds[i].keyBind = gameInputs.Player.Use.bindings[0].path;
+                        break;
                 }
             }
     }
@@ -187,6 +178,8 @@ public class SettingsManager : MonoBehaviour
                 return gameInputs.Player.Pause;
             case Keybinds.Restart:
                 return gameInputs.Player.Restart;
+            case Keybinds.Use:
+                return gameInputs.Player.Use;
         }
         return null;
     }
@@ -253,13 +246,17 @@ public class SettingsManager : MonoBehaviour
             case Keybinds.Restart:
                 gameInputs.Player.Restart.ApplyBindingOverride(0, path);
                 break;
+            case Keybinds.Use:
+                gameInputs.Player.Use.ApplyBindingOverride(0, path);
+                break;
         }
     }
     public enum Keybinds
     {
         Fire,
         Pause,
-        Restart
+        Restart,
+        Use
     }
     public void saveVsync(bool onVsync)
     {

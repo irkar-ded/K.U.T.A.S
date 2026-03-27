@@ -11,6 +11,7 @@ public class EnemyMove : MonoBehaviour
         enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.15f;
         enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 0.25f;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
+        enemyMain.SetCurrentHealth(enemyMain.healtSystem.maxHealt);
     }
     void Update()
     {

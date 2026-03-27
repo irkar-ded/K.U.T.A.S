@@ -46,6 +46,7 @@ public class SecondBoss : MonoBehaviour
         healtSystem.healt = healtSystem.maxHealt;
         healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
         currentHealthToTeleport = healtSystem.healt;
+        enemyMain.SetCurrentHealth(enemyMain.healtSystem.maxHealt);
         healtSystem.onTakeDamage.AddListener((Vector3) => CheckToTeleport());
         for(int i = 1;i < 5; i++)
             teleportPoints.Add(GameObject.Find($"TeleportSecondBossPoint{i}").transform);

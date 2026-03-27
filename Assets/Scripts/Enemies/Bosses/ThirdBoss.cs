@@ -41,6 +41,7 @@ public class ThirdBoss : MonoBehaviour
         anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.difficulty * 0.01f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.difficulty * 0.25f;
+        enemyMain.SetCurrentHealth(enemyMain.healtSystem.maxHealt);
         startSpeed = enemyMain.speed;
         player = enemyMain.target;
         rbPlayer = player.GetComponent<Rigidbody>();

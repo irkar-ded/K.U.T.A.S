@@ -41,7 +41,7 @@ public class EnemyMain : MonoBehaviour
             target = GameObject.FindWithTag("Player").transform;
         if(TryGetComponent(out healtSystem))
         {
-            currentHealth = healtSystem.healt;
+            SetCurrentHealth(healtSystem.healt);
             healtSystem.onDie.AddListener(() =>
             {
                 if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
@@ -61,7 +61,7 @@ public class EnemyMain : MonoBehaviour
                 if (healtSystem != null)
                 {
                     damage = currentHealth - healtSystem.healt;
-                    currentHealth = healtSystem.healt;
+                    SetCurrentHealth(healtSystem.healt);
                 }
                 if (EZ_PoolManager.Instance != null && damageCounter != null)
                 {
@@ -72,6 +72,7 @@ public class EnemyMain : MonoBehaviour
             });
         }
     }
+    public void SetCurrentHealth(float health) => currentHealth = health;
     void Update()
     {
         if(transform.position.y <= -10)

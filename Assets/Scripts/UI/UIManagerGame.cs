@@ -12,6 +12,8 @@ public class UIManagerGame : MonoBehaviour
     [Header("Health Bar:")]
     [SerializeField] GameObject healthBar;
     [SerializeField] Transform contentSpawnHealthBars;
+    [Header("Interact")]
+    public KeyReplacer textInteract;
     public static UIManagerGame instance;
     // Start is called before the first frame update
     void Awake()=>instance = this; 
@@ -21,5 +23,19 @@ public class UIManagerGame : MonoBehaviour
         tmpBar.SetHealthBar(healtSystem,name);
         return tmpBar;
     }
-    public void RemoveHealthBar(HealthBar healthBar)=>Destroy(healthBar.gameObject);
+    public void SetIntreractText(bool on)
+    {
+        if(textInteract == null)
+            return;
+        textInteract.gameObject.SetActive(on);
+        if(on)
+            textInteract.SetText();
+        else
+            textInteract.text = "Use (#Use#)";
+    }
+    public void RemoveHealthBar(HealthBar healthBar)
+    {
+        if(healthBar != null)
+            Destroy(healthBar.gameObject);
+    }
 }

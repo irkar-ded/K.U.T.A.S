@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] RoomSettings[] rooms;
     [SerializeField] RoomSettings[] bossRooms;
+    [SerializeField] RoomSettings finalBossRoom;
     [SerializeField] RoomSettings debugRoom;
     public UnityEvent onStartLevel;
     [Header("Beetwen Game Content")]
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI textCountdown;
     [SerializeField] TextMeshProUGUI textTimer;
     [SerializeField] TextMeshProUGUI textStages;
-    [SerializeField] Animator blackLines;
+    public Animator blackLines;
     [SerializeField] GameObject bossOrbitalCamera;
     [SerializeField] TextMeshProUGUI bossText;
     [SerializeField] CanvasGroup resultsPanel;
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour
     int currentChoosenCell;
     float timer;
     Room currentRoom;
-    GameObject currentPlayer;
+    [HideInInspector]public GameObject currentPlayer;
     Controls gameInputs;
     InputAction pauseKey;
     [HideInInspector]public bool endGameState;
@@ -226,6 +227,7 @@ public class GameManager : MonoBehaviour
             rooms[i].room.gameObject.SetActive(false);
         for(int i = 0;i < bossRooms.Length;i++)
             bossRooms[i].room.gameObject.SetActive(false);
+        finalBossRoom.room.gameObject.SetActive(false);
     }
     public void SetupRoom()
     {
@@ -236,6 +238,7 @@ public class GameManager : MonoBehaviour
         }
         else if (isBossFight)
         {
+            textTimer.gameObject.SetActive(false);
             if(currentBossRoomPool.Count <= 0)
             {
                 SetupBossRoomPool();
@@ -245,7 +248,8 @@ public class GameManager : MonoBehaviour
             lastBossRoom = roomSettings;
             currentRoom = roomSettings.room;
             currentBossRoomPool.Remove(roomSettings);
-            textTimer.gameObject.SetActive(false);
+            if(stage == 10)
+                currentRoom = finalBossRoom.room;
         }
         else
         {
