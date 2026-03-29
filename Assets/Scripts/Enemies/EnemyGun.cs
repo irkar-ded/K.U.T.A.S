@@ -27,7 +27,7 @@ public class EnemyGun : MonoBehaviour
         enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.25f;
         gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.difficulty * 0.02f;
         gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.difficulty * 0.25f;
-        reactionTime = reactionTime - GameManager.instance.difficulty * 0.015f;
+        reactionTime = reactionTime - GameManager.instance.difficulty * 0.01f;
         enemyMain.healtSystem.onDie.AddListener(Die);
         anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
     }
