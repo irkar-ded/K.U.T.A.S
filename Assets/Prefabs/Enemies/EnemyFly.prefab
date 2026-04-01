@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 378559328434964046}
   - component: {fileID: 2854638742711336140}
   - component: {fileID: 5795997621851127914}
+  - component: {fileID: 6528479905313780420}
   m_Layer: 6
   m_Name: EnemyFly
   m_TagString: Enemy
@@ -166,18 +167,6 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4685218133913599365}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2407408973506052549}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
@@ -360,6 +349,37 @@ MonoBehaviour:
         m_CallState: 2
   invokeStart: 0
   timerToInvokeStart: 0
+--- !u!114 &6528479905313780420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931592085619463908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1251742781
+      Data2: 1134871999
+      Data3: -1911532917
+      Data4: 270584030
+    Path: event:/Feel/Woosh
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 150
 --- !u!1 &4548383850564937970
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +421,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1222596755555171283}
-  - component: {fileID: 4685218133913599365}
-  - component: {fileID: 3750914352489012267}
   m_Layer: 0
   m_Name: Wings
   m_TagString: Untagged
@@ -427,58 +445,6 @@ Transform:
   - {fileID: 2096705299297901092}
   m_Father: {fileID: 4644543775324448818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4685218133913599365
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838603198687971450}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7d869a7b7d5fa04c4a4d7d6b4fbea61d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3750914352489012267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5838603198687971450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1251742781
-      Data2: 1134871999
-      Data3: -1911532917
-      Data4: 270584030
-    Path: event:/Feel/Woosh
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 150
 --- !u!1001 &824405664658313893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77a2df1de3a3b6aa98910cee85288fb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 77a2df1de3a3b6aa98910cee85288fb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -669,7 +635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 77a2df1de3a3b6aa98910cee85288fb0, type: 3}
       propertyPath: m_Name
-      value: Eyeball
+      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
