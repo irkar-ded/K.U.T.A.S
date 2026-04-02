@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5422170502972535432, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
       propertyPath: m_Name
-      value: Bomb
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5782506644687082333, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
       propertyPath: m_Materials.Array.size
@@ -149,11 +149,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -2165861217506266586}
   m_SourcePrefab: {fileID: 100100000, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
---- !u!95 &4373855342931839080 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4685218133913599365, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
-  m_PrefabInstance: {fileID: 9058484134112327149}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6131976533880283913 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2931592085619463908, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
@@ -178,7 +173,7 @@ MonoBehaviour:
   onExplosion:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4373855342931839080}
+      - m_Target: {fileID: 6497433795227453729}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -202,6 +197,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!95 &6497433795227453729 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2854638742711336140, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}
+  m_PrefabInstance: {fileID: 9058484134112327149}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7011529331186957797 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2088482292109903880, guid: c720ad5638b5f10738d2f58655cdabdf, type: 3}

@@ -49,6 +49,7 @@ public class TextButtons : MonoBehaviour , IPointerEnterHandler,IPointerClickHan
             text.color = Color.white;
     }
 }
+#if UNITY_EDITOR
 [CustomEditor(typeof(TextButtons))]
 public class TextButtonsEditor : Editor
 {
@@ -74,3 +75,4 @@ public class TextButtonsEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

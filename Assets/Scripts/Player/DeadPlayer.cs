@@ -26,6 +26,7 @@ public class DeadPlayer : MonoBehaviour
     {
         Destroy(gun);
         Destroy(this);
+        //ShakeManager.instance.Shake(ShakeManager.ShakeType.Kill);
         anim.SetInteger("DeathAnimation",Random.value < 0.5f ? 1 : 0);
         anim.SetTrigger("Death");
     }

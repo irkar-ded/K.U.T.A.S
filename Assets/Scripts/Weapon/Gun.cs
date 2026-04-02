@@ -74,6 +74,8 @@ public class Gun : MonoBehaviour
     {
         if(timerKd > 0)
             return;
+        /*if(ownerGun == OwnerGun.Player)
+            ShakeManager.instance.Shake(ShakeManager.ShakeType.Fire);*/
         if(gunAnim != null)
             gunAnim.SetTrigger("Shoot");
         RuntimeManager.PlayOneShot(soundShoot,transform.position);

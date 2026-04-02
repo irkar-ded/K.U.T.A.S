@@ -46,6 +46,7 @@ public class EnemyMain : MonoBehaviour
             {
                 if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
                     EZ_PoolManager.Spawn(explosion.transform,transform.position,Quaternion.identity);
+                //ShakeManager.instance.Shake(ShakeManager.ShakeType.Kill);
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);
                 if(typeMovement == TypeMovement.Fly)
@@ -108,11 +109,15 @@ public class EnemyMain : MonoBehaviour
         switch (typeMovement)
         {
             case TypeMovement.MoveDodge:
+                if(agent == null)
+                    return;
                 if(refreshPathCoroutine == null)
                     refreshPathCoroutine = StartCoroutine(PathOffset());
                 agent.destination = (avoidDirection != Vector3.zero ? avoidDirection  :  target.position) + offsetMove;
             break;
             case TypeMovement.Move:
+                if(agent == null)
+                    return;
                 agent.destination = target.position;
             break;
             case TypeMovement.Fly:
@@ -141,6 +146,8 @@ public class EnemyMain : MonoBehaviour
                 rb.AddForce((customTarget - transform.position).normalized * Time.deltaTime * 1000 * speed,ForceMode.Acceleration);
             break;
             default:
+                if(agent == null)
+                    return;
                 agent.destination = customTarget;
             break;
         }

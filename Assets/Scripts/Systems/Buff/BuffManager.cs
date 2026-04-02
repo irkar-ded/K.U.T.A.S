@@ -101,8 +101,8 @@ public class BuffManager : MonoBehaviour
         List<UIStackItemHolder> UIStackItemHolders = new List<UIStackItemHolder>();
         for(int j = 0;j < itemsBuff.Count; j++)
         {
-            if(UIStackItemHolders.Exists(x=>x.buff == itemsBuff[j]))
-                UIStackItemHolders.Find(x=>x.buff == itemsBuff[j]).count++;
+            if(UIStackItemHolders.Exists(x=>x.buff.name == itemsBuff[j].name))
+                UIStackItemHolders.Find(x=>x.buff.name == itemsBuff[j].name).count++;
             else
                 UIStackItemHolders.Add(new UIStackItemHolder(itemsBuff[j]));
         }
