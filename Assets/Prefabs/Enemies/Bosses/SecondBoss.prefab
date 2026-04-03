@@ -733,6 +733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 1
   outlineColor: {r: 0.36862746, g: 0.75686276, b: 1, a: 1}
+  outlineSelected: {r: 1, g: 0.32941177, b: 0.4392157, a: 1}
   outlineWidth: 5
   ignoreRenders:
   - {fileID: 2862145712157492677}

@@ -15,6 +15,6 @@ MonoBehaviour:
   iconItem: {fileID: 21300000, guid: efcdcb035e1323e638a275a52eeeebf6, type: 3}
   nameItem: Fat
   description: 
-  costItem: 200
+  costItem: 325
   maxCountItemsBuyed: -1
   buff: {fileID: 1401263574237597199, guid: e733d3451b3a0ab35958c7d64c40c906, type: 3}

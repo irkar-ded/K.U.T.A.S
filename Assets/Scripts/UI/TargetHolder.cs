@@ -18,7 +18,7 @@ public class TargetHolder : MonoBehaviour
     [SerializeField] GameObject holderPrefab;
 
     public static TargetHolder instance;
-    float borderSize = 50;
+    [SerializeField]float borderSize = 50;
     List<Pointer> pointers = new List<Pointer>();
     void Awake()=>instance = this;
     // Update is called once per frame

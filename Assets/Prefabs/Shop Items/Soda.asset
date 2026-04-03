@@ -15,6 +15,6 @@ MonoBehaviour:
   iconItem: {fileID: 21300000, guid: 4345d1b4e22d84a47bcdf09be05fd4e5, type: 3}
   nameItem: Soda
   description: 
-  costItem: 225
+  costItem: 400
   maxCountItemsBuyed: -1
   buff: {fileID: 1401263574237597199, guid: a64b13584719d190fa82ff9cc3fa50b1, type: 3}

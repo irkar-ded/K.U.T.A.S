@@ -71,11 +71,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public GameObject currentPlayer;
     Controls gameInputs;
     InputAction pauseKey;
+    CinemachineTargetGroup targetGroup;
+    Transform currentBoss;
+    [SerializeField]float currentHealthPlayer;
     [HideInInspector]public bool endGameState;
     // Start is called before the first frame update
     void Awake()=>instance = this;
     void Start()
     {
+        targetGroup = FindObjectOfType<CinemachineTargetGroup>();
         TicTacToeManager.instance.onChooseCell.AddListener(StartLevel);
         UpdateTextStage();
         ComboManager.instance.SetupCombo();
@@ -84,6 +88,7 @@ public class GameManager : MonoBehaviour
             gameInputs = SettingsManager.gameInputs;
         else
             gameInputs = new Controls();
+        currentHealthPlayer = GetStartCurrentMaxHealth();
         pauseKey = gameInputs.Player.Pause;
         pauseKey.Enable();
     }
@@ -95,9 +100,11 @@ public class GameManager : MonoBehaviour
     }
     void SetupBossRoomPool() => currentBossRoomPool = new List<RoomSettings>(bossRooms);
     void SetupRoomPool() => currentRoomPool = new List<RoomSettings>(rooms);
+    float GetStartCurrentMaxHealth() => 3 + BuffManager.instance.passiveBuff.maxHealth;
     public void NextStage()
     {
         stage++;
+        currentHealthPlayer = GetStartCurrentMaxHealth();
         UpdateTextStage();
         ComboManager.instance.SetupCombo();
         buttonNext.SetActive(false);
@@ -286,6 +293,11 @@ public class GameManager : MonoBehaviour
         }
         currentRoom.gameObject.SetActive(true);
         currentRoom.PrepareRoom();
+        if (isBossFight)
+        {
+            currentBoss = FindObjectOfType<EnemyMain>().transform;
+            targetGroup.AddMember(currentBoss,1f,0);
+        }
     }
     public void ClearMap()
     {
@@ -314,8 +326,8 @@ public class GameManager : MonoBehaviour
         gunPlayer.parametersBullet.bounceBullet = BuffManager.instance.passiveBuff.bounceBullet;
         gunPlayer.parametersBullet.xRayBullet = BuffManager.instance.passiveBuff.xRayBullet;
         gunPlayer.parametersBullet.toxicBullet = BuffManager.instance.passiveBuff.toxicBullet;
-        playerHealth.maxHealt = 1 + BuffManager.instance.passiveBuff.maxHealth;
-        playerHealth.healt = playerHealth.maxHealt;
+        playerHealth.maxHealt = GetStartCurrentMaxHealth();
+        playerHealth.healt = Mathf.Clamp(currentHealthPlayer,1,GetStartCurrentMaxHealth());
         tmpPlayer.speed = player.speed + BuffManager.instance.passiveBuff.bonusSpeed;
         HealthCells.instance.SetupHealthCells(playerHealth);
     }
@@ -343,6 +355,12 @@ public class GameManager : MonoBehaviour
             RuntimeManager.PlayOneShot(soundVHSDeath);
         }
         currentPlayer.GetComponent<DeadPlayer>().MakeAlwaysInvincible();
+        currentHealthPlayer = currentPlayer.GetComponent<HealtSystem>().healt;
+        if (isBossFight)
+        {
+            targetGroup.RemoveMember(currentBoss);
+            currentBoss = null;
+        }
         StartCoroutine(waitToEndLevel(winner));
     }
     IEnumerator waitToEndLevel(TicTacToeManager.Winner winner)

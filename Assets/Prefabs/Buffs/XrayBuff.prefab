@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741078700603623975, guid: f00ce97f0c8d0e50eaa963393b6e4859, type: 3}
       propertyPath: passiveBuff.xRayBullet
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

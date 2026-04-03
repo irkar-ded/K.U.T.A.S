@@ -58,6 +58,9 @@ public class Outline : MonoBehaviour {
 
   [SerializeField]
   private Color outlineColor = Color.white;
+  Color outlineDefualt;
+  [SerializeField]
+  Color outlineSelected = Color.white;
 
   [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 2f;
@@ -82,7 +85,7 @@ public class Outline : MonoBehaviour {
   private bool needsUpdate;
 
   void Awake() {
-
+    outlineDefualt = outlineColor;
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>().ToList();
     for(int i = 0; i < ignoreRenders.Length;i++)
@@ -112,6 +115,14 @@ public class Outline : MonoBehaviour {
 
       renderer.materials = materials.ToArray();
     }
+  }
+  public void TurnDefualtOutlineColor()
+  {
+    OutlineColor = outlineDefualt;
+  }
+  public void TurnSelectedOutlineColor()
+  {
+    OutlineColor = outlineSelected;
   }
 
   void OnValidate() {

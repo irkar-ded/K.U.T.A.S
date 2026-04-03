@@ -49,7 +49,7 @@ public class DeadPlayer : MonoBehaviour
     IEnumerator Invincible()
     {
         healtSystem.isInvincible = true;
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 5; i++)
         {
             for(int j = 0; j < model.Length;j++)
                 model[j].materials[0].SetColor("_Color",i % 2 == 1 ? colorPlayer : Color.yellow);

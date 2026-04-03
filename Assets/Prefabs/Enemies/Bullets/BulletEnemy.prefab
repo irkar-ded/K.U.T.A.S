@@ -24,6 +24,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 79cdaef5a0b5e17a9ba7f5fa88385efb, type: 2}
+    - target: {fileID: 1999386699163409364, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999386699163409364, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999386699163409364, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999386699163409364, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.32941177
+      objectReference: {fileID: 0}
     - target: {fileID: 2336081914310247968, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -32,6 +48,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 79cdaef5a0b5e17a9ba7f5fa88385efb, type: 2}
+    - target: {fileID: 4799794486176650560, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: outlineColor.b
+      value: 0.4392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4799794486176650560, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
+      propertyPath: outlineColor.g
+      value: 0.32941177
+      objectReference: {fileID: 0}
     - target: {fileID: 6444155367853862894, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Radius
       value: 0.25
@@ -42,15 +66,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7704451624214823731, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Name
-      value: TestBulletEnemy
+      value: BulletEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8825502528713103099, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Color.b
-      value: 0.16374302
+      value: 0.4392157
       objectReference: {fileID: 0}
     - target: {fileID: 8825502528713103099, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.32941177
       objectReference: {fileID: 0}
     - target: {fileID: 8825502528713103099, guid: 2e4a0e92be3f6923d93fe4056c35be10, type: 3}
       propertyPath: m_Color.r

@@ -657,6 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 3
   outlineColor: {r: 1, g: 0.8509804, b: 0.68235296, a: 1}
+  outlineSelected: {r: 1, g: 0.32941177, b: 0.4392157, a: 1}
   outlineWidth: 5
   ignoreRenders: []
   precomputeOutline: 0

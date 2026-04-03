@@ -20,7 +20,7 @@ public class HealthCells : MonoBehaviour
             GameObject healthCellFill = Instantiate(healthCellPrefab,healthCellsContent).transform.Find("HealthFill").gameObject;
             healthCellsFill.Add(healthCellFill);
         }
-        for(int i = 0; i < currentHealtSystem.maxHealt;i++)
+        for(int i = 0; i < currentHealtSystem.healt;i++)
             healthCellsFill[i].SetActive(true);
     }
     public void OnTakeDamage()

@@ -49,6 +49,7 @@ public class SettingsManager : MonoBehaviour
         public int idGraphicsQuality = -1;
         public int pixelScale = 1;
         public bool vsync = false;
+        public bool postProccesing = true;
         public bool fullScreen = true;
         public bool seeFrameRate = false;
     }
@@ -257,6 +258,11 @@ public class SettingsManager : MonoBehaviour
         Pause,
         Restart,
         Use
+    }
+    public void savePostProccesing(bool onPostProccesing)
+    {
+        settings.videoSettings.postProccesing = onPostProccesing;
+        Save();
     }
     public void saveVsync(bool onVsync)
     {

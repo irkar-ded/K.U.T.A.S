@@ -45,6 +45,8 @@ public class Bullet : MonoBehaviour
     int canBounceWall;
     Color startColor;
     ParametersBullet currentParameter;
+    TrailRenderer trailRenderer;
+    Outline outline;
     MeshRenderer model;
     Rigidbody rb;
     DamageOnCollision damage;
@@ -52,6 +54,8 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         model = GetComponentInChildren<MeshRenderer>();
+        outline = GetComponent<Outline>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
         startColor = model.material.color;
         damage = GetComponentInChildren<DamageOnCollision>();
         damage.OnTakeDamage.AddListener(OnTakeDamage);
@@ -112,11 +116,14 @@ public class Bullet : MonoBehaviour
         if(teleportBulletSetup.savePosition.y > 0)
             posToTeleport.z = transform.position.z;
         transform.position = posToTeleport;
+        trailRenderer.Clear();
     }
     void OnTakeDamage()
     {
         if(currentParameter.toxicBullet > 0)
             damage.lastDamagedTarget.DamagePoison(currentParameter.toxicBullet,currentParameter.damage / 5);
+        if(damage.owner == Player.instance.gameObject)
+            Hitmark.instance.PlayHitmarkAnim(true);
         gameObject.SetActive(false);
     }
     void OnDrawGizmosSelected()
@@ -150,5 +157,7 @@ public class Bullet : MonoBehaviour
         if(currentParameter.bounceBullet > 0)
             finalColor *= bounceColor;
         model.material.SetColor("_Color",finalColor);
+        trailRenderer.startColor = finalColor;
+        outline.OutlineColor = finalColor;
     }
 }

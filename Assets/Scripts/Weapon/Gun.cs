@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     [Header("Values:")]
     public OwnerGun ownerGun;
     public LayerMask surfaceToLook;
+    public LayerMask mouseToLook;
     [Header("Bullet:")]
     public GameObject bullet;
     public Transform bulletSpawnPosition;
@@ -26,11 +27,12 @@ public class Gun : MonoBehaviour
     public Animator gunAnim;
     public float recoil = 0;
     public float kdBeetwenShoots = 0.1f;
+    public static Gun instance;
     Controls gameInputs;
     InputAction shootKey;
     float timerKd;
     Transform player;
-    void Start()
+    void Awake()
     {
         if(ownerGun == OwnerGun.Enemy)
         {
@@ -39,6 +41,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
+            instance = this;
             if (SettingsManager.instance != null)
                 gameInputs = SettingsManager.gameInputs;
             else
@@ -74,8 +77,11 @@ public class Gun : MonoBehaviour
     {
         if(timerKd > 0)
             return;
-        /*if(ownerGun == OwnerGun.Player)
-            ShakeManager.instance.Shake(ShakeManager.ShakeType.Fire);*/
+        if(ownerGun == OwnerGun.Player)
+        {
+            Hitmark.instance.PlayHitmarkAnim(false);
+            //ShakeManager.instance.Shake(ShakeManager.ShakeType.Fire);
+        }
         if(gunAnim != null)
             gunAnim.SetTrigger("Shoot");
         RuntimeManager.PlayOneShot(soundShoot,transform.position);
@@ -83,7 +89,7 @@ public class Gun : MonoBehaviour
         timerKd = kdBeetwenShoots;
         //Debug.LogError("LOL");
     }
-    public Vector3 getTargetLook() => ownerGun == OwnerGun.Player ? MouseHit() : player.position;
+    public Vector3 getTargetLook() => ownerGun == OwnerGun.Player ? MouseHitWhithLayer() : player.position;
     public void SpawnBullet()=>EZ_PoolManager.Spawn(bullet.transform, bulletSpawnPosition.position + bulletSpawnPosition.right * Random.Range(-recoil,recoil), bulletSpawnPosition.rotation).GetComponent<Bullet>().SetBullet(parametersBullet); 
     public Quaternion LookRotate()
     {
@@ -95,13 +101,21 @@ public class Gun : MonoBehaviour
     public Vector3 MouseHit()
     {
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.value);
         if(Physics.Raycast(ray, out hit,Mathf.Infinity, surfaceToLook))
-            return hit.point;
+            return new Vector3(hit.point.x,transform.position.y,hit.point.z);
+        return Vector3.zero;
+    }
+    public Vector3 MouseHitWhithLayer()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.value);
+        if(Physics.Raycast(ray, out hit,Mathf.Infinity, mouseToLook))
+            return new Vector3(hit.point.x,transform.position.y,hit.point.z);
         return Vector3.zero;
     }
 }
-/*[CustomEditor(typeof(Gun))]
+[CustomEditor(typeof(Gun))]
 public class GunEditor : Editor
 {
     SerializedProperty m_ownerGun;
@@ -109,7 +123,12 @@ public class GunEditor : Editor
     SerializedProperty m_bullet;
     SerializedProperty m_surfaceToLook;
     SerializedProperty m_kdBeetwenShoots;
-    SerializedProperty m_reactionTime;
+    SerializedProperty m_mouseToLook;
+    SerializedProperty m_bulletSpawnPosition;
+    SerializedProperty m_soundShoot;
+    SerializedProperty m_mainGun;
+    SerializedProperty m_gunAnim;
+    SerializedProperty m_recoil;
     void OnEnable()
     {
         m_ownerGun = serializedObject.FindProperty("ownerGun");
@@ -117,7 +136,12 @@ public class GunEditor : Editor
         m_parametersBullet = serializedObject.FindProperty("parametersBullet");
         m_bullet = serializedObject.FindProperty("bullet");
         m_kdBeetwenShoots = serializedObject.FindProperty("kdBeetwenShoots");
-        m_reactionTime = serializedObject.FindProperty("reactionTime");
+        m_mouseToLook = serializedObject.FindProperty("mouseToLook");
+        m_bulletSpawnPosition = serializedObject.FindProperty("bulletSpawnPosition");
+        m_soundShoot = serializedObject.FindProperty("soundShoot");
+        m_mainGun = serializedObject.FindProperty("mainGun");
+        m_gunAnim = serializedObject.FindProperty("gunAnim");
+        m_recoil = serializedObject.FindProperty("recoil");
     }
     public override void OnInspectorGUI()
     {
@@ -126,11 +150,18 @@ public class GunEditor : Editor
         GUILayout.Label("Values:");
         EditorGUILayout.PropertyField(m_ownerGun, new GUIContent("Owner Gun"));
         EditorGUILayout.PropertyField(m_surfaceToLook,new GUIContent("Surface To Look"));
+        if(gun.ownerGun == Gun.OwnerGun.Player)
+            EditorGUILayout.PropertyField(m_mouseToLook,new GUIContent("Mouse To Look"));
         GUILayout.Label("Bullet:");
         EditorGUILayout.PropertyField(m_bullet,new GUIContent("Bullet Prefab"));
+        EditorGUILayout.PropertyField(m_bulletSpawnPosition,new GUIContent("Bullet Spawn Position"));
         EditorGUILayout.PropertyField(m_parametersBullet,new GUIContent("Bullet Parameters"));
         GUILayout.Label("Gun:");
+        EditorGUILayout.PropertyField(m_soundShoot,new GUIContent("Sound Shoot"));
+        EditorGUILayout.PropertyField(m_mainGun,new GUIContent("Main Gun"));
+        EditorGUILayout.PropertyField(m_gunAnim,new GUIContent("Gun Anim"));
         EditorGUILayout.PropertyField(m_kdBeetwenShoots,new GUIContent("Kd Beetwen Shoots"));
+        EditorGUILayout.PropertyField(m_recoil,new GUIContent("Recoil"));
         serializedObject.ApplyModifiedProperties();
     }
-}*/
+}

@@ -9,8 +9,18 @@ public class DamageFlash : MonoBehaviour
     [SerializeField] Color toxicDamage = Color.green;
     HealtSystem healtSystem;
     [SerializeField] Renderer[] model;
-    void Start()
+    [SerializeField]List<Material> materials = new List<Material>();
+    void Awake()
     {
+        for(int i = 0; i < model.Length; i++)
+        {
+            for(int j = 0; j < idMaterialDamage.Count; j++)
+            {
+                Material material = new Material(model[i].materials[idMaterialDamage[j]]);
+                model[i].materials[j] = material;
+                materials.Add(model[i].materials[j]);
+            }
+        }
         healtSystem = GetComponent<HealtSystem>();
         healtSystem.onTakeDamage.AddListener((Vector3) => OnTakeDamage());
         healtSystem.onDie.AddListener(() => Destroy(healtSystem));
@@ -29,20 +39,14 @@ public class DamageFlash : MonoBehaviour
         }
         for(int i = 0; i < 5; i++)
         {
-            for(int j = 0; j < model.Length; j++)
-            {
-                for(int n = 0; n < idMaterialDamage.Count; n++)
-                    model[j].materials[n].SetFloat("_FlashAmount", i % 2);
-            }
+            for(int j = 0; j < materials.Count; j++)
+                materials[j].SetFloat("_FlashAmount", i % 2);
             yield return new WaitForSeconds(0.1f);
         }
     }
     void SetColorDamage(Color damageColor)
     {
-        for(int i = 0; i < model.Length; i++)
-        {
-            for(int j = 0; j < idMaterialDamage.Count; j++)
-                model[i].materials[j].SetColor("_ColorFlash",damageColor);
-        }
+        for(int j = 0; j < materials.Count; j++)
+            materials[j].SetColor("_ColorFlash",damageColor);
     }
 }

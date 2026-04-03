@@ -4958,9 +4958,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTag: 0
-  stayCollision: 1
   owner: {fileID: 0}
-  damage: 2
+  damage: 1
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []

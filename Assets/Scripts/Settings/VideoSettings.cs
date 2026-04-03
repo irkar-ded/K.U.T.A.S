@@ -8,14 +8,17 @@ public class VideoSettings : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] Toggle fullscreenToggle;
+    [SerializeField] Toggle postProccesingToggle;
     [SerializeField] Toggle showFPSToggle;
     [SerializeField] Toggle vsyncToggle;
     [SerializeField] TMP_Dropdown resolutionDropdown;
     [SerializeField] TMP_Dropdown qualityDropdown;
     Resolution[] resolutions;
     [SerializeField] Slider sliderPixelScale;
+    GameObject postProccesing;
     public void PrepareSettings()
     {
+        postProccesing = GameObject.Find("PostProccesing");
         PrepareResolution();
         PrepareQuality();
         LoadSettings();
@@ -49,6 +52,11 @@ public class VideoSettings : MonoBehaviour
     {
         SettingsManager.instance.saveVsync(onVsync);
         QualitySettings.vSyncCount = onVsync ? -1 : 1;
+    }
+    public void SetPostProccesing(bool onPostProccesing)
+    {
+        SettingsManager.instance.savePostProccesing(onPostProccesing);
+        postProccesing.SetActive(onPostProccesing);
     }
     public void SetShowFPS(bool onShowFPS)=>SettingsManager.instance.saveSeeFrameRate(onShowFPS);
     public void SetFullscreen(bool isFullscreen)
@@ -102,6 +110,11 @@ public class VideoSettings : MonoBehaviour
     {
         vsyncToggle.isOn = SettingsManager.instance.settings.videoSettings.vsync;
         SetVsync(vsyncToggle.isOn);
+    }
+    public void LoadPostProccesing()
+    {
+        postProccesingToggle.isOn = SettingsManager.instance.settings.videoSettings.postProccesing;
+        SetPostProccesing(postProccesingToggle.isOn);
     }    
     public void LoadShowFPS()
     {
@@ -110,6 +123,7 @@ public class VideoSettings : MonoBehaviour
     }
     public void LoadSettings()
     {
+        LoadPostProccesing();
         LoadResolution();
         LoadQuality();
         LoadFullscreen();

@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [HideInInspector]public Controls inputs;
     HealtSystem healtSystem;
     [HideInInspector] public Gun gun;
+    Vector3 posCameraLimit = Vector3.zero;
     Vector2 input;
     Vector2 animMovement;
     Rigidbody rb;
@@ -38,7 +39,8 @@ public class Player : MonoBehaviour
     {
         if(canMove == false)
             return;
-        Vector3 posCameraLimit = ConvertorValue.Clamp(gun.getTargetLook(),new Vector3(-20,0,-20),new Vector3(20,0,20));
+        if(gun != null)
+            posCameraLimit = ConvertorValue.Clamp(gun.getTargetLook(),new Vector3(-20,0,-20),new Vector3(20,0,20));
         GameManager.instance.mousePositionCamera.position = posCameraLimit;
         GameManager.instance.playerPositionCamera.position = transform.position;
         if(Pause.isPaused || GameManager.instance.gameIsStarted == false || healtSystem.healt <= 0)
