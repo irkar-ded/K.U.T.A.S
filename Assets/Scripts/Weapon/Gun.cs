@@ -115,6 +115,7 @@ public class Gun : MonoBehaviour
         return Vector3.zero;
     }
 }
+#if UNITY_EDITOR
 [CustomEditor(typeof(Gun))]
 public class GunEditor : Editor
 {
@@ -164,4 +165,5 @@ public class GunEditor : Editor
         EditorGUILayout.PropertyField(m_recoil,new GUIContent("Recoil"));
         serializedObject.ApplyModifiedProperties();
     }
+#endif
 }
