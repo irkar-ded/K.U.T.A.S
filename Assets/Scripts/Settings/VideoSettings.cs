@@ -51,7 +51,7 @@ public class VideoSettings : MonoBehaviour
     public void SetVsync(bool onVsync)
     {
         SettingsManager.instance.saveVsync(onVsync);
-        QualitySettings.vSyncCount = onVsync ? -1 : 1;
+        QualitySettings.vSyncCount = onVsync ? 1 : -1;
     }
     public void SetPostProccesing(bool onPostProccesing)
     {

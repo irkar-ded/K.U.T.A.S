@@ -57,6 +57,7 @@ public class LoadingScreen : MonoBehaviour
         Pause.canPause = false;
         panelLoading.SetActive(true);
         canvasGroup.alpha = 0;
+        sliderLoading.value = 0;
         SetProggresText(0);
         while(canvasGroup.alpha < 1)
         {
@@ -72,6 +73,7 @@ public class LoadingScreen : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSecondsRealtime(0.3f);
+        sliderLoading.value = 1;
         SetProggresText(1);
         isLoading = false;
         Time.timeScale = 1;

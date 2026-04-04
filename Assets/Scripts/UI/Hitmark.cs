@@ -7,12 +7,11 @@ using UnityEngine.UI;
 
 public class Hitmark : MonoBehaviour
 {
-    [SerializeField] EventReference soundHitmark;
     [SerializeField] Image[] damageMarkLines;
     [HideInInspector]public bool isOn = true;
     public static Hitmark instance;
     CanvasGroup canvasGroup;
-    Image img;
+    //Image img;
     Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,7 @@ public class Hitmark : MonoBehaviour
         isOn = true;
         canvasGroup = GetComponent<CanvasGroup>();
         anim = GetComponent<Animator>();
-        img = GetComponent<Image>();
+        //img = GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -53,20 +52,10 @@ public class Hitmark : MonoBehaviour
     void OnEnable()=>Cursor.visible = false;
     void OnDisable()=>Cursor.visible = true;
     //public void PlayHitmarkAnim(bool damage) => anim.SetTrigger(damage ? "Shoot" : "Damage");
-    public void PlayHitmarkAnim(bool damage)
-    {
-        if (damage)
-        {
-            anim.SetTrigger("Damage");
-            PlaySoundHitmark();
-        }
-        else
-            anim.SetTrigger("Shoot");
-    }
+    public void PlayHitmarkAnim(bool damage)=>anim.SetTrigger(damage ? "Damage" : "Shoot");
     public void SetHitmarkColor(Color color)
     {
         for(int i = 0; i < damageMarkLines.Length;i++)
             damageMarkLines[i].color = color;
     }
-    public void PlaySoundHitmark() => RuntimeManager.PlayOneShot(soundHitmark, transform.position);
 }
