@@ -21,7 +21,7 @@ public class FinalBoss : MonoBehaviour
     {
         enemyMain = GetComponent<EnemyMain>();
         interactable = GetComponent<Interactable>();
-        credits = FindObjectOfType<Credits>().gameObject;
+        credits = GameObject.Find("TextCredits");
         credits.SetActive(false);
         Bullet.ParametersBullet parametersPlayer = GameManager.instance.currentPlayer.GetComponentInChildren<Gun>().parametersBullet;
         parametersBullet.owner = gameObject;

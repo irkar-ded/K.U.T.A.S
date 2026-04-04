@@ -5,15 +5,12 @@ using UnityEngine;
 public class Credits : MonoBehaviour
 {
     [SerializeField] Vector3 endPos;
-    float timer;
-    Vector3 startPos;
-    // Start is called before the first frame update
-    void Start()=>startPos = transform.position;
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime * 0.035f;
-        transform.position = Vector3.Lerp(startPos,endPos,timer);
+        transform.Translate(Vector3.up * Time.deltaTime * 3);
+        if(Vector3.Distance(transform.position,endPos) <= 0.1f)
+            Destroy(this);
     }
 }

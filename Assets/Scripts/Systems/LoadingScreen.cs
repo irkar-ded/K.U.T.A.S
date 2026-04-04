@@ -14,6 +14,8 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] EventReference closeSoundLoading;
     [HideInInspector] public bool isLoading;
     [SerializeField] GameObject panelLoading;
+    TextMeshProUGUI[] textsLoading;
+    Slider sliderLoading;
     Coroutine fadeScreenCoroutine;
     CanvasGroup canvasGroup;
     private void Awake()
@@ -25,6 +27,8 @@ public class LoadingScreen : MonoBehaviour
         }
         else
             Destroy(gameObject);
+        textsLoading = GetComponentsInChildren<TextMeshProUGUI>(true);
+        sliderLoading = GetComponentInChildren<Slider>(true);
         canvasGroup = GetComponent<CanvasGroup>();
         Application.targetFrameRate = -1;
         FadeOut();
@@ -53,6 +57,7 @@ public class LoadingScreen : MonoBehaviour
         Pause.canPause = false;
         panelLoading.SetActive(true);
         canvasGroup.alpha = 0;
+        SetProggresText(0);
         while(canvasGroup.alpha < 1)
         {
             canvasGroup.alpha += Time.unscaledDeltaTime;
@@ -61,12 +66,22 @@ public class LoadingScreen : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.3f);
         loadingOperation = SceneManager.LoadSceneAsync(sceneName);
         while (!loadingOperation.isDone)
+        {
+            sliderLoading.value = loadingOperation.progress;
+            SetProggresText(loadingOperation.progress);
             yield return null;
+        }
         yield return new WaitForSecondsRealtime(0.3f);
+        SetProggresText(1);
         isLoading = false;
         Time.timeScale = 1;
         Pause.canPause = true;
         FadeOut();
+    }
+    void SetProggresText(float value)
+    {
+        for(int i = 0;i < textsLoading.Length;i++)
+            textsLoading[i].text = $"{(value * 100).ToString("F2")}%";
     }
     IEnumerator fadeScreen(bool fadeIn)
     {
