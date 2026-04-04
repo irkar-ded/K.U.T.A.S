@@ -165,5 +165,5 @@ public class GunEditor : Editor
         EditorGUILayout.PropertyField(m_recoil,new GUIContent("Recoil"));
         serializedObject.ApplyModifiedProperties();
     }
-#endif
 }
+#endif
