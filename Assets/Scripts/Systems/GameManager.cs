@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     InputAction pauseKey;
     CinemachineTargetGroup targetGroup;
     Transform currentBoss;
-    [SerializeField]float currentHealthPlayer;
+    float currentHealthPlayer;
     [HideInInspector]public bool endGameState;
     // Start is called before the first frame update
     void Awake()=>instance = this;

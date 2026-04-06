@@ -121,10 +121,12 @@ public class Bullet : MonoBehaviour
     void OnTakeDamage()
     {
         if(currentParameter.toxicBullet > 0)
-            damage.lastDamagedTarget.DamagePoison(currentParameter.toxicBullet,currentParameter.damage / 5);
+            damage.lastDamagedTarget.DamagePoison(currentParameter.toxicBullet,currentParameter.damage / 15);
         if(damage.owner == Player.instance.gameObject)
             Hitmark.instance.PlayHitmarkAnim(true);
-        gameObject.SetActive(false);
+        canGoOutWall--;
+        if(canGoOutWall <= 0)
+            gameObject.SetActive(false);
     }
     void OnDrawGizmosSelected()
     {

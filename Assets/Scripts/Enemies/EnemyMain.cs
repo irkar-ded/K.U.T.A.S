@@ -31,9 +31,11 @@ public class EnemyMain : MonoBehaviour
     public GameObject damageCounter;
     public GameObject bloodVFX;
     public GameObject explosion;
+    Outline outline;
     void Awake()
     {
         TryGetComponent(out agent);
+        TryGetComponent(out outline);
         if(agent != null)
             agent.speed = speed;
         TryGetComponent(out rb);
@@ -46,6 +48,7 @@ public class EnemyMain : MonoBehaviour
             {
                 if(BuffManager.instance.passiveBuff.isExplosionAfterDeath)
                     EZ_PoolManager.Spawn(explosion.transform,transform.position,Quaternion.identity);
+                outline.TurnDefualtOutlineColor();
                 //ShakeManager.instance.Shake(ShakeManager.ShakeType.Kill);
                 ScoreManager.instance.addKill();
                 ComboManager.instance.addCombo(1);

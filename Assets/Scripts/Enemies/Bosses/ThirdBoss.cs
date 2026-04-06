@@ -35,12 +35,12 @@ public class ThirdBoss : MonoBehaviour
         enemyMain = GetComponent<EnemyMain>();
         gun = GetComponentInChildren<Gun>();
         enemyMain.healtSystem.onDie.AddListener(() => ComboManager.instance.addCombo(1));
-        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 15;
+        enemyMain.healtSystem.maxHealt = enemyMain.healtSystem.maxHealt + GameManager.instance.difficulty * 20;
         enemyMain.healtSystem.healt = enemyMain.healtSystem.maxHealt;
-        enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.35f;
-        anim.speed *= 1 + GameManager.instance.difficulty * 0.15f;
-        gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.difficulty * 0.01f;
-        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.difficulty * 0.25f;
+        enemyMain.speed = enemyMain.speed + GameManager.instance.difficulty * 0.4f;
+        anim.speed *= 1 + GameManager.instance.difficulty * 0.2f;
+        gun.kdBeetwenShoots = gun.kdBeetwenShoots - GameManager.instance.difficulty * 0.015f;
+        gun.parametersBullet.force = gun.parametersBullet.force + GameManager.instance.difficulty * 0.3f;
         enemyMain.SetCurrentHealth(enemyMain.healtSystem.maxHealt);
         startSpeed = enemyMain.speed;
         player = enemyMain.target;
@@ -103,7 +103,7 @@ public class ThirdBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1-GameManager.instance.difficulty * 0.01f);
+        yield return new WaitForSeconds(1-GameManager.instance.difficulty * 0.025f);
         bossState = ThirdBossStates.Shoot;
     }
     IEnumerator shootStateBoss()
@@ -135,7 +135,7 @@ public class ThirdBoss : MonoBehaviour
         rotToPlayer.x = 0;
         transform.rotation = rotToPlayer;
         Vector3 target = player.position + rbPlayer.velocity.normalized;
-        yield return new WaitForSeconds(0.15f - GameManager.instance.difficulty * 0.01f);
+        yield return new WaitForSeconds(0.15f - GameManager.instance.difficulty * 0.065f);
         enemyMain.agent.enabled = true;
         enemyMain.agent.isStopped = false;
         enemyMain.speed = 50;
@@ -152,7 +152,7 @@ public class ThirdBoss : MonoBehaviour
             dashVFX.SetPosition(1,transform.position);
             yield return null;
         }
-        yield return new WaitForSeconds(0.1f - GameManager.instance.difficulty * 0.01f);
+        yield return new WaitForSeconds(0.1f - GameManager.instance.difficulty * 0.055f);
         bossState = ThirdBossStates.Shoot;
     }
     public void FadeDashVFX()
@@ -167,7 +167,7 @@ public class ThirdBoss : MonoBehaviour
         while(dashVFX.startColor.a > 0)
         {
             Color colorDash = dashVFX.startColor;
-            colorDash.a -= Time.deltaTime * (2 + GameManager.instance.difficulty * 0.2f);
+            colorDash.a -= Time.deltaTime * (2 + GameManager.instance.difficulty * 0.3f);
             dashVFX.startColor = colorDash;
             dashVFX.endColor = colorDash;
             yield return null;

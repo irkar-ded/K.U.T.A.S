@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: model.Array.data[1]
       value: 
       objectReference: {fileID: 9059933710717051014}
+    - target: {fileID: 6383733685742831715, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: model.Array.data[2]
+      value: 
+      objectReference: {fileID: 6920534235230237778}
     - target: {fileID: 6842946729119622290, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -175,8 +179,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 3
   outlineColor: {r: 1, g: 0.32941177, b: 0.4392157, a: 1}
+  outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 3
-  ignoreRenders: []
+  ignoreRenders:
+  - {fileID: 6920534235230237778}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -382,6 +388,11 @@ Transform:
 --- !u!137 &5912847110768027645 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2963509524404488817, guid: 229bae22fa39cda9abe3f00dfc46be3e, type: 3}
+  m_PrefabInstance: {fileID: 8876074971199712652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &6920534235230237778 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1955839942744332766, guid: 229bae22fa39cda9abe3f00dfc46be3e, type: 3}
   m_PrefabInstance: {fileID: 8876074971199712652}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6953272508024269661 stripped

@@ -125,6 +125,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7649421458320216278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3339393699484017416
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8637037814120117743}
+    m_Modifications:
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0002199899
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.034159996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.008689997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737380938003607642, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+      propertyPath: m_Name
+      value: SparksFire
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+--- !u!198 &642287134507434290 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2791726399611904570, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+  m_PrefabInstance: {fileID: 3339393699484017416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8661104218386859102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6225527769317123926, guid: 4324e81eec35657b783f14ac80514ed8, type: 3}
+  m_PrefabInstance: {fileID: 3339393699484017416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4576008331300902691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +619,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f53a2375bba44808112acbf56ecf82, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1496688114698946560}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f53a2375bba44808112acbf56ecf82, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5889369248364206860}
   m_SourcePrefab: {fileID: 100100000, guid: e1f53a2375bba44808112acbf56ecf82, type: 3}
 --- !u!1 &3693046822607399538 stripped
 GameObject:
@@ -610,6 +668,35 @@ MonoBehaviour:
       Data3: -2032531583
       Data4: 1101126158
     Path: event:/Feel/Walk
+--- !u!114 &5889369248364206860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3693046822607399538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7d97c7ece350197b6a7d979a9bcc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTriggered:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 642287134507434290}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  invokeStart: 0
+  timerToInvokeStart: 0
 --- !u!4 &7649421458320216278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3050895055062153227, guid: e1f53a2375bba44808112acbf56ecf82, type: 3}
@@ -690,7 +777,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6c5d6a81c67f28b8888fef282730f31f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8661104218386859102}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c5d6a81c67f28b8888fef282730f31f, type: 3}
 --- !u!4 &8637037814120117743 stripped

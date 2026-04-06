@@ -207,6 +207,7 @@ MonoBehaviour:
   outlineWidth: 3
   ignoreRenders:
   - {fileID: 656441574269521244}
+  - {fileID: 7852735169654595945}
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -347,6 +348,7 @@ MonoBehaviour:
     m_Bits: 200
   laserStartPoint: {fileID: 7100774241864020273}
   currentTarget: {fileID: 0}
+  finalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &6627562576183667578
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +706,11 @@ SkinnedMeshRenderer:
 --- !u!4 &7822423515833826918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1968314556616705745, guid: 229bae22fa39cda9abe3f00dfc46be3e, type: 3}
+  m_PrefabInstance: {fileID: 8637357727853672631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &7852735169654595945 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1955839942744332766, guid: 229bae22fa39cda9abe3f00dfc46be3e, type: 3}
   m_PrefabInstance: {fileID: 8637357727853672631}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &8163743590402045373 stripped

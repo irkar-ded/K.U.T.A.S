@@ -103,7 +103,7 @@ public class SecondBoss : MonoBehaviour
     }
     IEnumerator idleStateBoss()
     {
-        yield return new WaitForSeconds(1-GameManager.instance.difficulty * 0.015f);
+        yield return new WaitForSeconds(1-GameManager.instance.difficulty * 0.05f);
         bossState = SecondBossStates.Teleport;
     }
     public void Teleport()
@@ -119,7 +119,7 @@ public class SecondBoss : MonoBehaviour
     IEnumerator bulletHellStateBoss()
     {
         isLastExplosion = false;
-        yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.015f);
+        yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.035f);
         float timer = 0;
         float timerToSpawnBullet = 0;
         bool isRevers = false;
@@ -130,9 +130,9 @@ public class SecondBoss : MonoBehaviour
             timer+=Time.deltaTime;
             timerToSpawnBullet += Time.deltaTime;
             if(isRevers)
-                rotationOffset+=Time.deltaTime * (10 * (1 + GameManager.instance.difficulty * 0.1f));
+                rotationOffset+=Time.deltaTime * (10 * (1 + GameManager.instance.difficulty * 0.25f));
             else
-                rotationOffset-=Time.deltaTime * (10 * (1 + GameManager.instance.difficulty * 0.1f));
+                rotationOffset-=Time.deltaTime * (10 * (1 + GameManager.instance.difficulty * 0.25f));
             if(rotationOffset >= 20 && isRevers)
                 isRevers = false;
             if(rotationOffset <= -20 && isRevers == false)
@@ -164,10 +164,10 @@ public class SecondBoss : MonoBehaviour
             markToExplosion.transform.position = randomPositionExplosion;
             RuntimeManager.PlayOneShot(soundAtackExplosion,randomPositionExplosion);
             markToExplosion.SetActive(true);
-            yield return new WaitForSeconds(0.65f-GameManager.instance.difficulty * 0.015f);
+            yield return new WaitForSeconds(0.65f-GameManager.instance.difficulty * 0.05f);
             EZ_PoolManager.Spawn(explosion.transform,randomPositionExplosion + Vector3.up * 0.5f,Quaternion.identity);
             markToExplosion.SetActive(false);
-            yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.015f);
+            yield return new WaitForSeconds(0.5f-GameManager.instance.difficulty * 0.05f);
         }
         bossState = SecondBossStates.BulletHell;
     }

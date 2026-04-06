@@ -15,6 +15,6 @@ MonoBehaviour:
   iconItem: {fileID: 21300000, guid: d243d7dfbf147c1c2a8978c844b49b7b, type: 3}
   nameItem: X-Ray
   description: 
-  costItem: 70
+  costItem: 65
   maxCountItemsBuyed: -1
   buff: {fileID: 1401263574237597199, guid: 6028840773f40cf148036697f6162721, type: 3}

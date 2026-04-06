@@ -60,7 +60,8 @@ public class BuffManager : MonoBehaviour
                 tempBuff.xRayBullet += item.passiveBuff.xRayBullet;
                 tempBuff.bounceBullet += item.passiveBuff.bounceBullet;
                 tempBuff.bonusForceBullet += item.passiveBuff.bonusForceBullet;
-                tempBuff.isExplosionAfterDeath = item.passiveBuff.isExplosionAfterDeath;
+                if(item.passiveBuff.isExplosionAfterDeath == true)
+                    tempBuff.isExplosionAfterDeath = true;
             }
         }
         passiveBuff = tempBuff;
