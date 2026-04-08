@@ -338,6 +338,10 @@ PrefabInstance:
       propertyPath: model.Array.data[0]
       value: 
       objectReference: {fileID: 4400448483534046700}
+    - target: {fileID: 6383733685742831715, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
+      propertyPath: idMaterialDamage.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8336325526326271816, guid: 27e69dc2eb343ca8596953949c20fbec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -442,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 3
   outlineColor: {r: 1, g: 0.32941177, b: 0.4392157, a: 1}
+  outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 3
   ignoreRenders: []
   precomputeOutline: 0
