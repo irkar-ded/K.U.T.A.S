@@ -15,14 +15,10 @@ The game is a classic representative of <b>Top-Down Shooter</b>, but for the mos
 ## Visual style:
 The visual style is inspired by:[Neon White](https://store.steampowered.com/app/1533420/Neon_White/) and the aesthetics of [Vaporwave](https://en.wikipedia.org/wiki/Vaporwave) and <b>Webpunk</b>. In the game I combined a 3D world with 2D elements.
 
-## Music:
-The music in the game is made in the genre [Jungle](https://en.wikipedia.org/wiki/Jungle_music). Inspiration was taken from these artists:[Soichi Terada](https://en.wikipedia.org/wiki/Soichi_Terada),[LTJ Bukem](https://en.wikipedia.org/wiki/LTJ_Bukem),[Machine Girl](https://en.wikipedia.org/wiki/Machine_Girl)
-
 ## What I used software in the development of the game:
 - Game development: [Unity](https://en.wikipedia.org/wiki/Unity_(game_engine)),[Visual Studio Code](https://en.wikipedia.org/wiki/Visual_Studio_Code)
 - Graphics: [Aseprite](https://en.wikipedia.org/wiki/Aseprite),[Blender](https://en.wikipedia.org/wiki/Blender_(software)),[Photopea](https://en.wikipedia.org/wiki/Photopea),[PureRef](https://www.pureref.com/)
 - Sound: [FMOD](https://en.wikipedia.org/wiki/FMOD),[Audacity](https://en.wikipedia.org/wiki/Audacity_(audio_editor))
-- Music: [FL Studio](https://en.wikipedia.org/wiki/FL_Studio)
 
 ## Libraries Used:
 - [EZ Pooling (Unity Asset)](https://assetstore.unity.com/packages/tools/ez-pooling-19941)
