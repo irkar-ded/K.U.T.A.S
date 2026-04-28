@@ -15,7 +15,7 @@ From the beginning of the game you have a panel with <b>cells</b>, this is a reg
 The game is a classic representative of <b>Top-Down Shooter</b>, but for the most part the gameplay is taken from [Hotline Miami](https://store.steampowered.com/app/219150/Hotline_Miami/), you <b>have 3 health in start</b>(can be upgraded), and most enemies <b>die from one shot</b>. But there is also an additional complication, in that you only have <b>10 seconds</b> to complete the level <b>(idea from [Post Void](https://store.steampowered.com/app/1285670/Post_Void/))</b>, thanks to this it pushes the player to active actions.
 ## Visual style:
 The visual style is inspired by:[Neon White](https://store.steampowered.com/app/1533420/Neon_White/) and the aesthetics of [Vaporwave](https://en.wikipedia.org/wiki/Vaporwave) and <b>Webpunk</b>. In the game I combined a 3D world with 2D elements.
-##Itch link game:[K.U.T.A.S](https://irkar.itch.io/kutas)
+## Itch link game:[K.U.T.A.S](https://irkar.itch.io/kutas)
 ## Screenshots:
 ![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMy5wbmc=/original/znkRY0.png)
 ![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMS5wbmc=/original/FnTnoR.png)
