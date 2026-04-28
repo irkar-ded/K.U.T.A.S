@@ -36,6 +36,6 @@ The visual style is inspired by:[Neon White](https://store.steampowered.com/app/
 ## License:
 <b>GPL 3</b>. Have fun :)
 
-Game by <b>IRKAR</b> ❤️
+Game by <b>I[RKAR](https://irkar.itch.io/)</b> ❤️
 
 <b>K</b>ill.<b>U</b>ltra.<b>T</b>itan.<b>A</b>gressive.<b>S</b>quad
