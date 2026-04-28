@@ -1,12 +1,7 @@
 using UnityEngine;
 public class ConvertorValue
 {
-    public static double ConvertValue(double value, double fromMax, double toMax)
-    {
-        double scaledValue = value / fromMax;
-        double convertedValue = scaledValue * toMax;
-        return convertedValue;
-    }
+    public static float ConvertFromMaxToNewMax(float value, float oldMax,float newMax) => newMax / oldMax * value;
     public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
     {
         if (value.x < min.x || value.y < min.y || value.z < min.z ||

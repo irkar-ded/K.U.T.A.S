@@ -10,29 +10,30 @@ public class KeyReplacer : MonoBehaviour
     public string text;
     TextMeshProUGUI textComponent;
     string startText;
-    public static string ReplaceKeysInText(string inputText)
+    public static string SetKeybindInText(string text)
     {
-        string pattern = "#(.*?)#";
-        string result = Regex.Replace(inputText, pattern, match =>
+        string finalText = text;
+        while(finalText.IndexOf('#') != -1)
         {
-            string key = match.Groups[1].Value;
-            return getTextKey(key);
-        });
-
-        return result;
+            int startBindId = finalText.IndexOf('#');
+            int endBindId = finalText.IndexOf('#',startBindId+1);
+            string bindName = finalText.Substring(startBindId + 1,endBindId-startBindId-1);
+            finalText = finalText.Replace($"#{bindName}#",getTextKey(bindName));
+        }
+        return finalText;
     }
     private void Awake()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
         SetText();
     }
-    public string getTextFinal() => ReplaceKeysInText(startText);
+    public string getTextFinal() => SetKeybindInText(startText);
     public void SetText(string text)
     {
         if(textComponent == null)
             textComponent = GetComponent<TextMeshProUGUI>();
         startText = text;
-        textComponent.text = ReplaceKeysInText(startText);
+        textComponent.text = SetKeybindInText(startText);
     }
     public void SetText()
     {
@@ -41,7 +42,7 @@ public class KeyReplacer : MonoBehaviour
         if(textComponent == null)
             textComponent = GetComponent<TextMeshProUGUI>();
         startText = text;
-        textComponent.text = ReplaceKeysInText(startText);
+        textComponent.text = SetKeybindInText(startText);
     }
     public static string getTextKey(string id)
     {

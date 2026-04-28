@@ -45,7 +45,7 @@ public class ComboManager : MonoBehaviour
             return;
         if (timerCombo > 0f && combo > 0)
             timerCombo -= Time.deltaTime;
-        comboFill.fillAmount = (float)ConvertorValue.ConvertValue(timerCombo,2.5f,1);
+        comboFill.fillAmount = (float)ConvertorValue.ConvertFromMaxToNewMax(timerCombo,2.5f,1);
         if (timerCombo <= 0 && combo > 0)
             removeCombo();
     }
