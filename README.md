@@ -34,7 +34,7 @@ The visual style is inspired by:[Neon White](https://store.steampowered.com/app/
 - [FMOD](https://www.fmod.com/unity)
 
 ## License:
-<b>MIT</b>. Have fun :)
+<b>GPL 3</b>. Have fun :)
 
 Game by <b>IRKAR</b> ❤️
 
