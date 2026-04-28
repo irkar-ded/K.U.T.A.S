@@ -56,7 +56,11 @@ public class VideoSettings : MonoBehaviour
     public void SetPostProccesing(bool onPostProccesing)
     {
         SettingsManager.instance.savePostProccesing(onPostProccesing);
-        postProccesing.SetActive(onPostProccesing);
+        #if UNITY_WEBGL
+            postProccesing.SetActive(false);
+        #else
+            postProccesing.SetActive(onPostProccesing);
+        #endif
     }
     public void SetShowFPS(bool onShowFPS)=>SettingsManager.instance.saveSeeFrameRate(onShowFPS);
     public void SetFullscreen(bool isFullscreen)
