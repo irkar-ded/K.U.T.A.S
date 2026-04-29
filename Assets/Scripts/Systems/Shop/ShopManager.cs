@@ -71,7 +71,7 @@ public class ShopManager : MonoBehaviour
             for(int j = 0;j < customItems.Length; j++)
             {
                 ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
-                randomItem.SetItemHolder(canSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, canSpawnItemsCustom(customItems.ToList()).Count - 1)]);
+                randomItem.SetItemHolder(NewCanSpawnItemsCustom(customItems.ToList())[Mathf.Clamp(j, 0, NewCanSpawnItemsCustom(customItems.ToList()).Count - 1)]);
                 currentItems.Add(randomItem);
             }
         }
@@ -79,7 +79,7 @@ public class ShopManager : MonoBehaviour
         {
             for(int i = 0; i < 3; i++)
             {
-                List<ShopItem> tempItems = canSpawnItems();
+                List<ShopItem> tempItems = NewCanSpawnItems();
                 ShopItemHolder randomItem = Instantiate(itemShopHolder, contentItems);
                 randomItem.SetItemHolder(tempItems[Random.Range(0, tempItems.Count)]);
                 currentItems.Add(randomItem);
@@ -110,41 +110,34 @@ public class ShopManager : MonoBehaviour
         if(refreshItem != null)
             Destroy(refreshItem.gameObject);
     }
-    public List<ShopItem> canSpawnItems()
+    public List<ShopItem> NewCanSpawnItems()
     {
-        HashSet<string> usedNames = new HashSet<string>();
-        foreach (ShopItemHolder itemCurrent in currentItems)
-            usedNames.Add(itemCurrent.item.nameItem);
-        foreach (ShopItemTemp itemCurrent in itemsShopNames)
+        List<ShopItem> tempItems = new List<ShopItem>(itemsShop);
+        foreach(ShopItemTemp item in itemsShopNames)
         {
-            ShopItem shopItem = itemsShop.First(x=> x.nameItem == itemCurrent.nameItem);
-            if (itemCurrent.countBuyedItem >= shopItem.maxCountItemsBuyed && shopItem.maxCountItemsBuyed != -1)
-                usedNames.Add(itemCurrent.nameItem);
+            if(currentItems.Exists(x => item.nameItem == x.item.nameItem))
+            {
+                tempItems.Remove(tempItems.Find(x => x.nameItem == item.nameItem));
+                continue;
+            }
+            ShopItem tempItem = tempItems.Find(x => x.nameItem == item.nameItem);
+            if(item.countBuyedItem >= tempItem.maxCountItemsBuyed && tempItem.maxCountItemsBuyed != -1)
+                tempItems.Remove(tempItem);
         }
-        List<ShopItem> result = new List<ShopItem>();
-        foreach (ShopItem item in itemsShop)
-        {
-            if (!usedNames.Contains(item.nameItem))
-                result.Add(item);
-        }
-        return result;
+        return tempItems;
     }
-    public List<ShopItem> canSpawnItemsCustom(List<ShopItem> customItems)
+    public List<ShopItem> NewCanSpawnItemsCustom(List<ShopItem> customItems)
     {
-        HashSet<string> usedNames = new HashSet<string>();
-        foreach (ShopItemTemp itemCurrent in itemsShopNames)
+        List<ShopItem> tempItems = new List<ShopItem>(customItems);
+        foreach(ShopItem item in customItems)
         {
-            ShopItem shopItem = itemsShop.First(x => x.nameItem == itemCurrent.nameItem);
-            if (itemCurrent.countBuyedItem >= shopItem.maxCountItemsBuyed && shopItem.maxCountItemsBuyed != -1)
-                usedNames.Add(itemCurrent.nameItem);
+            if(!currentItems.Exists(x => item.nameItem == x.item.nameItem))
+                continue;
+            ShopItem tempItem = tempItems.Find(x => x.nameItem == item.nameItem);
+            if(itemsShopNames.Find(x => x.nameItem == item.nameItem).countBuyedItem >= tempItem.maxCountItemsBuyed && tempItem.maxCountItemsBuyed != -1)
+                tempItems.Remove(tempItem);
         }
-        List<ShopItem> result = new List<ShopItem>();
-        foreach (ShopItem item in customItems)
-        {
-            if (!usedNames.Contains(item.nameItem))
-                result.Add(item);
-        }
-        return result;
+        return tempItems;
     }
     public void DropCountItem(string nameItem)
     {
