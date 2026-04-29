@@ -1,3 +1,4 @@
+![alt text](https://img.itch.zone/aW1nLzI2OTU0ODkwLnBuZw==/315x250%23c/AAJe%2B4.png)
 # K.U.T.A.S
 
 ## About the game:
@@ -9,11 +10,19 @@ This project requires [Unity](unity.com)(2022.3.62f3) to build and run. Clone th
 git clone https://github.com/irkar-ded/K.U.T.A.S.git
 ```
 ## Gameloop:
-From the beginning of the game you have a panel with <b>cells</b>, this is a regular [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) game. Choose a <b>cell</b> where you will move, after choosing the <b>cell</b> you appear in a random room with <b>enemies</b>. Your main task is to <b>kill all enemies in the room</b> and <b>not die yourself</b>. Just keep in mind that you only have <b>10 seconds</b>(can be upgraded) for this. If you win, the cell will be marked as a <b>cross (you move with it)</b>. And if you lose, then a <b>zero</b> will be placed where it will be more profitable for the enemy. On the third move there will be a <b>boss fight</b>, and if you defeat him, then you will go to the <b>shop</b>. For the <b>money</b> earned for <b>killing enemies</b>, you can buy <b>items</b> in the <b>shop</b>. After the <b>shop</b> the game <b>starts from the beginning</b>, but <b>with increased difficulty and your items</b>. But if the <b>enemy</b> collects <b>3 zeros in a row</b>, then you <b>lose</b>. The game <b>has no end</b>, it goes <b>until you die</b>.
+From the beginning of the game you have a panel with <b>cells</b>, this is a regular [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) game. Choose a <b>cell</b> where you will move, after choosing the <b>cell</b> you appear in a random room with <b>enemies</b>. Your main task is to <b>kill all enemies in the room</b> and <b>not die yourself</b>. Just keep in mind that you only have <b>10 seconds</b>(can be upgraded) for this. If you win, the cell will be marked as a <b>cross (you move with it)</b>. And if you lose, then a <b>zero</b> will be placed where it will be more profitable for the enemy. On the third move there will be a <b>boss fight</b>, and if you defeat him, then you will go to the <b>shop</b>. For the <b>money</b> earned for <b>killing enemies</b>, you can buy <b>items</b> in the <b>shop</b>. After the <b>shop</b> the game <b>starts from the beginning</b>, but <b>with increased difficulty and your items</b>. But if the <b>enemy</b> collects <b>3 zeros in a row</b>, then you <b>lose</b>. Game ends in <b>10 lvl</b> but if you <b>kill final boss</b> you can continue playing.
 ## Gameplay:
 The game is a classic representative of <b>Top-Down Shooter</b>, but for the most part the gameplay is taken from [Hotline Miami](https://store.steampowered.com/app/219150/Hotline_Miami/), you <b>have 3 health in start</b>(can be upgraded), and most enemies <b>die from one shot</b>. But there is also an additional complication, in that you only have <b>10 seconds</b> to complete the level <b>(idea from [Post Void](https://store.steampowered.com/app/1285670/Post_Void/))</b>, thanks to this it pushes the player to active actions.
 ## Visual style:
-The visual style is inspired by:[Neon White](https://store.steampowered.com/app/1533420/Neon_White/) and the aesthetics of [Vaporwave](https://en.wikipedia.org/wiki/Vaporwave) and <b>Webpunk</b>. In the game I combined a 3D world with 2D elements.
+The visual style is inspired by:[Neon White](https://store.steampowered.com/app/1533420/Neon_White/) and the aesthetics of [Vaporwave](https://en.wikipedia.org/wiki/Vaporwave) and <b>Webpunk</b>.
+## Itch link game:[K.U.T.A.S](https://irkar.itch.io/kutas)
+## Screenshots:
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMy5wbmc=/original/znkRY0.png)
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMS5wbmc=/original/FnTnoR.png)
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzNC5wbmc=/original/GID3Fd.png)
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEyOS5wbmc=/original/NAyhbx.png)
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMi5wbmc=/original/9OHI%2BA.png)
+![alt text](https://img.itch.zone/aW1hZ2UvNDUyMjIxMi8yNjk1NzEzMC5wbmc=/original/6XRQMV.png)
 
 ## What I used software in the development of the game:
 - Game development: [Unity](https://en.wikipedia.org/wiki/Unity_(game_engine)),[Visual Studio Code](https://en.wikipedia.org/wiki/Visual_Studio_Code)
@@ -25,8 +34,8 @@ The visual style is inspired by:[Neon White](https://store.steampowered.com/app/
 - [FMOD](https://www.fmod.com/unity)
 
 ## License:
-<b>MIT</b>. Have fun :)
+<b>GPL 3</b>. Have fun :)
 
-Game by <b>IRKAR</b> ❤️
+Game by <b>[IRKAR](https://irkar.itch.io/)</b> ❤️
 
 <b>K</b>ill.<b>U</b>ltra.<b>T</b>itan.<b>A</b>gressive.<b>S</b>quad
