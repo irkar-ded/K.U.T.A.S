@@ -215,15 +215,6 @@ public class GameManager : MonoBehaviour
             isBossCutscene = false;
             StartCoroutine(startGameCountdown());
         }
-        if (Keyboard.current.bKey.wasPressedThisFrame)
-        {
-            HealtSystem[] healtSystems = FindObjectsByType<HealtSystem>(FindObjectsSortMode.None);
-            foreach(HealtSystem healtSystem in healtSystems)
-            {
-                if(healtSystem.gameObject != currentPlayer)
-                    healtSystem.TakeDamage(1488,Vector3.zero,"LOL");
-            }
-        }
         if(gameIsStarted == false || isBossFight || debugRoom != null && debugRoom.room != null)
             return;
         if(timer > 0)
